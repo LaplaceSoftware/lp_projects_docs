@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# MkDocs build output
+site/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Editors
+.idea/
+.vscode/

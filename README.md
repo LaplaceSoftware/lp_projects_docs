@@ -1,0 +1,59 @@
+# Laplace Projects Documentation
+
+Documentation for Laplace Software projects, published as a searchable website.
+
+**📖 Read it here: <https://laplacesoftware.github.io/lp_projects_docs/>**
+
+---
+
+## What is in here
+
+| Set | For | Location |
+|-----|-----|----------|
+| **User Guide** | Account Managers, Sales, Customer Service, Client Users, Business Administrators | [`docs/b2b_ecommerce_docs/_user_guide/`](docs/b2b_ecommerce_docs/_user_guide/) |
+| **Technical Documentation** | Technical Managers, Solution Architects, developers | [`docs/b2b_ecommerce_docs/_technical_docs/`](docs/b2b_ecommerce_docs/_technical_docs/) |
+
+Other folders under `docs/b2b_ecommerce_docs/` hold working notes, proposals and release
+records. They are kept in the repository but are not part of the published site navigation.
+
+---
+
+## Editing the documentation
+
+Everything is plain Markdown. Edit a file, commit to `main`, and the site rebuilds and
+redeploys automatically — usually within a couple of minutes.
+
+You can edit directly on GitHub: open any page on the site and use the ✏️ pencil icon at the
+top right.
+
+### Adding a new page
+
+1. Add the `.md` file under `docs/`.
+2. Add it to the `nav:` section of [`mkdocs.yml`](mkdocs.yml) so it appears in the sidebar.
+3. Commit to `main`.
+
+---
+
+## Previewing locally
+
+```bash
+pip install -r requirements.txt
+mkdocs serve
+```
+
+Then open <http://127.0.0.1:8000>. The preview reloads as you save.
+
+---
+
+## A note on redacted values
+
+This repository is **public**. Internal host addresses appear as placeholders:
+
+| Placeholder | Stands for |
+|-------------|-----------|
+| `<build-server>` | The internal build/host server address |
+| `<registry-host>` | The private Docker registry address |
+| `<staging-erp-build>` | The `staging-erp` Odoo.sh build identifier |
+
+The real values live in the internal copy of these documents and in each environment's
+configuration. **Do not commit them here.**

@@ -1,0 +1,106 @@
+# Technical Documentation Extraction Prompt
+
+Act as a **Senior Software Architect** and **Technical Documentation Engineer**.
+
+Analyze the complete source code of the **SAMTIA B2B E-Commerce Platform**
+and generate a comprehensive, high-level technical documentation repository
+intended for onboarding a new **Technical Manager** or **Solution Architect**.
+exclude any thing not visible in menu or any screen or not used features
+
+## Project Scope
+
+Analyze all repositories and their relationships:
+
+* **Odoo Backoffice**
+/Users/abadr/Documents/Laplace/Projects/odoo19/addons_lp_ecommerce
+  * Custom Odoo modules
+  * Business logic
+  * Models
+  * Controllers
+  * Security
+  * Scheduled jobs
+  * Configuration
+
+* **Next.js Frontend**
+/Users/abadr/Documents/Laplace/Projects/odoo19/next_ecommerce
+
+  * Account Manager (Admin) Portal
+  * Client (Storefront) Portal
+
+  some knowledge not up to date but can read help you to understand but you need depend scanning code to read uptodate
+  /Users/abadr/Documents/Laplace/Projects/odoo19/addons_lp_ecommerce/_docs/030_architecture_and_api.md
+
+  use this information in file related to odoo.sh
+/Users/abadr/Documents/Laplace/Projects/odoo19/addons_lp_ecommerce/_docs/_technical_docs/Odoo.sh_Environments_and_Release_Guide.md
+
+Understand how all applications interact as a single platform.
+
+## Documentation Objectives
+
+Generate documentation that provides a complete architectural overview without requiring the reader to inspect the source code.
+
+Focus on:
+
+* Overall system architecture
+* Integration between Odoo and Next.js applications
+* Business workflows
+* Major technical components
+* Project structure
+* Deployment architecture
+* Core customizations
+
+Avoid implementation details and source code examples.
+
+## Required Documentation
+
+The documentation should include:
+
+* High-level system architecture with C4-style diagrams where applicable
+* Architecture, integration, component, sequence, deployment, and workflow diagrams (Mermaid)
+* Repository structure and responsibilities
+* Odoo module overview with purpose, dependencies, and responsibilities
+* Next.js application architecture and module organization
+* Authentication and authorization workflow
+* Feature catalog automatically extracted from the codebase, with a short technical description for each feature
+* Order management lifecycle and business workflow diagrams
+* Models overview, relationships, inheritance, and major customizations (high level only)
+* API and controller catalog, including endpoint purpose and controller inheritance architecture
+* Master data and project configuration, including SMTP, module configuration, environment settings, and other essential startup configuration
+* Application navigation generated from visible menus to explain the business flow and user journey
+* Deployment architecture, environments, and Odoo.sh staging/production workflow
+* External integrations and system dependencies
+* Core architecture decisions and customization points
+
+## Documentation Style
+
+* Executive-level and architecture-focused
+* High-level technical documentation
+* Short, concise paragraphs
+* Tables where appropriate
+* Clear diagrams before explanations
+* No source code
+* No implementation details
+* No duplicated information
+* Consistent terminology throughout the documentation
+
+## Output Organization
+
+save output in  a `/Users/abadr/Documents/Laplace/Projects/odoo19/addons_lp_ecommerce/_docs/_technical_docs` 
+directory with sequentially numbered Markdown files, for example:
+
+* 001-Project-Overview.md
+* 002-System-Architecture.md
+* 003-Repositories.md
+* 004-Business-Modules.md
+* ...
+
+Include a top-level `000-README.md` that serves as the documentation index and links all generated documents.
+
+## Success Criteria
+
+The final documentation should enable a newly joined Technical Manager / new developer
+ to understand the entire SAMTIA B2B E-Commerce platform—including 
+ its architecture, applications, integrations, business workflows,
+  deployment process, and major technical components—without reading the source code.
+
+
