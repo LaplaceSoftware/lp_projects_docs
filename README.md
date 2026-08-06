@@ -2,7 +2,7 @@
 
 Documentation for Laplace Software projects, published as a searchable website.
 
-**📖 Read it here: <https://lp-projects-docs.ahmed-fouad.workers.dev/>**
+**📖 Read it here: <https://b2b-docs.laplacesoftware.com/>**
 
 ---
 
