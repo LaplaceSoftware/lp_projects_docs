@@ -13,3 +13,7 @@ __pycache__/
 # Editors
 .idea/
 .vscode/
+
+# Node / Wrangler
+node_modules/
+.wrangler/
