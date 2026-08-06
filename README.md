@@ -71,6 +71,8 @@ The site is served from **Cloudflare Workers** (static assets), built from `main
 | Deploy command | `npx wrangler deploy` |
 | Output directory | `site` (see `wrangler.jsonc`) |
 
-GitHub Pages is **not** used: its deploy step timed out indefinitely for this repository on
-both the workflow and branch publishing paths, while the build itself always succeeded. The
-`.github/workflows/docs.yml` and `gh-pages` branch remain only as a fallback.
+GitHub Pages is **not** used. Its deploy step timed out indefinitely for this repository on
+both the workflow and the branch publishing path, while the build itself always succeeded —
+the failure was server-side. The GitHub Actions workflow and the `gh-pages` branch have been
+removed, because pushing to `gh-pages` made Cloudflare try to build that branch (which holds
+only pre-built HTML, no `requirements.txt`) and fail.
