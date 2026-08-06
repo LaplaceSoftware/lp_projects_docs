@@ -2,7 +2,7 @@
 
 Documentation for Laplace Software projects, published as a searchable website.
 
-**📖 Read it here: <https://laplacesoftware.github.io/lp_projects_docs/>**
+**📖 Read it here: <https://lp-projects-docs.ahmed-fouad.workers.dev/>**
 
 ---
 
@@ -57,3 +57,20 @@ This repository is **public**. Internal host addresses appear as placeholders:
 
 The real values live in the internal copy of these documents and in each environment's
 configuration. **Do not commit them here.**
+
+---
+
+## Hosting
+
+The site is served from **Cloudflare Workers** (static assets), built from `main` on every push.
+
+| Setting | Value |
+|---------|-------|
+| Project | `lp-projects-docs` |
+| Build command | `pip install -r requirements.txt && mkdocs build` |
+| Deploy command | `npx wrangler deploy` |
+| Output directory | `site` (see `wrangler.jsonc`) |
+
+GitHub Pages is **not** used: its deploy step timed out indefinitely for this repository on
+both the workflow and branch publishing paths, while the build itself always succeeded. The
+`.github/workflows/docs.yml` and `gh-pages` branch remain only as a fallback.

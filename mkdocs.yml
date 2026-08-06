@@ -1,6 +1,6 @@
 site_name: Laplace Projects Documentation
 site_description: Technical and user documentation for Laplace Software projects
-site_url: https://laplacesoftware.github.io/lp_projects_docs/
+site_url: https://lp-projects-docs.ahmed-fouad.workers.dev/
 repo_url: https://github.com/LaplaceSoftware/lp_projects_docs
 repo_name: LaplaceSoftware/lp_projects_docs
 edit_uri: edit/main/
