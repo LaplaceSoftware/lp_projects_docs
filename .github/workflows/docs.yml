@@ -31,6 +31,12 @@ jobs:
       - name: Build site
         run: mkdocs build
 
+      - name: Check artifact
+        run: |
+          ls -la site
+          du -sh site
+
+
       - uses: actions/configure-pages@v5
         with:
           enablement: true
