@@ -67,7 +67,6 @@ which Account Manager is alerted on state changes.
 | Model                              | Purpose                                           | Notable traits                                                                                                                                 |
 | ---------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ecommerce.brand`                | Product brands                                    | Name & description, manual sequence, active flag, chatter                                                                         |
-| `ecommerce.merchant`              | Product merchants / suppliers                     | Master data only (name); no product linkage in the current codebase                                                                            |
 | `ecommerce.banner`               | Marketing banners                                 | Scheduled`active_datetime` / `deactivate_datetime`, optional client targeting, promotion URL, linked products & categories, obfuscated IDs |
 | `ecommerce.alert_message`        | Short catalog alert text attached to products     | Simple label model                                                                                                                             |
 | `ecommerce.portal.user.tag`      | Tags for portal users                             | Scoped per client company                                                                                                                      |
@@ -172,5 +171,6 @@ an explicit resolution that logs the outcome in the chatter.
 removed from the codebase — model, views, security rules and manifest entries all deleted — in
 commit `c26ef8b` (2026-08-06). They are not present in any form; do not build on either name.
 Client segmentation is done with `res.partner.grade` (Client Categories) instead.
-`ecommerce.merchant` (supplier master data, singular) is unrelated and still active — see
-[005.1](005.1-Model-Field-Reference.md#ecommercemerchant).
+`ecommerce.merchant` (supplier master data, singular) is still present in code today but is
+slated for removal too — see `_docs/todos/ecommerce-models-dead-code.md` — so it is no longer
+documented here.

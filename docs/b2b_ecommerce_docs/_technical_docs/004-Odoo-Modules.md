@@ -120,7 +120,7 @@ data and the frontend navigation definition.
 
 | Area               | Models involved                                                                                                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Catalog            | `product.template`, `product.product`, `product.public.category`, `ecommerce.brand`, `ecommerce.merchant`, `ecommerce.alert_message` |
+| Catalog            | `product.template`, `product.product`, `product.public.category`, `ecommerce.brand`, `ecommerce.alert_message` |
 | Pricing            | `product.pricelist`, `product.pricelist.item`, `res.partner.grade`                                                                                                         |
 | Orders             | `sale.order`, `sale.order.line`, `ecommerce.product.request.line`                                                                                                          |
 | Identity & tenancy | `res.users`, `res.partner`, `ecommerce.portal.user.tag`                                                                                                                    |
