@@ -40,7 +40,7 @@ Five branches exist on Odoo.sh. Every environment exposes an Odoo back-office; a
 | Branch                | Purpose                                            | Storefront Portal URL                                 | Odoo Back-office URL                                   |
 | --------------------- | -------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
 | **staging-b2b** | Validate B2B E-commerce submodule changes          | https://staging-b2b.adv-photonx.com  | https://staging-b2b-odoo.adv-photonx.com       |
-| **staging-erp** | Validate ERP / back-office changes                 | — (back-office only)                | https://<staging-erp-build>.dev.odoo.com |
+| **staging-erp** | Validate ERP / back-office changes                 | — (back-office only)                | https://adv-photonix-erp-34374833.dev.odoo.com |
 | **pre-prod**    | Integrate staging-b2b + staging-erp; joint testing | https://pre-prod.adv-photonx.com     | https://pre-prod-odoo.adv-photonx.com          |
 | **training**    | UAT and end-user training on validated build       | https://training-b2b.adv-photonx.com | https://training-b2b-odoo.adv-photonx.com      |
 | **production**  | Live environment serving real clients              | https://b2b.samtia.com               | https://www.samtia.com                         |

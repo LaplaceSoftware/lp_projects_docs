@@ -12,10 +12,7 @@ pricing.
 **Who uses it:** Account Managers, Business Administrators.
 **Navigation path:** Sidebar → Clients management → **Clients Categories**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-client-categories.png`
-> Description: Clients Categories table showing Name, Company, Price List, Clients count, Status
-> and Actions columns.
+![Clients Categories](images/amp-client-categories.png)
 
 ### Main information displayed
 
@@ -59,10 +56,7 @@ segment rather than customer by customer.
 **Who uses it:** Account Managers, Business Administrators.
 **Navigation path:** Sidebar → Clients management → **Clients**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-clients.png`
-> Description: Clients list showing Name, Tax ID, Email, Phone, Client category and Price list
-> columns, with the search box and New Client button.
+![Clients](images/amp-clients.png)
 
 ### Main information displayed
 
@@ -104,10 +98,7 @@ Opening a client gives you four tabs.
 | **Banners** | Promotional banners aimed at this customer specifically |
 | **Attachments** | Documents relating to the customer |
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-client-form.png`
-> Description: Client form on the Company Info tab showing company name, tax ID, e-mail, phone,
-> address fields, account manager and client category selectors, and the logo preview.
+![Client form](images/amp-client-form.png)
 
 ### Company Info
 

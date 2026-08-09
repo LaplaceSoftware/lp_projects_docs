@@ -13,11 +13,7 @@ account is in.
 **Who uses it:** Company Administrators.
 **Navigation path:** User menu → Company Profile → **Users**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-users.png`
-> Description: Portal Users screen with the heading "Portal Users — Manage your company portal
-> users", the search box, and the user table showing Name, Email, Phone, Status, Account Manager
-> Approved and Actions.
+![Portal Users screen](images/client-users.png)
 
 ### Main information displayed
 
@@ -76,10 +72,7 @@ receives their access details.
 **Who uses it:** Company Administrators.
 **Navigation path:** User menu → Company Profile → **User Tags**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-user-tags.png`
-> Description: User Tags screen showing the existing tags and the controls to add, rename and
-> delete a tag.
+![User Tags screen](images/client-user-tags.png)
 
 ### What tags are for
 

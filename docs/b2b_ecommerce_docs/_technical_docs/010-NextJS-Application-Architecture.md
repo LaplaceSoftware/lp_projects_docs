@@ -226,4 +226,4 @@ and environment lists are never published.
 5. Theming through CSS custom properties (`var(--bg-card)`, `var(--text-primary)`, …) so light
    and dark are a single implementation.
 6. Navigation is a static typed tree; AMM only filters it (see
-   [007](007-Authentication-and-Authorization.md#5-feature-permissions-amm)).
+   [007](007-Authentication-and-Authorization.md#5--feature-permissions-amm)).

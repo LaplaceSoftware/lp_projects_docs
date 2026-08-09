@@ -93,7 +93,7 @@ are not yet in the catalog, and notifications on every state change.
 | Characteristic | Consequence for the architecture |
 |----------------|----------------------------------|
 | **Quote-driven** | A parallel `portal_state` machine sits alongside Odoo's native `sale.order.state`; see [008](008-Order-Lifecycle.md) |
-| **Multi-tenant by client company** | Every read and write is scoped server-side to the user's company partner; see [007](007-Authentication-and-Authorization.md#4-multi-tenant-isolation) |
+| **Multi-tenant by client company** | Every read and write is scoped server-side to the user's company partner; see [007](007-Authentication-and-Authorization.md#multi-tenant-isolation) |
 | **Headless Odoo** | ~110 custom REST routes; no Odoo website/QWeb pages in the customer path; see [006](006-API-and-Controller-Architecture.md) |
 | **Session-cookie auth, no tokens** | Browser holds the Odoo session cookie; CORS with credentials everywhere |
 | **English only** | The portals ship a single language (`en_US`). No localisation layer, no per-locale content variants |

@@ -8,10 +8,7 @@ shopping.
 **Who uses it:** All Client Portal users.
 **Navigation path:** Sign in, or click the logo at any time.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-home.png`
-> Description: Home page showing the banner carousel at the top, the four summary tiles, the
-> Work Items list, and the product grid below.
+![Home screen](images/client-home.png)
 
 ### What the screen shows
 
@@ -45,10 +42,7 @@ shopping.
 **Who uses it:** All Client Portal users.
 **Navigation path:** Header → **Products** or **Brands**, or type in the search box.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-products.png`
-> Description: Products list with the Filters panel open on the left showing Category, Brands and
-> Tags sections, the search box above, and product cards in a grid.
+![Products screen](images/client-products.png)
 
 ### What the screen shows
 
@@ -88,11 +82,7 @@ If nothing matches, the screen reads **No available products**.
 **Who uses it:** All Client Portal users.
 **Navigation path:** Click any product card.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-product-detail.png`
-> Description: Product details page with the image gallery on the left, product name, price,
-> variant selector, quantity and Add button on the right, description below, and the Related
-> Items section at the bottom.
+![Product Details screen](images/client-product-detail.png)
 
 ### Main information displayed
 

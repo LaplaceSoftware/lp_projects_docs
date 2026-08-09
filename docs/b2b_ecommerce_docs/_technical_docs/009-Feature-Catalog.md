@@ -23,7 +23,6 @@ back-office.
 | Product ribbons        | A           | Odoo website-sale ribbons exposed as a lookup for the AMP product form                                                                                                              |
 | "Need call" products   | C · A · B | Products that must be quoted by phone; the flag propagates onto order lines                                                                                                         |
 | Product terms          | C · B      | Per-product HTML terms and conditions rendered on the detail page                                                                                                                   |
-| Merchants / suppliers  | B           | Merchant master data and per-product merchant prices, maintained from the Configuration menu                                                                                        |
 | Banners                | C · A · B | Scheduled marketing banners with activation windows, optional promotion URL, optional targeting to one client, and linked products/categories; carousel on the storefront home page |
 
 ## Product Management (AMP & Back-office)

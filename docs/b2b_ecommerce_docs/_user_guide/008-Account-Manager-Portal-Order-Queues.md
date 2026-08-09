@@ -40,11 +40,7 @@ flowchart LR
 **Who uses it:** Account Managers, Sales Representatives, Customer Service, Read Only Managers.
 **Navigation path:** Sidebar → Orders management → choose the queue.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-rfq-list.png`
-> Description: RFQ Quotations list showing the title with record count, search box, Filters
-> button, column chooser, and the table with Ref Name, Label, Created By, Client, Create Date,
-> Planned Date, State, Planning State and Items columns.
+![RFQ Quotations list](images/amp-rfq-list.png)
 
 ### Main information displayed
 

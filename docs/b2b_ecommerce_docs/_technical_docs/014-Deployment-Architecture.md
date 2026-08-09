@@ -74,7 +74,7 @@ to an Odoo.sh branch.
 | Branch          | Purpose                               | Storefront portal                | Odoo back-office                           |
 | --------------- | ------------------------------------- | -------------------------------- | ------------------------------------------ |
 | `staging-b2b` | Validate B2B submodule changes        | `staging-b2b.adv-photonx.com`  | `staging-b2b-odoo.adv-photonx.com`       |
-| `staging-erp` | Validate ERP / back-office changes    | — (back-office only)            | `<staging-erp-build>.dev.odoo.com` |
+| `staging-erp` | Validate ERP / back-office changes    | — (back-office only)            | `adv-photonix-erp-34374833.dev.odoo.com` |
 | `pre-prod`    | Integrate both streams; joint testing | `pre-prod.adv-photonx.com`     | `pre-prod-odoo.adv-photonx.com`          |
 | `training`    | UAT and end-user training             | `training-b2b.adv-photonx.com` | `training-b2b-odoo.adv-photonx.com`      |
 | `production`  | Live                                  | `b2b.samtia.com`               | `www.samtia.com`                         |
@@ -175,14 +175,14 @@ to Cloudflare.
 
 | Env          | Folder                   | Internal URL          | Public sub-domain                | Odoo API                              | Image tag        |
 | ------------ | ------------------------ | --------------------- | -------------------------------- | ------------------------------------- | ---------------- |
-| training     | `docker/training/`     | `<build-server>:3080` | —                               | `b2b-training-odoo.adv-photonx.com` | `training`     |
-| pre-prod     | `docker/pre-prod/`     | `<build-server>:3081` | `pre-prod.adv-photonx.com`     | `pre-prod-odoo.adv-photonx.com`     | `pre-prod`     |
-| staging-b2b  | `docker/staging-b2b/`  | `<build-server>:3082` | `staging-b2b.adv-photonx.com`  | `staging-b2b-odoo.adv-photonx.com`  | `staging-b2b`  |
-| training-b2b | `docker/training-b2b/` | `<build-server>:3083` | `training-b2b.adv-photonx.com` | `training-b2b-odoo.adv-photonx.com` | `training-b2b` |
+| training     | `docker/training/`     | `192.168.2.32:3080` | —                               | `b2b-training-odoo.adv-photonx.com` | `training`     |
+| pre-prod     | `docker/pre-prod/`     | `192.168.2.32:3081` | `pre-prod.adv-photonx.com`     | `pre-prod-odoo.adv-photonx.com`     | `pre-prod`     |
+| staging-b2b  | `docker/staging-b2b/`  | `192.168.2.32:3082` | `staging-b2b.adv-photonx.com`  | `staging-b2b-odoo.adv-photonx.com`  | `staging-b2b`  |
+| training-b2b | `docker/training-b2b/` | `192.168.2.32:3083` | `training-b2b.adv-photonx.com` | `training-b2b-odoo.adv-photonx.com` | `training-b2b` |
 
 Each environment folder is self-contained: its own `.env.<env>`, `Dockerfile`,
 `docker-compose.yml`, `build_upload_amd64.sh` and gitignored SSH defaults. All four push to the
-same private registry on the server (`<registry-host>:5000/next-ecommerce-portal:<tag>`).
+same private registry on the server (`127.0.0.1:5000/next-ecommerce-portal:<tag>`).
 
 > The repo-root `Dockerfile`, `Dockerfile.dev` and `docker-compose.yml` are for local
 > development and manual production runs — they are **not** part of this pipeline.
@@ -195,7 +195,7 @@ flowchart LR
     B --> C["buildx → linux/amd64 image<br/>tagged <env> and <env>-<version>"]
     C --> D["save both tags to<br/>docker/build_releases/<env>/<env>_<version>_amd64.tar"]
     D --> E["scp tar to the server"]
-    E --> F["--deploy: load, retag,<br/>push both tags to <registry-host>:5000"]
+    E --> F["--deploy: load, retag,<br/>push both tags to 127.0.0.1:5000"]
     F --> G["redeploy the stack<br/>(manual — Portainer / compose)"]
 ```
 
@@ -293,18 +293,3 @@ this for you.
 - [ ] `npm run preview:cloudflare` run locally — the Worker build differs from the container build
 - [ ] Push `main` to the **GitHub** remote — this is the deploy action
 - [ ] Cloudflare build succeeded; `b2b.samtia.com` serves the new version and `/release-notes` shows it
-
----
-
-## A Note on Redacted Values
-
-This is the public copy of the documentation. Internal host addresses appear as placeholders:
-
-| Placeholder | What it stands for |
-|-------------|--------------------|
-| `<build-server>` | The internal build/host server address |
-| `<registry-host>` | The private Docker registry address |
-| `<staging-erp-build>` | The `staging-erp` Odoo.sh build identifier |
-
-The real values are held in the internal copy of these documents and in each environment's
-configuration. Ask the ERP team if you need them.

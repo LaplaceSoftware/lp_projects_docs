@@ -21,10 +21,7 @@ flowchart LR
 **Who uses it:** Pricing Managers, Account Managers, Business Administrators.
 **Navigation path:** Sidebar → Products management → **Pricelists**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-pricelists.png`
-> Description: Pricelists table showing Name, Currency and Actions columns, with the search box
-> and New Pricelist button.
+![Pricelists](images/amp-pricelists.png)
 
 ### Main information displayed
 
@@ -59,10 +56,7 @@ flowchart LR
 **Who uses it:** Pricing Managers, Business Administrators.
 **Navigation path:** Pricelists → **View details** on a price list.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-pricelist-items.png`
-> Description: Pricelist details showing the price list name and the rules table with Apply On,
-> Min Qty, Price, Valid Period and Actions columns, plus search and paging.
+![Pricelist Details](images/amp-pricelist-items.png)
 
 ### Main information displayed
 

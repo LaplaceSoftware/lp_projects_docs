@@ -31,11 +31,7 @@ flowchart LR
 **Who uses it:** All Client Portal users.
 **Navigation path:** Company Profile → choose the section on the left.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-orders-list.png`
-> Description: Orders list showing the section title and record count, search box, Filters
-> button, and the table with Label, Created By, Create Date, Planned Date, State, Planning State,
-> Items and Actions columns.
+![Orders List screen](images/client-orders-list.png)
 
 ### Main information displayed
 
@@ -90,11 +86,7 @@ order to its next stage.
 **Who uses it:** All Client Portal users.
 **Navigation path:** Any orders list → 👁 **View Details**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-order-detail.png`
-> Description: Order details with the editable label and action buttons at the top, the summary
-> panel, the product lines table, and the tabs for adding products, product requests, comments
-> and attachments.
+![Order Details screen](images/client-order-detail.png)
 
 ### Screen layout
 
@@ -189,10 +181,7 @@ If you cannot find something in the catalogue, ask for it directly on the order.
 | Quantity | How many you need |
 | Reference URL | A link to the product elsewhere, if you have one |
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-product-request.png`
-> Description: The Product Requests panel with the request form showing product name,
-> description, quantity and reference URL fields.
+![Product Requests screen](images/client-product-request.png)
 
 ### What happens next
 

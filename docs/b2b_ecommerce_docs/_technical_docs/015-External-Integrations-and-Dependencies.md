@@ -15,7 +15,7 @@ flowchart TB
     subgraph HOST["Hosting"]
         SH[["Odoo.sh"]]
         CF[["Cloudflare Workers<br/>production portal"]]
-        REG[["Private Docker registry<br/>+ internal server <build-server>"]]
+        REG[["Private Docker registry<br/>+ internal server 192.168.2.32"]]
     end
 
     subgraph BUILD["Build / delivery only"]
@@ -114,7 +114,7 @@ Storybook, Wrangler, OpenNext.
 | **Cloudflare Workers** (OpenNext + Wrangler) | **Hosts and continuously deploys the production portal** at `b2b.samtia.com`. A runtime dependency, not just a build tool |
 | **GitHub** (`LaplaceSoftware/next_ecommerce`) | The CI/CD trigger — a push to `main` rebuilds and redeploys production |
 | Azure DevOps | Pull requests for both repos (no CLI integration — PR links are shared manually) |
-| Private Docker registry on `<build-server>` | Serves portal images to the four non-production stacks |
+| Private Docker registry on `192.168.2.32` | Serves portal images to the four non-production stacks |
 
 ---
 
@@ -129,4 +129,4 @@ Storybook, Wrangler, OpenNext.
 | Two independently versioned halves | A portal build can outrun its backend | Release files record both head commits; deploy backend first |
 | Ungated production CI/CD | A push to GitHub `main` reaches live customers within minutes, with no approval step, while the matching backend change still has three Odoo.sh promotions to clear | Process only — validate on `staging-b2b` / `pre-prod` and confirm the backend has reached Odoo.sh `production` **before** pushing. Nothing in the pipeline enforces this |
 | Two git remotes with different roles | Merging on Azure DevOps does not deploy; pushing to GitHub does | Documented in [014](014-Deployment-Architecture.md#two-remotes-two-roles); no technical safeguard |
-| Single shared database | A tenancy bug is a cross-customer data exposure | Mandatory company scoping in every API method (see [007](007-Authentication-and-Authorization.md#4-multi-tenant-isolation)) |
+| Single shared database | A tenancy bug is a cross-customer data exposure | Mandatory company scoping in every API method (see [007](007-Authentication-and-Authorization.md#4--multi-tenant-isolation)) |

@@ -8,10 +8,7 @@
 **Navigation path:** Open the portal address in your browser. If you are not signed in, you are
 sent here automatically.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/login.png`
-> Description: Sign In screen showing the "Welcome Back" heading, the email/Iqama field, the
-> password field, the Sign In button and the "Forgot password" link.
+![Sign In screen](images/login.png)
 
 ### What you enter
 
@@ -58,10 +55,7 @@ flowchart LR
     D --> E["Sign in with<br/>the new password"]
 ```
 
-> 📷 **Screenshot Placeholder**
-> File: `images/reset-password-steps.png`
-> Description: The three states of the Reset Password screen — e-mail entry, verification code
-> entry, and new password entry with the requirements checklist.
+![Reset Password screen](images/reset-password-steps.png)
 
 | Step | What you do | Notes |
 |------|-------------|-------|

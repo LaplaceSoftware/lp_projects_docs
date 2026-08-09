@@ -20,10 +20,8 @@ keeps records clean.
 **Who uses it:** All Client Portal users.
 **Navigation path:** Any order → **Open Chat**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-chat.png`
-> Description: The chat window over an order screen, showing the conversation history, the
-> other person's online status, and the message input.
+![Chat](images/client-chat.png)
+![Chatter](images/chatter.png)
 
 Your company has **one shared conversation** with your Account Manager. Colleagues at your
 company see the same history — chat is a company channel, not a private one.
@@ -35,10 +33,7 @@ company see the same history — chat is a company channel, not a private one.
 **Who uses it:** Account Managers, Sales Representatives, Customer Service.
 **Navigation path:** Sidebar → **Messages**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-messages.png`
-> Description: Messages screen with the conversation list on the left showing customer names,
-> last message and unread counts, and the open conversation on the right.
+![Messages](images/amp-messages.png)
 
 | Area | What it shows |
 |------|---------------|
@@ -78,10 +73,7 @@ are offline, a comment on the order or an e-mail is more likely to be seen.
 **Where:** The 🔔 bell in the Client Portal header; the notification area in the Account Manager
 Portal.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/notifications.png`
-> Description: The notifications dropdown showing recent items with unread indicators and the
-> option to mark all as seen.
+![Notifications](images/notifications.png)
 
 ### What triggers a notification
 

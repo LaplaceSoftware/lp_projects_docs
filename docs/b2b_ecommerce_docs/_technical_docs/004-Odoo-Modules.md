@@ -139,7 +139,7 @@ data and the frontend navigation definition.
 Model-level rights are declared in `ir.model.access.csv` (≈49 rules). The module defines **no
 `ir.rule` record rules** — multi-tenant isolation is enforced in the API layer instead, since
 all portal traffic runs through `sudo()` model methods. See
-[007](007-Authentication-and-Authorization.md#4-multi-tenant-isolation).
+[007](007-Authentication-and-Authorization.md#multi-tenant-isolation).
 
 ### Assets registered into the back-office
 

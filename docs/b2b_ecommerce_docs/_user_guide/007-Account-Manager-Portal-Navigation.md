@@ -29,10 +29,7 @@ flowchart LR
     CM --> C2["Clients"]
 ```
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-sidebar.png`
-> Description: The Account Manager Portal sidebar expanded, showing all menu groups, with the
-> user name and options menu at the bottom.
+![Sidebar](images/amp-sidebar.png)
 
 At the bottom of the sidebar is your name. The **⋮** button beside it offers **Light mode / Dark
 mode** and **Sign Out**.
@@ -73,10 +70,7 @@ mode** and **Sign Out**.
 **Who uses it:** All Account Manager Portal users.
 **Navigation path:** Sidebar → **Dashboard**. This is also where you land after signing in.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-dashboard.png`
-> Description: Dashboard showing the Work Items list with its record count, and the Online Users
-> panel with the green "Live" indicator.
+![Dashboard](images/amp-dashboard.png)
 
 ### Main information displayed
 

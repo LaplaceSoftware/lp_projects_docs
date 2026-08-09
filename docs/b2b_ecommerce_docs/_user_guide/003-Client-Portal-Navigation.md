@@ -21,11 +21,7 @@ flowchart LR
     U --> U4["Sign Out"]
 ```
 
-> 📷 **Screenshot Placeholder**
-> File: `images/client-header.png`
-> Description: The Client Portal header showing the logo, Products and Brands menus, search box,
-> notification bell, wishlist selector and the user menu opened.
-
+![Client Header screen](images/client-header.png)
 ---
 
 ## Header Items

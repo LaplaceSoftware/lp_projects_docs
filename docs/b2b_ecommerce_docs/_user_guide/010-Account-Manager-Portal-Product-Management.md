@@ -15,10 +15,7 @@ structure), **Products** (the items), and **Brands** (the manufacturers).
 **Who uses it:** Account Managers, Business Administrators.
 **Navigation path:** Sidebar → Products management → **Product Categories**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-categories.png`
-> Description: Product Categories screen showing the expandable category tree with images, the
-> search box, and the add/edit/delete controls.
+![Product Categories](images/amp-categories.png)
 
 ### What the screen shows
 
@@ -57,10 +54,7 @@ customers see in the Client Portal header.
 **Who uses it:** Account Managers, Business Administrators.
 **Navigation path:** Sidebar → Products management → **Brands**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-brands.png`
-> Description: Brands table showing Name, Active and Actions columns with the add and edit
-> controls.
+![Brands](images/amp-brands.png)
 
 ### Main information displayed
 
@@ -94,10 +88,7 @@ customers see in the Client Portal header.
 **Who uses it:** Account Managers, Business Administrators.
 **Navigation path:** Sidebar → Products management → **Products**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-products.png`
-> Description: Products table showing the image thumbnail, Product, Brand, Categories, Tags,
-> Flags and Status columns, with the search box and New Product button above.
+![Products screen](images/amp-products.png)
 
 ### Main information displayed
 
@@ -135,10 +126,7 @@ Opening a product gives you five tabs.
 | **Sales & Descriptions** | Short description, long description, terms and conditions |
 | **Media** | Images |
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-product-form.png`
-> Description: Product form on the General tab showing Product Name, Brand, Categories, Ribbon,
-> Alert Message and the Published, Featured Product and Requires Call switches.
+![Product form](images/amp-product-form.png)
 
 ### General tab
 
@@ -197,9 +185,7 @@ lists.
 **Who uses it:** Business Administrators.
 **Navigation path:** Products screen → **Import**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-product-import.png`
-> Description: The Import dialog with the data area and, after running, the Import Result panel.
+![Import Products](images/amp-product-import.png)
 
 ### What the import does
 

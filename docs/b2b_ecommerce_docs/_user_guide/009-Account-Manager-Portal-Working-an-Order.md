@@ -8,11 +8,7 @@ here.
 **Who uses it:** Account Managers, Sales Representatives, Customer Service.
 **Navigation path:** Any order queue → 👁 **View Details**.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-order-detail.png`
-> Description: Order details with the label and state badge at top left, action buttons at top
-> right, the summary panel below, the product lines table with editable price and discount, and
-> the panels for adding products, product requests, comments and attachments.
+![Order Details](images/amp-order-detail.png)
 
 ---
 
@@ -135,10 +131,7 @@ queue meaningful for you and your colleagues.
 When a customer asks for something not in the catalogue, it appears in the **Product Requests**
 panel.
 
-> 📷 **Screenshot Placeholder**
-> File: `images/amp-product-requests.png`
-> Description: The Product Requests panel showing a customer request with its description,
-> quantity and reference link, and the controls to update its status.
+![Product Requests](images/amp-product-requests.png)
 
 ```mermaid
 flowchart LR
