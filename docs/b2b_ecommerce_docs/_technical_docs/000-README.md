@@ -22,6 +22,7 @@ are documented. Dead code, commented-out models and unregistered views are exclu
 | 003 | [Repositories and Structure](003-Repositories-and-Structure.md)                                           | The two repos, folder responsibilities                   |
 | 004 | [Odoo Modules](004-Odoo-Modules.md)                                                                       | Module catalog, dependency graph, responsibilities       |
 | 005 | [Domain Model](005-Domain-Model.md)                                                                       | Custom models, extensions, ERD, inheritance              |
+| 005.1 | [Model & Field Reference](005.1-Model-Field-Reference.md)                                               | Every model and every field, in full, with descriptions   |
 | 006 | [API and Controller Architecture](006-API-and-Controller-Architecture.md)                                 | Envelope, controller inheritance, endpoint catalog       |
 | 007 | [Authentication and Authorization](007-Authentication-and-Authorization.md)                               | Session login, password reset, guards, Access Management |
 | 008 | [Order Lifecycle](008-Order-Lifecycle.md)                                                                 | Portal state machine, sequence diagrams                  |

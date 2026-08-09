@@ -33,9 +33,7 @@ erDiagram
 
     PRODUCT_TEMPLATE }o--o| ECOMMERCE_BRAND : "brand"
     PRODUCT_TEMPLATE }o--o{ PRODUCT_PUBLIC_CATEGORY : "public categories"
-    PRODUCT_TEMPLATE ||--o{ PRODUCT_MERCHANT : "supplier prices"
     PRODUCT_TEMPLATE }o--o| ALERT_MESSAGE : "catalog alert"
-    PRODUCT_MERCHANT }o--|| ECOMMERCE_MERCHANT : "merchant"
 
     PRODUCT_PRICELIST ||--o{ PRODUCT_PRICELIST_ITEM : "price rules"
     RES_PARTNER_GRADE ||--o{ RES_PARTNER_COMPANY : "categorises"
@@ -69,8 +67,7 @@ which Account Manager is alerted on state changes.
 | Model                              | Purpose                                           | Notable traits                                                                                                                                 |
 | ---------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ecommerce.brand`                | Product brands                                    | Name & description, manual sequence, active flag, chatter                                                                         |
-|                                    |                                                   |                                                                                                                                                |
-| `ecommerce.product_merchant`     | Product ↔ merchant link with price               | Computed display name                                                                                                                          |
+| `ecommerce.merchant`              | Product merchants / suppliers                     | Master data only (name); no product linkage in the current codebase                                                                            |
 | `ecommerce.banner`               | Marketing banners                                 | Scheduled`active_datetime` / `deactivate_datetime`, optional client targeting, promotion URL, linked products & categories, obfuscated IDs |
 | `ecommerce.alert_message`        | Short catalog alert text attached to products     | Simple label model                                                                                                                             |
 | `ecommerce.portal.user.tag`      | Tags for portal users                             | Scoped per client company                                                                                                                      |
@@ -169,8 +166,11 @@ an explicit resolution that logs the outcome in the chatter.
 
 ---
 
-## Deliberately Unused
+## Removed Models
 
-`ecommerce.tier` exists as a Python file and a view file but is **not** loaded — it is
-commented out of the model registry and its views are not in the manifest. Client segmentation
-is done with `res.partner.grade` (Client Categories) instead. Do not build on `ecommerce.tier`.
+`ecommerce.tier` and `ecommerce.product_merchant` (product ↔ merchant price link) were fully
+removed from the codebase — model, views, security rules and manifest entries all deleted — in
+commit `c26ef8b` (2026-08-06). They are not present in any form; do not build on either name.
+Client segmentation is done with `res.partner.grade` (Client Categories) instead.
+`ecommerce.merchant` (supplier master data, singular) is unrelated and still active — see
+[005.1](005.1-Model-Field-Reference.md#ecommercemerchant).

@@ -102,6 +102,7 @@ nav:
           - Repositories and Structure: b2b_ecommerce_docs/_technical_docs/003-Repositories-and-Structure.md
           - Odoo Modules: b2b_ecommerce_docs/_technical_docs/004-Odoo-Modules.md
           - Domain Model: b2b_ecommerce_docs/_technical_docs/005-Domain-Model.md
+          - Model and Field Reference: b2b_ecommerce_docs/_technical_docs/005.1-Model-Field-Reference.md
           - API and Controller Architecture: b2b_ecommerce_docs/_technical_docs/006-API-and-Controller-Architecture.md
           - Authentication and Authorization: b2b_ecommerce_docs/_technical_docs/007-Authentication-and-Authorization.md
           - Order Lifecycle: b2b_ecommerce_docs/_technical_docs/008-Order-Lifecycle.md

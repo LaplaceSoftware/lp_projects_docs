@@ -254,7 +254,7 @@ Where to extend, in decreasing order of safety.
 - Do not query portal data without a company scope (AD-3).
 - Do not reuse a controller method name that exists elsewhere in the inheritance chain.
 - Do not remove the WebSocket workarounds (AD-9).
-- Do not build on `ecommerce.tier` — it is not loaded.
+- Do not build on `ecommerce.tier` or `ecommerce.product_merchant` — both were removed from the codebase (commit `c26ef8b`, 2026-08-06).
 - Do not add raw endpoint strings or `process.env` reads in frontend components.
 
 ---
@@ -265,7 +265,7 @@ Where to extend, in decreasing order of safety.
 |------|--------|-----------|
 | Three admin route prefixes (`/ecommerce/api/admin/*`, `/api/admin/*`, `/ecommerce/admin/api/*`) | Inconsistent client configuration | Standardise new endpoints on `/ecommerce/api/admin/*` |
 | AMM enforcement is a no-op on the backend | Permissions are UI-level only | Gate endpoints once the permission model settles |
-| `ecommerce.tier` present but unloaded | Confusing for newcomers | Remove the files |
+| ~~`ecommerce.tier` present but unloaded~~ | Resolved | Files removed in commit `c26ef8b` (2026-08-06), along with `ecommerce.product_merchant` |
 | Three very large model files | Hard to navigate and review | Split by concern (catalog / admin management / import) |
 | No `test` npm script despite Vitest + Playwright being configured | Nothing runs tests before a production deploy — and production now deploys automatically | Add the script and make the Cloudflare build fail on it |
 | No approval gate on production deploys | A push to GitHub `main` is live in minutes (AD-14) | Protect `main`, or gate the Cloudflare build on a passing test/lint run |
@@ -282,7 +282,6 @@ as features because they are unreachable from any menu or screen, or not loaded:
 
 | Item | Status |
 |------|--------|
-| `ecommerce.tier` model and views | Commented out of the model registry; views not in the manifest |
 | `pending_approval` order state | Present in the `portal_state` selection but never reached — no screen or endpoint transitions into it. The lifecycle runs `draft → rfq_submitted` directly |
 | Arabic / any second language | **Not supported.** The portals are English only. The language flag toggle in the client header is commented out, no translation catalogue is loaded, and the localised message key some endpoints still return is ignored by both portals |
 | Passwordless / OTP sign-in | **Not supported.** Login is password-only. The one-time code exists solely for the forgotten-password reset and never creates a session |
