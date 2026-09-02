@@ -1,7 +1,7 @@
 site_name: SAMTIA B2B Client Portal — Help Center
 site_description: How to use the SAMTIA B2B Client Portal — browsing, ordering, and company management
-# TODO: replace with the real domain once it's added to Cloudflare, e.g. https://help.samtia.com/
-site_url: https://help.samtia.com/
+# NOTE: this is a Laplace-owned domain and must move to a SAMTIA domain at vendor handover.
+site_url: https://b2b-client.laplacesoftware.com/
 
 docs_dir: docs_client
 site_dir: site_client
