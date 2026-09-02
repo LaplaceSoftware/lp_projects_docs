@@ -1,0 +1,27 @@
+{
+  // Serves the SAMTIA B2B Client Portal Help Center as static assets on
+  // Cloudflare Workers. Separate Worker from the internal site (see
+  // wrangler.jsonc) even though both live in this same repo.
+  //
+  // The build step (see this Worker's Cloudflare project settings) runs:
+  //     pip install -r requirements.txt && mkdocs build -f mkdocs.client.yml --strict
+  // which produces ./site_client — the directory published below.
+  //
+  // This project's Deploy command must be overridden in the Cloudflare
+  // dashboard to point wrangler at this file instead of the default
+  // wrangler.jsonc:
+  //     npx wrangler deploy --config wrangler.client.jsonc
+  //
+  // This is an assets-only Worker: there is no `main` script, because the
+  // site is entirely static. Cloudflare serves the files directly from its
+  // edge network.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "b2b-client-help",
+  "compatibility_date": "2026-08-06",
+  "assets": {
+    "directory": "./site_client",
+    // MkDocs emits a styled 404.html at the site root; serve it for unknown
+    // paths instead of Cloudflare's default error page.
+    "not_found_handling": "404-page"
+  }
+}
