@@ -118,6 +118,20 @@ nav:
           - Odoo.sh Environments Guide: b2b_ecommerce_docs/_technical_docs/017-Odoo.sh-Environments-Guide.md
 
 extra:
+  b2b_ecommerce:
+    # Source of truth for the freshness line on docs/b2b_ecommerce_docs/index.md.
+    # Kept in sync by the docs-sync skill on every run — there is no templating
+    # plugin installed, so these values and that page's visible text must be
+    # updated together by hand (or by the skill) rather than relying on one
+    # driving the other automatically.
+    #
+    # docs_last_updated: date this sync ran (not a doc's individual edit date).
+    # portal_version: the next_ecommerce version from its latest
+    #   next_ecommerce/_docs/releases/<version>.json (semver, highest wins) —
+    #   NOT necessarily what's live in every environment. staging/pre-prod/
+    #   training track the latest release; .env.production can lag behind it.
+    docs_last_updated: "2026-09-02"
+    portal_version: "1.3.1"
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/LaplaceSoftware

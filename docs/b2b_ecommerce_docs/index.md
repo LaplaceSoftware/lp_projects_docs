@@ -1,5 +1,7 @@
 # B2B E-Commerce Platform
 
+*Docs last updated: 2026-09-02 · Portal version: 1.3.1*
+
 A quote-driven B2B trade platform built on Odoo 19, with two Next.js portals.
 
 ```mermaid
