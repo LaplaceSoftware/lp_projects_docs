@@ -71,7 +71,6 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Claud: claud.md
 
   - B2B E-Commerce:
       - Overview: b2b_ecommerce_docs/index.md
