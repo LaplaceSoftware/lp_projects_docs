@@ -3,6 +3,7 @@
 
 # MkDocs build output
 site/
+site_client/
 
 # Python
 .venv/

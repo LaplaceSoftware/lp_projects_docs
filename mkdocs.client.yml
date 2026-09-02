@@ -1,0 +1,81 @@
+site_name: SAMTIA B2B Client Portal — Help Center
+site_description: How to use the SAMTIA B2B Client Portal — browsing, ordering, and company management
+# TODO: replace with the real domain once it's added to Cloudflare, e.g. https://help.samtia.com/
+site_url: https://help.samtia.com/
+
+docs_dir: docs_client
+site_dir: site_client
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tabs.link
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  # Renders :material-*: / :fontawesome-*: shortcodes as inline SVG icons.
+  # Without this they show on the page as literal text.
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Home: index.md
+  - Index: _client_user_guide/000-README.md
+  - Getting Started: _client_user_guide/001-Getting-Started.md
+  - User Roles and Permissions: _client_user_guide/002-User-Roles-and-Permissions.md
+  - Navigation: _client_user_guide/003-Client-Portal-Navigation.md
+  - Browsing and Wishlists: _client_user_guide/004-Client-Portal-Browsing-and-Wishlists.md
+  - Orders: _client_user_guide/005-Client-Portal-Orders.md
+  - Company Management: _client_user_guide/006-Client-Portal-Company-Management.md
+  - Messages and Notifications: _client_user_guide/007-Messages-and-Notifications.md
+  - The Order Lifecycle: _client_user_guide/008-The-Order-Lifecycle.md
+  - Common Business Scenarios: _client_user_guide/009-Common-Business-Scenarios.md
+  - Glossary: _client_user_guide/010-Glossary.md
+
+copyright: SAMTIA — B2B Client Portal Help Center
