@@ -94,6 +94,10 @@ flowchart LR
 **In practice:** if a customer says "I switched my colleague back on but they still cannot sign
 in", check whether SAMTIA has switched off the *Active User* flag.
 
+**Switching either flag off takes effect immediately** — even for someone already signed in and
+working. It is not just a block on the next sign-in attempt; their current session is ended
+straight away. The same is true of promoting or demoting someone to/from Company Administrator.
+
 ---
 
 ## Menu Visibility

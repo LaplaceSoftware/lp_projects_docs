@@ -39,7 +39,8 @@ you see when you sign in — you cannot switch between them.
 | 013 | [Messages and Notifications](013-Messages-and-Notifications.md) | Chat with the other side and follow alerts |
 | 014 | [The Order Lifecycle](014-The-Order-Lifecycle.md) | Understand every status and who acts next |
 | 015 | [Common Business Scenarios](015-Common-Business-Scenarios.md) | Follow step-by-step recipes for daily tasks |
-| 016 | [Glossary](016-Glossary.md) | Look up a term |
+| 016 | [Account Manager Portal — Reports](016-Account-Manager-Portal-Reports.md) | Review login activity with the Persistence Report |
+| 017 | [Glossary](017-Glossary.md) | Look up a term |
 
 ---
 
@@ -49,7 +50,7 @@ you see when you sign in — you cannot switch between them.
 
 **New Account Manager** → 001 → 002 → 007 → 014 → 008 → 009 → 013 → 015
 
-**New Business Administrator** → 001 → 002 → 011 → 012 → 010 → 015
+**New Business Administrator** → 001 → 002 → 011 → 012 → 010 → 016 → 015
 
 ---
 

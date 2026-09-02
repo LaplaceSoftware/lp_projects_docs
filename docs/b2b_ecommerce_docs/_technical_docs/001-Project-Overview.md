@@ -64,7 +64,7 @@ flowchart TB
 ```
 
 A single Next.js deployment serves both portals. Which portal a user gets is decided **at
-runtime from one flag on the authenticated user** (`is_ecommerce_portal`) — there is no
+runtime from one flag on the authenticated user** (`is_b2b_portal`) — there is no
 second build, no second host.
 
 ---

@@ -1,4 +1,4 @@
-# 016 — Glossary
+# 017 — Glossary
 
 Terms used consistently throughout this guide and in the platform itself.
 

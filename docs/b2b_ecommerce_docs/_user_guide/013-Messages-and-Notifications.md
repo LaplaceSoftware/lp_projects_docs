@@ -73,6 +73,8 @@ are offline, a comment on the order or an e-mail is more likely to be seen.
 **Where:** The 🔔 bell in the Client Portal header; the notification area in the Account Manager
 Portal.
 
+⚠️ <span title="New notification triggers added (first login, quotation opened/downloaded) — example screenshot needs a fresh capture">**Needs update**</span>
+
 ![Notifications](images/notifications.png)
 
 ### What triggers a notification
@@ -85,6 +87,8 @@ Portal.
 | An order changes stage | The customer's company |
 | A new message arrives | The other side |
 | A user signs in or is activated | The company |
+| One of your company's users signs in for the very first time | The Account Manager |
+| The customer opens or downloads their quotation | The Account Manager |
 
 ### Reading them
 
@@ -114,8 +118,12 @@ Some events also send an e-mail, so nothing is missed when nobody is signed in.
 | A Purchase Order is submitted | The Account Manager |
 | A wishlist is shared | The Account Manager |
 | A quotation is sent | The customer |
-| A user invitation | The invited user |
+| A user invitation | The invited user, cc'ing their Account Manager |
 | A password reset code | The requesting user |
+| One of your company's users signs in for the very first time | The Account Manager |
+| The customer opens or downloads their quotation | The Account Manager |
+| A chat thread stays unread too long | The Account Manager |
+| An Account Manager requests an internal review of a quotation | The chosen internal reviewers |
 
 Account Manager alert e-mails include a direct link into the portal, so you can go straight to
 the record.

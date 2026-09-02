@@ -93,7 +93,8 @@ nav:
           - Messages and Notifications: b2b_ecommerce_docs/_user_guide/013-Messages-and-Notifications.md
           - The Order Lifecycle: b2b_ecommerce_docs/_user_guide/014-The-Order-Lifecycle.md
           - Common Business Scenarios: b2b_ecommerce_docs/_user_guide/015-Common-Business-Scenarios.md
-          - Glossary: b2b_ecommerce_docs/_user_guide/016-Glossary.md
+          - AMP — Reports: b2b_ecommerce_docs/_user_guide/016-Account-Manager-Portal-Reports.md
+          - Glossary: b2b_ecommerce_docs/_user_guide/017-Glossary.md
 
       - Technical Documentation:
           - Index: b2b_ecommerce_docs/_technical_docs/000-README.md

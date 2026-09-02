@@ -88,6 +88,8 @@ customers see in the Client Portal header.
 **Who uses it:** Account Managers, Business Administrators.
 **Navigation path:** Sidebar → Products management → **Products**.
 
+⚠️ <span title="Screen changed — Internal Reference column added, needs a fresh capture">**Needs update**</span>
+
 ![Products screen](images/amp-products.png)
 
 ### Main information displayed
@@ -96,6 +98,7 @@ customers see in the Client Portal header.
 |--------|---------|
 | **IMG** | Product thumbnail |
 | **Product** | Product name |
+| **Internal Reference** | Your own SKU/reference code for the product, not shown to customers |
 | **Brand** | Manufacturer |
 | **Categories** | Where it appears in the customer's browsing menu |
 | **Tags** | Labels customers can filter by |
@@ -111,6 +114,7 @@ customers see in the Client Portal header.
 | **Delete** | Removes the product |
 | **Import** | Loads many products at once |
 | **Search** | Finds by product name |
+| **Column sorting** | Click a column heading to sort |
 
 ---
 
@@ -126,6 +130,8 @@ Opening a product gives you five tabs.
 | **Sales & Descriptions** | Short description, long description, terms and conditions |
 | **Media** | Images |
 
+⚠️ <span title="Screen changed — Internal Reference field added to the General tab, needs a fresh capture">**Needs update**</span>
+
 ![Product form](images/amp-product-form.png)
 
 ### General tab
@@ -133,6 +139,7 @@ Opening a product gives you five tabs.
 | Field | Business meaning |
 |-------|------------------|
 | **Product Name** | Required. What customers see |
+| **Internal Reference** | Your own SKU/reference code, for internal use only — never shown to customers |
 | **Brand** | The manufacturer |
 | **Categories** | Where it appears in the browsing menu. A product can sit in several |
 | **Ribbon / Badge** | A small marker on the product card, such as *New* or *Sale* |

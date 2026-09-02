@@ -8,6 +8,8 @@ here.
 **Who uses it:** Account Managers, Sales Representatives, Customer Service.
 **Navigation path:** Any order queue → 👁 **View Details**.
 
+⚠️ <span title="Screen changed — Send Quotation for Review button added to the header, needs a fresh capture">**Needs update**</span>
+
 ![Order Details](images/amp-order-detail.png)
 
 ---
@@ -87,9 +89,20 @@ Which buttons appear depends on where the order has reached.
 |--------|--------------|--------------|
 | **Open Chat** | Always | Opens a live conversation with the customer |
 | **Reply Done** | The customer has flagged the order for attention | Clears the attention flag once you have responded |
+| **Send Quotation for Review** | Always | Sends the quotation to chosen internal colleagues for a second look, before it ever reaches the customer |
 | **Send Quotation** | The order is a submitted or revised request | Produces the quotation, e-mails it to the customer, and moves the order to *Quotation Submitted* |
 | **Confirm** | The customer has uploaded a Purchase Order | Confirms the order — it becomes real business and moves to *In Progress* |
 | **Return** | The customer has uploaded a Purchase Order | Sends the order back to the customer with a reason |
+
+### Send Quotation for Review
+
+Before a price goes out to the customer, you can have a colleague check it internally.
+
+1. Click **Send Quotation for Review**
+2. Select the internal reviewers
+3. Confirm — they all receive one e-mail with the quotation and any attached product requests
+
+This is entirely internal: the customer is not notified and the order does not change stage.
 
 ### Send Quotation
 
@@ -131,6 +144,8 @@ queue meaningful for you and your colleagues.
 When a customer asks for something not in the catalogue, it appears in the **Product Requests**
 panel.
 
+⚠️ <span title="Screen changed — Price Unit field added when marking a request Product Added, needs a fresh capture">**Needs update**</span>
+
 ![Product Requests](images/amp-product-requests.png)
 
 ```mermaid
@@ -149,6 +164,10 @@ flowchart LR
 
 **When you link a product to a request, the order line is created automatically.** You do not add
 it manually. Removing the link removes the line again.
+
+When you mark a request **Product Added**, set the **Price Unit** for the line — it defaults to
+the linked product's catalogue price but you can override it before confirming, so the sourced
+item lands on the order at the right price the first time.
 
 The customer can see the status, so moving a request to **In Progress** is itself a useful signal
 that you are working on it.

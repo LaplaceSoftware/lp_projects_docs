@@ -235,6 +235,32 @@ For the pricing side, add rules with a **Valid Period** to the relevant price li
 
 ---
 
+### Scenario 16 — Get a second opinion before a quotation goes out
+
+1. Open the order, priced and ready to send.
+2. Click **Send Quotation for Review** instead of Send Quotation.
+3. Select the colleagues who should check it.
+4. Confirm — they receive one e-mail with the quotation and any attached product requests.
+5. Once you have their sign-off, click **Send Quotation** as normal.
+
+This step is entirely internal — the customer is not notified and the order does not change
+stage. Use it for unusually large orders, non-standard discounts, or anything you want a second
+pair of eyes on before it becomes visible to the customer.
+
+---
+
+### Scenario 17 — Price a new segment's price list quickly
+
+1. **Products management → Pricelists**, open the price list for the new segment.
+2. Click **Add Multiple Items**.
+3. Select every product the segment should be able to buy.
+4. Confirm — a price rule is created for each, starting from that product's catalogue price.
+5. Go back through the new rules and adjust any that need a different price than the default.
+
+Faster than adding rules one at a time when a whole segment needs pricing at once.
+
+---
+
 ## Quick Troubleshooting
 
 | Symptom                                        | Most likely cause                                                       |

@@ -67,6 +67,10 @@ writes — they delegate to real Odoo actions:
 - Only the creator may delete a basket.
 - Editing an already-quoted order sets `portal_pending_submit`, marking it as changed but not
   yet re-submitted.
+- A B2B portal order stays out of the standard Odoo Sales module views
+  (Quotations / Orders) until it reaches `state='sale'` — i.e. until it hits `in_progress`. This
+  keeps in-flight RFQs and quotations from cluttering the internal sales pipeline; the order is
+  always visible in the AMP/back-office portal-state queues regardless.
 
 ---
 
@@ -119,10 +123,10 @@ sequenceDiagram
 ```
 
 **Notification trigger points.** The account manager is notified on exactly three customer-side
-transitions: `rfq_submitted`, `rfq_updated`, `po_submitted` — plus when a wishlist is shared.
-Notifications are only sent when the actor is a portal user, so account-manager-side edits do
-not notify the account manager. E-mail delivery is globally switchable via a system setting;
-the in-app notification is always created.
+transitions: `rfq_submitted`, `rfq_updated`, `po_submitted` — plus when a wishlist is shared, and
+whenever the client opens or downloads the quotation PDF. Notifications are only sent when the
+actor is a portal user, so account-manager-side edits do not notify the account manager. E-mail
+delivery is globally switchable via a system setting; the in-app notification is always created.
 
 ---
 
@@ -193,11 +197,16 @@ Per-client sequences mean each customer sees a continuous, private numbering ser
 | ------------------------------------------------------- | ----------------------------------------------------------- |
 | `portal_planned_order_date` + computed planning state | Late / On Time / Upcoming — drives urgency indicators      |
 | `portal_visible`                                      | Needs attention (unread portal activity or shared wishlist) |
-| `portal_reviewed` + `portal_reviewed_date`          | The customer has reviewed the quotation                     |
-| `portal_print_quotation_date`                         | The customer printed/downloaded the quotation               |
+| `portal_reviewed` + `portal_reviewed_date`          | The customer has reviewed the quotation — stamped only when the actor is a portal user |
+| `portal_print_quotation_date`                         | The customer printed/downloaded the quotation — same portal-user-only stamping |
+| `account_manager_print_po_date`                       | The account manager downloaded the purchase order — the internal-side mirror of the two rows above |
 | `portal_pending_submit`                               | The customer edited a quoted order without re-submitting    |
 | `portal_messages_count`                               | Volume of portal-originated chatter                         |
 | `account_manager_notes` / `account_manager_comment` | Internal note vs. client-visible comment                    |
+
+The planning state is not purely computed-on-read: a daily scheduled job
+(*Ecommerce: Update Order Planning States*) recomputes it from `portal_planned_order_date` for
+every order, so a Late/Upcoming indicator does not go stale between reads.
 
 ---
 

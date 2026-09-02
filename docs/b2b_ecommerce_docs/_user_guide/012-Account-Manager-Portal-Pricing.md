@@ -42,8 +42,8 @@ flowchart LR
 
 ### Business rules
 
-- A price list in use by customers should not be deleted — check which client categories and
-  clients reference it first.
+- **A price list assigned to a client or used as a client category's default cannot be deleted.**
+  The screen tells you it is in use — reassign the client(s) or category first.
 - Changing the currency affects how every price on the list is interpreted. Treat it as a
   structural change, not an edit.
 
@@ -55,6 +55,8 @@ flowchart LR
 **Business purpose:** Set the actual prices within a price list.
 **Who uses it:** Pricing Managers, Business Administrators.
 **Navigation path:** Pricelists → **View details** on a price list.
+
+⚠️ <span title="Screen changed — Add Multiple Items button added, needs a fresh capture">**Needs update**</span>
 
 ![Pricelist Details](images/amp-pricelist-items.png)
 
@@ -71,11 +73,24 @@ flowchart LR
 
 | Action | Result |
 |--------|--------|
-| **Add rule** | Creates a price rule |
+| **Add rule** | Creates a single price rule |
+| **Add Multiple Items** | Opens a dialog to pick several products at once and create a price rule for each in one go, starting from their catalogue prices |
 | **Edit** | Changes an existing rule |
 | **Delete** | Removes a rule |
-| **Search** | Finds a rule by what it applies to |
+| **Search** | Finds a rule by product name or code |
 | **Paging** | Moves through long lists |
+
+### Adding several rules at once
+
+Use **Add Multiple Items** when you are setting up a new price list for a segment and need to
+price many products at the same time rather than one by one:
+
+1. Click **Add Multiple Items**
+2. Select the products to add
+3. Confirm — a rule is created for each, seeded from that product's own catalogue price
+
+Review and adjust the resulting rules individually afterwards if any product needs a different
+price than its catalogue default.
 
 ### How rules combine
 

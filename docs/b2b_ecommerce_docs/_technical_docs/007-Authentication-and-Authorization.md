@@ -5,7 +5,7 @@
 ```mermaid
 flowchart TB
     A["<b>1 · Authentication</b><br/>Who is this? — Odoo session cookie"] --> B
-    B["<b>2 · Portal routing</b><br/>Which application? — is_ecommerce_portal"] --> C
+    B["<b>2 · Portal routing</b><br/>Which application? — is_b2b_portal"] --> C
     C["<b>3 · Activation</b><br/>Is the account usable? — activate + portal_activate"] --> D
     D["<b>4 · Tenancy</b><br/>Whose data? — portal_company_partner_id"] --> E
     E["<b>5 · Feature permission</b><br/>Which screens & actions? — AMM roles"] --> F
@@ -98,14 +98,14 @@ password without the code exchange.
 
 A single boolean decides which application the user gets.
 
-| `is_ecommerce_portal` | Meaning                    | Landing route |
+| `is_b2b_portal` | Meaning                    | Landing route |
 | ----------------------- | -------------------------- | ------------- |
 | `true`                | External B2B customer user | `/home`     |
 | `false`               | Internal vendor employee   | `/admin`    |
 
 ```mermaid
 flowchart TB
-    L["Login succeeds"] --> Q{"is_ecommerce_portal"}
+    L["Login succeeds"] --> Q{"is_b2b_portal"}
     Q -->|true| CG["AuthGuard<br/>client routes"]
     Q -->|false| AG["AdminGuard<br/>/admin routes"]
     CG -->|"user hits /admin/*"| R1["redirect /home"]
@@ -137,6 +137,12 @@ This lets the vendor suspend an entire client's user without the client being ab
 re-enable it, while still letting the client's own admin manage their team day to day. The
 check is re-applied on write operations, not only at login.
 
+**Immediate revocation.** Flipping `activate` or `portal_activate` to `False` — or changing
+`is_admin_portal_user` in either direction — revokes every one of that user's active device
+sessions on the spot (`res.users.write()` → `_action_revoke_all_devices()`). Deactivation is not
+just a login-time check: a user already signed in loses access immediately, without waiting for
+their session to expire or for a next login attempt.
+
 ---
 
 ## 4 · Multi-Tenant Isolation
@@ -161,6 +167,17 @@ flowchart LR
 
 **Consequence for developers:** a new endpoint that forgets the company scope has no second
 line of defence. Scoping is not optional and cannot be added later by configuration.
+
+The product, pricelist and order APIs now route through a shared helper module,
+`ecommerce/api_access.py` (`as_user()`, `resolve_for_user()`, `resolve_id_for_user()`,
+`search_as_user()`): a record is resolved/authorized under the calling user first — so Odoo's
+own record rules still apply at that step — then the actual read or write executes under
+`sudo()`. This formalizes the pattern above into one place instead of each controller
+re-implementing its own scoping.
+
+Deleting a client company that is still referenced by other records (orders, users, …) no
+longer surfaces a raw database FK error — the delete is wrapped in a savepoint and reported back
+as a plain `CLIENT_IN_USE` business error instead.
 
 Identifiers exposed to clients can additionally be obfuscated (reversible XOR + Base64) to
 mitigate enumeration — a defence-in-depth measure, not a substitute for the scoping above.

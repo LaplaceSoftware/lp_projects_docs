@@ -130,7 +130,7 @@ Route prefixes in use:
 | Password change | `reset-password` | Lets an already authenticated user change their own password |
 | Catalog | `brands`, `products`, `product`, `public_categories` | Paginated, filterable catalog with pricelist-resolved prices, variants and attribute exclusions |
 | Marketing | `banners` | Active, schedule-aware banners for the user's company |
-| Orders | `orders`, `orders/create`, `orders/drafts`, `orders/details`, `orders/update`, `orders/delete` | Basket/RFQ/quotation/order lifecycle; create supports copying an existing order |
+| Orders | `orders`, `orders/create`, `orders/drafts`, `orders/details`, `orders/update`, `orders/delete` | Basket/RFQ/quotation/order lifecycle; create supports copying an existing order; list accepts `sort_field`/`sort_order` |
 | Order lines | `order_lines/create`, `update`, `delete` | Line editing including customer target price |
 | Product requests | `product_requests` (+ `create`, `update`, `delete`, `details`) | Requests for items not in the catalog |
 | Chatter | `chatter/messages`, `message/post`, `message/update`, `attachment/upload`, `attachment/delete` | Per-order comment thread with attachments |
@@ -146,7 +146,7 @@ Route prefixes in use:
 
 | Area | Endpoints | Purpose |
 |------|-----------|---------|
-| Products | `products` (GET/POST/PUT/DELETE), `product`, `products/import` | Full product CRUD with media, plus JSON bulk import |
+| Products | `products` (GET/POST/PUT/DELETE), `product`, `products/import` | Full product CRUD with media, plus JSON bulk import; list accepts `sort`/`sort_order` and returns `default_code` (internal reference) |
 | Attributes & variants | `attributes`, `attribute/values`, `product/variants` (GET/POST/DELETE), `product/variant` (PUT), `link-attribute`, `unlink-attribute`, `remove-attribute-value`, `generate-product-variants` | Variant matrix management |
 | Product metadata | `ribbons`, `alert-messages` | Lookup lists for the product form |
 | Product categories | `product-categories` (list / create / update / delete) | Public category tree |
@@ -157,12 +157,13 @@ Route prefixes in use:
 | Clients | `/api/admin/clients` (+ `get`, `create`, `update`, `delete`, `restore`) | Client company CRUD with archive/restore |
 | Client categories | `client-categories` (+ `details`, `create`, `update`, `delete`) | Category (grade) CRUD |
 | Pricelists | `/api/admin/pricelists` (+ `details`, `create`, `update`, `delete`), `currencies` | Pricelist CRUD |
-| Pricelist items | `/api/admin/pricelists/items` (+ `details`, `create`, `update`, `delete`) | Price rule CRUD |
+| Pricelist items | `/api/admin/pricelists/items` (+ `details`, `create`, `update`, `delete`, `bulk_create`) | Price rule CRUD; `bulk_create` seeds rules for several products at once from their default prices |
 | Product requests | `product_requests`, `product_requests/update` | Triage of catalog requests |
 | Chat | `chat/threads`, `chat/init`, `chat/send`, `chat/mark_read` | Multi-client inbox |
 | Users | `users/send-invitation` | Sends the QR invitation e-mail |
 | Address lookups | `countries`, `states` | Form dropdowns |
 | Attachments | `attachments/list` | Documents on a record |
+| Reports | `reports/persistence`, `reports/persistence/export` | Client activity (`ecommerce.notification` of type `user_login`) over a chosen date range; export streams an `.xlsx` via `xlsxwriter` |
 
 ### Access Management API
 

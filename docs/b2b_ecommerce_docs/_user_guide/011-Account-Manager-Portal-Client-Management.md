@@ -84,6 +84,8 @@ segment rather than customer by customer.
 
 - **You see only your own clients.**
 - Deleting archives rather than erases — history is preserved and the client can be restored.
+- If a client cannot be archived because other records still reference it, the screen tells you
+  clearly instead of showing a technical error.
 
 ---
 

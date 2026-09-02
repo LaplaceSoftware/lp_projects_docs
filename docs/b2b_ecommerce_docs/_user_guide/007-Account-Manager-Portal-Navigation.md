@@ -11,6 +11,7 @@ flowchart LR
     S --> OM["Orders management"]
     S --> PM["Products management"]
     S --> CM["Clients management"]
+    S --> RP["Reports"]
     S --> M["Messages"]
     S --> C["Configuration"]
 
@@ -28,6 +29,8 @@ flowchart LR
     CM --> C1["Clients Categories"]
     CM --> C2["Clients"]
 ```
+
+⚠️ <span title="Screen changed — Reports menu item added to the sidebar, needs a fresh capture">**Needs update**</span>
 
 ![Sidebar](images/amp-sidebar.png)
 
@@ -55,6 +58,7 @@ mode** and **Sign Out**.
 | **Clients management** | Customer companies | [011](011-Account-Manager-Portal-Client-Management.md) |
 | ├ Clients Categories | Customer segments and their default pricing | [011](011-Account-Manager-Portal-Client-Management.md) |
 | └ Clients | The customer companies themselves | [011](011-Account-Manager-Portal-Client-Management.md) |
+| **Reports** | Login/activity history | [016](016-Account-Manager-Portal-Reports.md) |
 | **Messages** | Live conversations with customers | [013](013-Messages-and-Notifications.md) |
 | **Configuration** | Reserved for future settings | — |
 

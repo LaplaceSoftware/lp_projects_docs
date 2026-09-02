@@ -55,9 +55,13 @@ outgoing mail server. Configure it in **Settings → Technical → Email → Out
 | Template | Trigger |
 |----------|---------|
 | *User Login OTP* | The password-reset code endpoint (name is historical — it is not a login mail) |
-| *User Invitation QR Code Email* | Sending an invitation to a portal user |
+| *User Invitation QR Code Email* | Sending an invitation to a portal user; the responsible account manager is now cc'd |
 | *Ecommerce: Portal Quotation* | Transition to `quotation_submitted` |
 | *Ecommerce: Account Manager Order State Change* | RFQ submitted / RFQ updated / PO submitted / wishlist shared |
+| *First Login Notification to Account Manager* | A client portal user's first successful login |
+| *Quotation Downloaded Notification* | A portal user opens or downloads the quotation PDF |
+| *Unread Chat Notification* | A chat thread stays unread past the configured threshold |
+| *Quotation Review Request (Internal)* | An account manager sends an order for internal review; lists any attached product requests and cc's every recipient on one e-mail |
 
 ## 4 · Module Settings (Settings → B2B Ecommerce)
 
@@ -81,6 +85,8 @@ outgoing mail server. Configure it in **Settings → Technical → Email → Out
 | Job | Interval | Purpose | If disabled |
 |-----|----------|---------|-------------|
 | *Ecommerce: mark stale chat presences offline* | 1 minute | Flips presences whose heartbeat went stale | Users appear online indefinitely after a crash or a dropped connection |
+| *Ecommerce: Update Order Planning States* | Daily | Recomputes `portal_order_planning_state` for every order from `portal_planned_order_date` | Late/On Time/Upcoming indicators only refresh when an order is read/written, not continuously |
+| *Ecommerce: notify unread chat messages* | Periodic | Sends the Unread Chat Notification e-mail once a thread's unread streak exceeds the configured threshold | Account managers rely solely on the in-app badge/bus push to notice unread client messages |
 
 ## 7 · Sequences
 

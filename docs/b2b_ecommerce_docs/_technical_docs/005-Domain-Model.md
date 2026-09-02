@@ -50,7 +50,7 @@ Everything in the platform hangs off one relationship:
 
 ```mermaid
 flowchart LR
-    U["res.users<br/>portal user"] -->|portal_company_partner_id| C["res.partner<br/>is_company = True<br/>is_ecommerce_portal = True"]
+    U["res.users<br/>portal user"] -->|portal_company_partner_id| C["res.partner<br/>is_company = True<br/>is_b2b_portal = True"]
     C -->|account_manager_user_id| AM["res.users<br/>Account Manager"]
     C -->|property_product_pricelist| PL["product.pricelist"]
     C -->|partner_grade_id| G["res.partner.grade<br/>Client Category"]
@@ -97,7 +97,7 @@ removes it again.
 
 | Added capability      | Fields / behaviour                                                                                                                                                        |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tenancy               | `portal_company_partner_id`, computed `is_ecommerce_portal`, `is_admin_portal_user`                                                                                 |
+| Tenancy               | `portal_company_partner_id`, computed `is_b2b_portal`, `is_admin_portal_user`                                                                                 |
 | Dual activation       | `activate` (controlled by the vendor's account manager) **and** `portal_activate` (controlled by the client's own company admin) — both must be true to log in |
 | Identity              | `identification_no` as an alternative login, `portal_user_code`                                                                                                       |
 | Password reset        | `otp`, `otp_expiry_datetime` — a one-time code e-mailed and verified during a forgotten-password reset. It never establishes a session |
@@ -110,7 +110,7 @@ removes it again.
 
 | Added capability     | Detail                                                                                     |
 | -------------------- | ------------------------------------------------------------------------------------------ |
-| Portal client flag   | `is_ecommerce_portal` marks a company as a B2B client                                    |
+| Portal client flag   | `is_b2b_portal` marks a company as a B2B client                                    |
 | Account managers     | `account_manager_user_id` (primary) and `account_manager_ids` (many-to-many)           |
 | Per-client numbering | `portal_order_sequence_id` — each client gets its own order sequence                    |
 | Portal URL           | `shop_portal_url`, falling back to a global system parameter                             |
