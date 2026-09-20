@@ -1,4 +1,4 @@
-# 005 — Client Portal: Orders
+# 005 — Customer Portal: Sales Orders
 
 All four order sections share the same screen design, so learning one teaches you all four. They
 differ only in **which** orders they show.
@@ -9,14 +9,14 @@ differ only in **which** orders they show.
 
 | Section | Shows | You are waiting on |
 |---------|-------|--------------------|
-| **Wishlists** | Baskets you are still building | Yourself |
+| **Draft Requests** | Baskets you are still building | Yourself |
 | **RFQs** | Requests sent to SAMTIA, and quotations received back | SAMTIA, then yourself |
 | **Orders** | Confirmed business being fulfilled | SAMTIA |
 | **Archived** | Cancelled requests, kept for reference | Nobody |
 
 ```mermaid
 flowchart LR
-    W["Wishlists"] -->|"Submit RFQ"| R["RFQs"]
+    W["Draft Requests"] -->|"Submit RFQ"| R["RFQs"]
     R -->|"Quotation accepted<br/>and PO uploaded"| O["Orders"]
     R -->|"Cancelled"| A["Archived"]
     O -->|"Cancelled"| A
@@ -24,11 +24,11 @@ flowchart LR
 
 ---
 
-## The Orders List Screen
+## The Sales Orders List Screen
 
-**Screen name:** Wishlists / RFQs / Orders / Archived
+**Screen name:** Draft Requests / RFQs / Orders / Archived
 **Business purpose:** Find and act on a piece of business.
-**Who uses it:** All Client Portal users.
+**Who uses it:** All Customer Portal users.
 **Navigation path:** Company Profile → choose the section on the left.
 
 ![Orders List screen](images/client-orders-list.png)
@@ -37,12 +37,12 @@ flowchart LR
 
 | Column | What it tells you |
 |--------|-------------------|
-| **Label** | The name given to the wishlist or order |
+| **Label** | The name given to the draft request or order |
 | **Created By** | Which colleague started it |
 | **Create Date** | When it was started |
-| **Planned Date** | When the goods are needed |
+| **Requested Delivery Date** | When the goods are needed |
 | **State** | Where it has reached — see [014](014-The-Order-Lifecycle.md) |
-| **Planning State** | **Late**, **On Time** or **Upcoming**, based on the planned date |
+| **Schedule Status** | **Late**, **On Time** or **Upcoming**, based on the requested delivery date |
 | **Items** | How many product lines it contains |
 
 ### Search and filters
@@ -50,11 +50,11 @@ flowchart LR
 | Tool | What it does |
 |------|--------------|
 | **Search orders** | Finds by name or label |
-| **Filters** | Narrows by **Created Date** range and **Planned Date** range (From / To) |
+| **Filters** | Narrows by **Created Date** range and **Requested Delivery Date** range (From / To) |
 | **Column sorting** | Click a column heading to sort |
 | **Paging** | Move through long lists |
 
-**Planning State** is the fastest way to spot trouble: filter or sort on it to find everything
+**Schedule Status** is the fastest way to spot trouble: filter or sort on it to find everything
 running late.
 
 ### Available actions per row
@@ -62,28 +62,28 @@ running late.
 | Button | When it appears | What it does |
 |--------|-----------------|--------------|
 | 👁 **View Details** | Always | Opens the full order |
-| 📋 **Copy** | Always | Creates a new wishlist containing the same products |
-| 🗑 **Delete** | Only while the record is still a Wishlist (Draft) | Removes it permanently |
+| 📋 **Copy** | Always | Creates a new draft request containing the same products |
+| 🗑 **Delete** | Only while the record is still a Draft Request | Removes it permanently |
 | 📥 **Archive** | Only on RFQs and quotations in progress | Moves it out of the active list |
 
 ### Business rules
 
-- **Delete only works on wishlists.** Once submitted, business records are archived rather than
-  deleted, so the history is preserved.
-- **Only the creator can delete a wishlist.**
+- **Delete only works on draft requests.** Once submitted, business records are archived rather
+  than deleted, so the history is preserved.
+- **Only the creator can delete a draft request.**
 - Copy is available on any record, at any stage — including completed orders.
 
 ---
 
-## The Order Detail Screen
+## The Sales Order Detail Screen
 
-This is where the real work happens. It is the same screen for a wishlist, an RFQ and a
+This is where the real work happens. It is the same screen for a draft request, an RFQ and a
 confirmed order — the available buttons change with the stage.
 
 **Screen name:** Order Details
 **Business purpose:** Review and edit the contents, talk to your Account Manager, and move the
 order to its next stage.
-**Who uses it:** All Client Portal users.
+**Who uses it:** All Customer Portal users.
 **Navigation path:** Any orders list → 👁 **View Details**.
 
 ![Order Details screen](images/client-order-detail.png)
@@ -92,9 +92,9 @@ order to its next stage.
 
 ```mermaid
 flowchart TB
-    H["Header — order label, state badge, action buttons"] --> S["Summary — dates, notes, Account Manager comment"]
+    H["Header — order label, state badge, action buttons"] --> S["Summary — dates, notes, Account Manager Note"]
     S --> L["Product lines table"]
-    L --> P["Panels — Add Products · Product Requests · Comments & Attachments"]
+    L --> P["Panels — Add Products · New Product Requests · Comments & Attachments"]
 ```
 
 ### Summary information
@@ -103,10 +103,10 @@ flowchart TB
 |-------|---------|
 | **Create Date** | When it was started |
 | **Created By** | Which colleague started it |
-| **Planned Date** | When you need the goods — you can edit this |
-| **Order Planning State** | Late / On Time / Upcoming |
+| **Requested Delivery Date** | When you need the goods — you can edit this |
+| **Order Schedule Status** | Late / On Time / Upcoming |
 | **Notes** | Your own note about the purpose of this order |
-| **Account Manager Comment** | A message from SAMTIA about this specific order |
+| **Account Manager Note** | A message from SAMTIA about this specific order |
 | **Return Reason** | Shown when SAMTIA has returned the order to you, explaining why |
 
 ### The product lines table
@@ -124,7 +124,7 @@ flowchart TB
 
 The order total is shown beneath the table.
 
-**Editing is allowed while the order is a Wishlist, or after a quotation has been received.** At
+**Editing is allowed while the order is a Draft Request, or after a quotation has been received.** At
 other stages the order is with SAMTIA and the lines are locked.
 
 ### Action buttons and when they appear
@@ -134,10 +134,10 @@ other stages the order is with SAMTIA and the lines are locked.
 | **Edit** | The order can be changed | Unlocks the label, dates and lines |
 | **Save** | You are editing | Saves your changes |
 | **Reset** | You are editing | Discards your changes |
-| **Copy** | Always | Creates a new wishlist from these products |
+| **Copy** | Always | Creates a new draft request from these products |
 | **Open Chat** | Always | Starts or opens a conversation with your Account Manager |
-| **Share wishlist** / **Hide wishlist** | On a wishlist | Flags it for your Account Manager's attention, or removes the flag |
-| **Submit RFQ** | On a wishlist with at least one product | Sends it to SAMTIA for pricing |
+| **Share draft request** / **Hide draft request** | On a draft request | Flags it for your Account Manager's attention, or removes the flag |
+| **Submit RFQ** | On a draft request with at least one product | Sends it to SAMTIA for pricing |
 | **Update RFQ** | On a submitted request | Reopens it so you can change it |
 | **Submit Updated RFQ** | After changing a submitted request | Sends the revision to SAMTIA |
 | **Submit PO** | On a received quotation | Opens the Purchase Order upload |
@@ -172,7 +172,7 @@ back-and-forth.
 
 If you cannot find something in the catalogue, ask for it directly on the order.
 
-**Where:** Order Details → **Product Requests** panel.
+**Where:** Order Details → **New Product Requests** panel.
 
 | Field | What to enter |
 |-------|---------------|
@@ -181,7 +181,7 @@ If you cannot find something in the catalogue, ask for it directly on the order.
 | Quantity | How many you need |
 | Reference URL | A link to the product elsewhere, if you have one |
 
-![Product Requests screen](images/client-product-request.png)
+![New Product Requests screen](images/client-product-request.png)
 
 ### What happens next
 
@@ -198,7 +198,7 @@ the product appears as a normal line on your order — you do not need to add it
 
 ### Business rules
 
-- Requests belong to a specific order, so raise them on the wishlist or RFQ they relate to.
+- Requests belong to a specific order, so raise them on the draft request or RFQ they relate to.
 - A request cannot be changed once the order is finalised.
 - The reference URL is optional but genuinely speeds up sourcing — include it when you have one.
 
@@ -206,11 +206,11 @@ the product appears as a normal line on your order — you do not need to add it
 
 ## Tips
 
-- **Watch for the Account Manager Comment.** It is the most common place a question or condition
+- **Watch for the Account Manager Note.** It is the most common place a question or condition
   is recorded, and it is easy to scroll past.
 - **A returned order is not a rejection.** Check the Return Reason, make the change, and submit
   again.
-- **Set the Planned Date honestly.** It drives the Late / On Time / Upcoming flag your Account
+- **Set the Requested Delivery Date honestly.** It drives the Late / On Time / Upcoming flag your Account
   Manager uses to prioritise work.
 - **Editing a received quotation** marks it as changed but not resubmitted. Remember to submit it
   again, or your Account Manager will not know to look.

@@ -11,7 +11,7 @@ flowchart TB
     A["Odoo server config file<br/>addons_path · db · ports"] --> B["Module installation<br/>lp_base → access_management → ecommerce → ecommerce_access_data"]
     B --> C["Odoo Settings UI<br/>Technical + B2B Ecommerce app"]
     C --> D["System parameters<br/>ir.config_parameter"]
-    D --> E["Master data<br/>catalog · clients · pricing"]
+    D --> E["Master data<br/>catalog · customers · pricing"]
     E --> F["Portal env vars<br/>NEXT_PUBLIC_*"]
 ```
 
@@ -55,19 +55,15 @@ outgoing mail server. Configure it in **Settings → Technical → Email → Out
 | Template | Trigger |
 |----------|---------|
 | *User Login OTP* | The password-reset code endpoint (name is historical — it is not a login mail) |
-| *User Invitation QR Code Email* | Sending an invitation to a portal user; the responsible account manager is now cc'd |
+| *User Invitation QR Code Email* | Sending an invitation to a portal user |
 | *Ecommerce: Portal Quotation* | Transition to `quotation_submitted` |
-| *Ecommerce: Account Manager Order State Change* | RFQ submitted / RFQ updated / PO submitted / wishlist shared |
-| *First Login Notification to Account Manager* | A client portal user's first successful login |
-| *Quotation Downloaded Notification* | A portal user opens or downloads the quotation PDF |
-| *Unread Chat Notification* | A chat thread stays unread past the configured threshold |
-| *Quotation Review Request (Internal)* | An account manager sends an order for internal review; lists any attached product requests and cc's every recipient on one e-mail |
+| *Ecommerce: Account Manager Order State Change* | RFQ submitted / RFQ revised / PO submitted / draft request shared |
 
 ## 4 · Module Settings (Settings → B2B Ecommerce)
 
 | Setting | System parameter | Purpose |
 |---------|------------------|---------|
-| Shop Portal URL | `ecommerce.shop_portal_url` | Default portal base URL used to build deep links in e-mails; falls back per client to `res.partner.shop_portal_url` |
+| Shop Portal URL | `ecommerce.shop_portal_url` | Default portal base URL used to build deep links in e-mails; falls back per customer to `res.partner.shop_portal_url` |
 | Send Email Notification | `ecommerce.send_email_notification` | Master switch for account-manager e-mail alerts. In-app notifications are unaffected. Default `True` |
 
 ## 5 · System Parameters (Settings → Technical → System Parameters)
@@ -76,7 +72,7 @@ outgoing mail server. Configure it in **Settings → Technical → Email → Out
 |-----|---------|--------|
 | `ecommerce.shop_portal_url` | — | See above |
 | `ecommerce.send_email_notification` | `True` | See above |
-| `ecommerce.use_encrypted_id` | `false` | Turns external ID obfuscation on. **Changing it invalidates every identifier already held by a client** — coordinate with a portal deploy |
+| `ecommerce.use_encrypted_id` | `false` | Turns external ID obfuscation on. **Changing it invalidates every identifier already held by a customer** — coordinate with a portal deploy |
 | `base64_id.secret` | built-in numeric default | Salt for the obfuscation. Set a per-environment value; changing it also invalidates existing external IDs |
 | `web.base.url` | — | Standard Odoo; used for absolute URLs in mail and reports |
 
@@ -85,15 +81,13 @@ outgoing mail server. Configure it in **Settings → Technical → Email → Out
 | Job | Interval | Purpose | If disabled |
 |-----|----------|---------|-------------|
 | *Ecommerce: mark stale chat presences offline* | 1 minute | Flips presences whose heartbeat went stale | Users appear online indefinitely after a crash or a dropped connection |
-| *Ecommerce: Update Order Planning States* | Daily | Recomputes `portal_order_planning_state` for every order from `portal_planned_order_date` | Late/On Time/Upcoming indicators only refresh when an order is read/written, not continuously |
-| *Ecommerce: notify unread chat messages* | Periodic | Sends the Unread Chat Notification e-mail once a thread's unread streak exceeds the configured threshold | Account managers rely solely on the in-app badge/bus push to notice unread client messages |
 
 ## 7 · Sequences
 
 | Sequence | Scope |
 |----------|-------|
 | *Portal Order Basket Sequence* | Template for portal order numbering |
-| Per-client sequence (`res.partner.portal_order_sequence_id`) | Each client company gets its own series, assigned at order creation so every customer sees continuous private numbering |
+| Per-customer sequence (`res.partner.portal_order_sequence_id`) | Each customer company gets its own series, assigned at order creation so every customer sees continuous private numbering |
 
 ---
 
@@ -102,12 +96,12 @@ outgoing mail server. Configure it in **Settings → Technical → Email → Out
 ```mermaid
 flowchart TB
     A["1 · Currencies<br/>language stays en_US only"] --> B["2 · Pricelists"]
-    B --> C["3 · Client categories<br/>res.partner.grade + default pricelist"]
-    C --> D["4 · Brands · Merchants · Public categories · Alert messages"]
+    B --> C["3 · Customer segments<br/>res.partner.grade + default pricelist"]
+    C --> D["4 · Brands · Merchants · Public categories · Product Notices"]
     D --> E["5 · Products<br/>manual or JSON import"]
     E --> F["6 · Price rules per pricelist"]
     F --> G["7 · Account managers<br/>internal users flagged is_account_manager"]
-    G --> H["8 · Client companies<br/>category · pricelist · account manager · portal URL"]
+    G --> H["8 · Customer companies<br/>category · pricelist · account manager · portal URL"]
     H --> I["9 · Portal users + invitations"]
     I --> J["10 · Banners · user tags"]
     J --> K["11 · AMM roles & assignments (optional)"]
@@ -118,11 +112,11 @@ flowchart TB
 | Entity | Minimum | Consequence if missing |
 |--------|---------|------------------------|
 | Pricelist | ≥ 1 | Catalog returns nothing — visibility is driven by what the company's pricelist can price |
-| Client category | ≥ 1 | Clients have no default pricing |
+| Customer segment | ≥ 1 | Customers have no default pricing |
 | Public category | ≥ 1 | Storefront mega-menu is empty |
 | Product with a price rule | ≥ 1 | Nothing to order |
 | Account manager | ≥ 1 | No chat counterpart, no state-change alerts |
-| Client company | ≥ 1 | No tenant to log into |
+| Customer company | ≥ 1 | No tenant to log into |
 | Portal user | ≥ 1 | No one can use the storefront |
 
 ---

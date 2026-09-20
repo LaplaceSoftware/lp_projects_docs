@@ -7,7 +7,7 @@ keeps records clean.
 |---------|----------|----------------|
 | **Chat** | Quick back-and-forth while both people are available | The Messages screen, or *Open Chat* on an order |
 | **Comments** | Discussion that must stay attached to an order permanently | The order's Comments panel |
-| **Account Manager Comment** | A standing statement about an order the customer must see | The order summary (Account Managers only) |
+| **Account Manager Note** | A standing statement about an order the customer must see | The order summary (Account Managers only) |
 
 ---
 
@@ -17,7 +17,7 @@ keeps records clean.
 
 **Screen name:** Chat
 **Business purpose:** Talk to your Account Manager directly.
-**Who uses it:** All Client Portal users.
+**Who uses it:** All Customer Portal users.
 **Navigation path:** Any order → **Open Chat**.
 
 ![Chat](images/client-chat.png)
@@ -47,7 +47,7 @@ question is about that specific order.
 ### Business rules
 
 - **Messages are delivered live.** Both sides see new messages without refreshing.
-- **You only see your own clients' conversations.**
+- **You only see your own customers' conversations.**
 - Opening a conversation marks it as read and clears the unread count.
 
 ---
@@ -70,10 +70,8 @@ are offline, a comment on the order or an e-mail is more likely to be seen.
 
 ## Notifications
 
-**Where:** The 🔔 bell in the Client Portal header; the notification area in the Account Manager
-Portal.
-
-⚠️ <span title="New notification triggers added (first login, quotation opened/downloaded) — example screenshot needs a fresh capture">**Needs update**</span>
+**Where:** The 🔔 bell in the Customer Portal header; the notification area in the Account
+Management Portal.
 
 ![Notifications](images/notifications.png)
 
@@ -83,12 +81,10 @@ Portal.
 |-------|-------------|
 | A request is submitted or revised | The Account Manager |
 | A Purchase Order is submitted | The Account Manager |
-| A wishlist is shared | The Account Manager |
+| A draft request is shared | The Account Manager |
 | An order changes stage | The customer's company |
 | A new message arrives | The other side |
 | A user signs in or is activated | The company |
-| One of your company's users signs in for the very first time | The Account Manager |
-| The customer opens or downloads their quotation | The Account Manager |
 
 ### Reading them
 
@@ -116,14 +112,10 @@ Some events also send an e-mail, so nothing is missed when nobody is signed in.
 | A request is submitted | The Account Manager |
 | A request is revised | The Account Manager |
 | A Purchase Order is submitted | The Account Manager |
-| A wishlist is shared | The Account Manager |
+| A draft request is shared | The Account Manager |
 | A quotation is sent | The customer |
-| A user invitation | The invited user, cc'ing their Account Manager |
+| A user invitation | The invited user |
 | A password reset code | The requesting user |
-| One of your company's users signs in for the very first time | The Account Manager |
-| The customer opens or downloads their quotation | The Account Manager |
-| A chat thread stays unread too long | The Account Manager |
-| An Account Manager requests an internal review of a quotation | The chosen internal reviewers |
 
 Account Manager alert e-mails include a direct link into the portal, so you can go straight to
 the record.
@@ -134,19 +126,19 @@ the record.
 
 ---
 
-## Attention Flags on Orders
+## Attention Flags on Sales Orders
 
-When a customer shares a wishlist or posts a message, the order is flagged as **needing
-attention**. The flag appears on the order and drives the Shared wishlist queue.
+When a customer shares a draft request or posts a message, the order is flagged as **needing
+attention**. The flag appears on the order and drives the Shared Request queue.
 
 ```mermaid
 flowchart LR
-    A["Customer shares a wishlist<br/>or posts a message"] --> B["Order flagged<br/>as needing attention"]
+    A["Customer shares a draft request<br/>or posts a message"] --> B["Order flagged<br/>as needing attention"]
     B --> C["Account Manager<br/>responds"]
     C --> D["Reply Done clears<br/>the flag"]
 ```
 
-**Clearing the flag matters.** If nobody clicks **Reply Done**, the Shared wishlist queue fills
+**Clearing the flag matters.** If nobody clicks **Reply Done**, the Shared Request queue fills
 with items that have already been handled and stops being useful to the team.
 
 ---
@@ -157,14 +149,14 @@ with items that have already been handled and stops being useful to the team.
 flowchart TB
     Q{"What are you<br/>communicating?"} -->|"Quick question,<br/>they're online"| CHAT["Chat"]
     Q -->|"Must stay on the<br/>record permanently"| COM["Comment on the order"]
-    Q -->|"A condition the customer<br/>must not miss"| AMC["Account Manager Comment"]
+    Q -->|"A condition the customer<br/>must not miss"| AMC["Account Manager Note"]
     Q -->|"A document"| ATT["Attach it to the order"]
 ```
 
 | Situation | Best channel |
 |-----------|--------------|
 | "Is this in stock?" | Chat |
-| "Lead time is six weeks on line 3" | Account Manager Comment |
+| "Lead time is six weeks on line 3" | Account Manager Note |
 | "Approved by our finance team on 4 March" | Comment |
 | Revised specification document | Attachment |
 | "Why has the price changed since last quarter?" | Chat, then record the outcome as a Comment |

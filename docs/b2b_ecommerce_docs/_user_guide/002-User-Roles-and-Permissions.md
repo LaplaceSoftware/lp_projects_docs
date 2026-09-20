@@ -4,11 +4,11 @@
 
 ```mermaid
 flowchart LR
-    subgraph CUST["Customer side — Client Portal"]
+    subgraph CUST["Customer side — Customer Portal"]
         CA["Company Administrator"]
         CU["Standard User"]
     end
-    subgraph SAM["SAMTIA side — Account Manager Portal"]
+    subgraph SAM["SAMTIA side — Account Management Portal"]
         AM["Account Manager"]
         PR["Pricing Manager"]
         RO["Read Only Manager"]
@@ -30,9 +30,9 @@ The everyday buyer.
 | Can do | Cannot do |
 |--------|-----------|
 | Browse the catalogue and search products | See or manage colleagues' accounts |
-| Build and name wishlists | Create or deactivate users |
+| Build and name draft requests | Create or deactivate users |
 | Request products that are not in the catalogue | Manage user tags |
-| Submit a wishlist as a Request for Quotation | See other companies' orders or prices |
+| Submit a draft request as a Request for Quotation | See other companies' orders or prices |
 | Review quotations and upload a Purchase Order | |
 | Track orders through to delivery | |
 | Chat with the Account Manager | |
@@ -63,11 +63,11 @@ Everything a Standard User can do, **plus** managing their own company's people.
 | **Read Only Manager** | Views everything relevant without changing anything. |
 | **Super Administrator** | Full access, including system configuration. |
 
-### Account Managers only see their own clients
+### Account Managers only see their own customers
 
-This is the single most important rule for internal staff. Every list in the Account Manager
+This is the single most important rule for internal staff. Every list in the Account Management
 Portal — orders, quotations, chat conversations — shows **only** the customer companies assigned
-to you. You will not see another Account Manager's clients, and they will not see yours.
+to you. You will not see another Account Manager's customers, and they will not see yours.
 
 If a customer tells you they submitted a request and you cannot find it, the most likely reason
 is that their company is assigned to a different Account Manager.
@@ -80,23 +80,19 @@ A customer user can only sign in when **both** switches are on.
 
 ```mermaid
 flowchart LR
-    A["Active User<br/>set by the SAMTIA<br/>Account Manager"] --> AND{"Both on?"}
-    B["Portal Active<br/>set by the customer's own<br/>Company Administrator"] --> AND
+    A["Account Enabled<br/>set by the SAMTIA<br/>Account Manager"] --> AND{"Both on?"}
+    B["Portal Access Enabled<br/>set by the customer's own<br/>Company Administrator"] --> AND
     AND -->|Yes| OK["User can sign in and work"]
     AND -->|No| NO["Sign-in refused —<br/>'account is not active'"]
 ```
 
 | Switch | Controlled by | Business purpose |
 |--------|---------------|------------------|
-| **Active User** (shown as *Account Manager Approved*) | SAMTIA Account Manager | Lets SAMTIA suspend a customer's access — for example during a commercial dispute. The customer cannot undo this. |
-| **Portal Active** (shown as *Active / Inactive*) | The customer's own Company Administrator | Lets the customer manage their own team — a leaver is switched off without involving SAMTIA. |
+| **Account Enabled** (shown as *Account Manager Approved*) | SAMTIA Account Manager | Lets SAMTIA suspend a customer's access — for example during a commercial dispute. The customer cannot undo this. |
+| **Portal Access Enabled** (shown as *Active / Inactive*) | The customer's own Company Administrator | Lets the customer manage their own team — a leaver is switched off without involving SAMTIA. |
 
 **In practice:** if a customer says "I switched my colleague back on but they still cannot sign
-in", check whether SAMTIA has switched off the *Active User* flag.
-
-**Switching either flag off takes effect immediately** — even for someone already signed in and
-working. It is not just a block on the next sign-in attempt; their current session is ended
-straight away. The same is true of promoting or demoting someone to/from Company Administrator.
+in", check whether SAMTIA has switched off the *Account Enabled* flag.
 
 ---
 
@@ -117,8 +113,8 @@ These limits apply to every role and are enforced by the system, not by conventi
 
 - **See another company's data.** All customer information is separated by company. There is no
   view that mixes two customers' orders, prices or users.
-- **Delete an order that has left Draft.** Once a wishlist becomes a Request for Quotation it can
-  be cancelled or archived, but not deleted.
-- **Delete someone else's wishlist.** Only the person who created a wishlist can delete it.
+- **Delete an order that has left Draft Request.** Once a draft request becomes a Request for
+  Quotation it can be cancelled or archived, but not deleted.
+- **Delete someone else's draft request.** Only the person who created a draft request can delete it.
 - **Delete a file someone else uploaded.** Only the person who attached a file can remove it.
 - **Deactivate or delete your own account.** You cannot lock yourself out.

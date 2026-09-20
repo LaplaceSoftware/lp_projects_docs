@@ -28,7 +28,7 @@ are documented. Dead code, commented-out models and unregistered views are exclu
 | 008 | [Order Lifecycle](008-Order-Lifecycle.md)                                                                 | Portal state machine, sequence diagrams                  |
 | 009 | [Feature Catalog](009-Feature-Catalog.md)                                                                 | Every shipped feature with a technical description       |
 | 010 | [Next.js Application Architecture](010-NextJS-Application-Architecture.md)                                | Layers, routing, state, HTTP client                      |
-| 011 | [Navigation and User Journeys](011-Navigation-and-User-Journeys.md)                                       | Back-office menus, portal menus, journeys                |
+| 011 | [Navigation and User Journeys](011-Navigation-and-User-Journeys.md)                                       | ERP Back Office menus, portal menus, journeys                |
 | 012 | [Real-Time and Messaging](012-Realtime-and-Messaging.md)                                                  | WebSocket, chat, presence, notifications, chatter        |
 | 013 | [Master Data and Configuration](013-Master-Data-and-Configuration.md)                                     | Startup config, SMTP, system parameters, crons, env vars |
 | 014 | [Deployment Architecture](014-Deployment-Architecture.md)                                                 | Odoo.sh branches, portal Docker pipeline, environments   |
@@ -52,11 +52,11 @@ are documented. Dead code, commented-out models and unregistered views are exclu
 
 | Term                                   | Meaning                                                                          |
 | -------------------------------------- | -------------------------------------------------------------------------------- |
-| **Client Portal**                | Customer-facing Next.js app served at`/`                                       |
-| **AMP** / Account Manager Portal | Internal Next.js app served at`/admin/*`                                       |
-| **Back-office**                  | The Odoo web client itself (ERP UI)                                              |
-| **Client**                       | A B2B customer*company* (`res.partner`, `is_company = True`)               |
-| **Portal user**                  | An end user belonging to a Client company                                        |
-| **Account Manager**              | Internal employee owning one or more Clients                                     |
+| **Customer Portal**               | Customer-facing Next.js app served at`/`                                       |
+| **AMP** / Account Management Portal | Internal Next.js app served at`/admin/*`                                       |
+| **ERP Back Office**               | The Odoo web client itself (ERP UI)                                              |
+| **Customer**                      | A B2B customer*company* (`res.partner`, `is_company = True`)               |
+| **Portal user**                  | An end user belonging to a Customer company                                        |
+| **Account Manager**              | Internal employee owning one or more Customers                                     |
 | **Portal state**                 | The B2B order status shown in both portals, distinct from Odoo's native`state` |
 | **AMM**                          | Access Management Module — role/permission engine (`access_management`)       |

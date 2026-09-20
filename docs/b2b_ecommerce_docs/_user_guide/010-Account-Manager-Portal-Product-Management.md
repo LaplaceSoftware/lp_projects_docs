@@ -1,4 +1,4 @@
-# 010 — Account Manager Portal: Product Management
+# 010 — Account Management Portal: Product Management
 
 Three screens control what customers see when they browse: **Product Categories** (the
 structure), **Products** (the items), and **Brands** (the manufacturers).
@@ -20,7 +20,7 @@ structure), **Products** (the items), and **Brands** (the manufacturers).
 ### What the screen shows
 
 Categories in a tree. Parent categories expand to reveal their children, matching the menu
-customers see in the Client Portal header.
+customers see in the Customer Portal header.
 
 | Element | Meaning |
 |---------|---------|
@@ -39,7 +39,7 @@ customers see in the Client Portal header.
 
 ### Business rules
 
-- **The tree is the customer's menu.** Changes appear in the Client Portal immediately, so plan
+- **The tree is the customer's menu.** Changes appear in the Customer Portal immediately, so plan
   restructuring rather than experimenting live.
 - A category can hold products and sub-categories at the same time.
 - Deleting a category does not delete its products, but those products lose that browsing route —
@@ -88,8 +88,6 @@ customers see in the Client Portal header.
 **Who uses it:** Account Managers, Business Administrators.
 **Navigation path:** Sidebar → Products management → **Products**.
 
-⚠️ <span title="Screen changed — Internal Reference column added, needs a fresh capture">**Needs update**</span>
-
 ![Products screen](images/amp-products.png)
 
 ### Main information displayed
@@ -98,11 +96,10 @@ customers see in the Client Portal header.
 |--------|---------|
 | **IMG** | Product thumbnail |
 | **Product** | Product name |
-| **Internal Reference** | Your own SKU/reference code for the product, not shown to customers |
 | **Brand** | Manufacturer |
 | **Categories** | Where it appears in the customer's browsing menu |
-| **Tags** | Labels customers can filter by |
-| **Flags** | Special markers such as *Featured* or *Requires Call* |
+| **Product Tags** | Labels customers can filter by |
+| **Flags** | Special markers such as *Featured* or *Requires Consultation* |
 | **Status** | Whether it is published to customers |
 
 ### Available actions
@@ -114,7 +111,6 @@ customers see in the Client Portal header.
 | **Delete** | Removes the product |
 | **Import** | Loads many products at once |
 | **Search** | Finds by product name |
-| **Column sorting** | Click a column heading to sort |
 
 ---
 
@@ -124,13 +120,11 @@ Opening a product gives you five tabs.
 
 | Tab | What you maintain there |
 |-----|-------------------------|
-| **General** | Name, brand, categories, ribbon, alert message, and the flags |
-| **Attributes & Values** | The characteristics the product varies by — size, colour and similar |
-| **Variants** | The individual sellable versions produced from those attributes |
+| **General** | Name, brand, categories, product badge, product notice, and the flags |
+| **Product Attributes & Values** | The characteristics the product varies by — size, colour and similar |
+| **Product Variants** | The individual sellable versions produced from those attributes |
 | **Sales & Descriptions** | Short description, long description, terms and conditions |
 | **Media** | Images |
-
-⚠️ <span title="Screen changed — Internal Reference field added to the General tab, needs a fresh capture">**Needs update**</span>
 
 ![Product form](images/amp-product-form.png)
 
@@ -139,28 +133,27 @@ Opening a product gives you five tabs.
 | Field | Business meaning |
 |-------|------------------|
 | **Product Name** | Required. What customers see |
-| **Internal Reference** | Your own SKU/reference code, for internal use only — never shown to customers |
 | **Brand** | The manufacturer |
 | **Categories** | Where it appears in the browsing menu. A product can sit in several |
-| **Ribbon / Badge** | A small marker on the product card, such as *New* or *Sale* |
-| **Alert Message** | An important notice shown on the product page |
+| **Product Badge** | A small marker on the product card, such as *New* or *Sale* |
+| **Product Notice** | An important notice shown on the product page |
 | **Published** | Whether customers can see it at all |
 | **Featured Product** | Promotes it onto the customer Home page |
-| **Requires Call** | Marks it as needing a conversation before ordering. Customers see *Call Required* |
+| **Requires Consultation** | Marks it as needing a conversation before ordering. Customers see *Call Required* |
 
-### Attributes and Variants
+### Product Attributes and Product Variants
 
 Use these when one product comes in several versions.
 
 ```mermaid
 flowchart LR
-    A["Define attributes<br/>e.g. Size, Colour"] --> B["Add values<br/>e.g. S/M/L, Red/Blue"]
-    B --> C["Generate variants"]
+    A["Define product attributes<br/>e.g. Size, Colour"] --> B["Add values<br/>e.g. S/M/L, Red/Blue"]
+    B --> C["Generate product variants"]
     C --> D["Each combination becomes<br/>a sellable version"]
 ```
 
-Customers choose between variants on the product page. Combinations you have not created are
-shown as unavailable, so they cannot request something that does not exist.
+Customers choose between product variants on the product page. Combinations you have not created
+are shown as unavailable, so they cannot request something that does not exist.
 
 ### Sales & Descriptions
 
@@ -198,7 +191,7 @@ lists.
 
 - Creates products that do not exist and updates those that do
 - Creates missing brands and categories automatically
-- Creates missing attributes and values, and builds the variants
+- Creates missing product attributes and values, and builds the product variants
 - Sets prices on the price lists included in the data
 - Downloads product images where image links are supplied
 
@@ -208,7 +201,8 @@ successfully.*
 ### Business rules
 
 - **Always test with a small batch first.** The import creates supporting records — brands,
-  categories, attributes — as a side effect, and a badly formed file can leave clutter behind.
+  categories, product attributes — as a side effect, and a badly formed file can leave clutter
+  behind.
 - Products are matched to decide create-versus-update. Re-running the same file updates rather
   than duplicates.
 - Review the result panel every time. Partial success is possible.
@@ -235,7 +229,7 @@ culprit.**
 ## Tips
 
 - **Use Featured Product deliberately.** It is prime space on every customer's Home page.
-- **Alert Messages are for things that affect the purchase decision** — supply constraints,
+- **Product Notices are for things that affect the purchase decision** — supply constraints,
   regulatory notes — not marketing copy.
-- **Set Requires Call on anything genuinely needing a conversation.** It sets expectations before
-  the customer submits a request.
+- **Set Requires Consultation on anything genuinely needing a conversation.** It sets expectations
+  before the customer submits a request.

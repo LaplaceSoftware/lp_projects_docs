@@ -1,4 +1,4 @@
-# 014 — The Order Lifecycle
+# 014 — The Sales Order Lifecycle
 
 Every piece of business moves through the same set of stages. Knowing which stage a record is in
 tells you two things immediately: **who has to act next**, and **what can still be changed**.
@@ -9,7 +9,7 @@ tells you two things immediately: **who has to act next**, and **what can still 
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Draft: customer creates a wishlist
+    [*] --> Draft: customer creates a draft request
 
     Draft --> RFQ_Submitted: customer submits it
 
@@ -43,12 +43,12 @@ stateDiagram-v2
 
 | Stage | What it means in business terms | Who acts next | Where the customer finds it | Where the Account Manager finds it |
 |-------|--------------------------------|---------------|----------------------------|-----------------------------------|
-| **Draft** | A wishlist being built. Nothing has been asked of SAMTIA | Customer | Wishlists | Shared wishlist (only if flagged) |
+| **Draft Request** | Still being built. Nothing has been asked of SAMTIA | Customer | Draft Requests | Shared Request (only if flagged) |
 | **RFQ Submitted** | A formal request for a price | **Account Manager** | RFQs | RFQ Quotations |
-| **RFQ Updated** | The customer has changed their request | **Account Manager** | RFQs | RFQ Quotations |
-| **Quotation Submitted** | A price has been offered | **Customer** | RFQs | Quotations |
+| **RFQ Revised** | The customer has changed their request | **Account Manager** | RFQs | RFQ Quotations |
+| **Quotation Issued** | A price has been offered | **Customer** | RFQs | Quotations |
 | **PO Submitted** | The customer has accepted and sent their Purchase Order | **Account Manager** | RFQs | Quotations |
-| **In Progress** | Confirmed business being fulfilled | Account Manager | Orders | Orders |
+| **Processing** | Confirmed business being fulfilled | Account Manager | Orders | Orders |
 | **Delivered** | Complete | Nobody | Orders | Orders |
 | **Rejected** | The request was refused | Nobody | Archived | Archived Orders |
 | **Cancelled** | The business was stopped | Nobody | Archived | Archived Orders |
@@ -86,12 +86,12 @@ to act.
 
 | Stage | Customer can edit the lines? | Account Manager can edit the lines? |
 |-------|----------------------------|------------------------------------|
-| Draft | Yes | Not applicable |
+| Draft Request | Yes | Not applicable |
 | RFQ Submitted | No — reopen with **Update RFQ** first | **Yes — this is where pricing happens** |
-| RFQ Updated | No — same | Yes |
-| Quotation Submitted | Yes, then resubmit | Yes |
+| RFQ Revised | No — same | Yes |
+| Quotation Issued | Yes, then resubmit | Yes |
 | PO Submitted | No | No |
-| In Progress | No | No |
+| Processing | No | No |
 | Delivered | No | No |
 
 **The rule of thumb:** an order is editable while the commercial conversation is still open, and
@@ -105,10 +105,10 @@ Some transitions do more than change a label.
 
 | Transition | Also happens |
 |------------|--------------|
-| → **Quotation Submitted** | The quotation document is produced and e-mailed to the customer, and the customer is notified in the portal |
-| → **In Progress** | The order is confirmed as real business in SAMTIA's system |
-| → **RFQ Submitted** / **RFQ Updated** / **PO Submitted** | The Account Manager receives a portal notification and an e-mail |
-| Wishlist shared | The Account Manager is notified and the order is flagged for attention |
+| → **Quotation Issued** | The quotation document is produced and e-mailed to the customer, and the customer is notified in the portal |
+| → **Processing** | The order is confirmed as real business in SAMTIA's system |
+| → **RFQ Submitted** / **RFQ Revised** / **PO Submitted** | The Account Manager receives a portal notification and an e-mail |
+| Draft request shared | The Account Manager is notified and the order is flagged for attention |
 
 ---
 
@@ -119,34 +119,34 @@ can show them as columns in any order queue.
 
 | Signal | Meaning |
 |--------|---------|
-| **Reviewed Date** | When the customer opened the quotation |
-| **Print Quotation Date** | When the customer printed or downloaded it |
+| **Quotation Viewed Date** | When the customer opened the quotation |
+| **Quotation Downloaded Date** | When the customer printed or downloaded it |
 
 | What you see | What it usually means |
 |--------------|----------------------|
-| No Reviewed Date after several days | It has not been seen. Chase by chat or phone |
+| No Quotation Viewed Date after several days | It has not been seen. Chase by chat or phone |
 | Reviewed but not printed | Seen, under consideration |
 | Printed | Being circulated internally — often for approval. A good moment to follow up |
 
 ---
 
-## Planning State
+## Schedule Status
 
-Alongside the stage, every order carries a timing signal calculated from the customer's **Planned
-Date**.
+Alongside the stage, every order carries a timing signal calculated from the customer's
+**Requested Delivery Date**.
 
-| Planning State | Meaning |
+| Schedule Status | Meaning |
 |----------------|---------|
-| **Late** | The planned date has passed and the order is not complete |
+| **Late** | The requested delivery date has passed and the order is not complete |
 | **On Time** | Progressing within the expected window |
-| **Upcoming** | The planned date is still ahead |
+| **Upcoming** | The requested delivery date is still ahead |
 
 Sort or filter on this to prioritise. **Late** items are where customer relationships are won or
 lost.
 
 ---
 
-## Pending Submit — an easy one to miss
+## Pending Resubmission — an easy one to miss
 
 If a customer edits an order **after** receiving a quotation but does not resubmit it, the order
 is marked as changed but not resubmitted.
@@ -165,7 +165,7 @@ Check with the customer before requoting.
 
 ```mermaid
 flowchart LR
-    W["Wishlists<br/>I'm still building"] --> R["RFQs<br/>asked, or waiting on my decision"]
+    W["Draft Requests<br/>I'm still building"] --> R["RFQs<br/>asked, or waiting on my decision"]
     R --> O["Orders<br/>agreed and coming"]
     R --> A["Archived<br/>didn't proceed"]
 ```
@@ -174,7 +174,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    SW["Shared wishlist<br/>they want advice"] --> RQ["RFQ Quotations<br/>MY ACTION — price it"]
+    SW["Shared Request<br/>they want advice"] --> RQ["RFQ Quotations<br/>MY ACTION — price it"]
     RQ --> Q["Quotations<br/>their decision, then MY ACTION to confirm"]
     Q --> O["Orders<br/>fulfil it"]
     Q --> A["Archived<br/>didn't proceed"]

@@ -129,8 +129,8 @@ extra:
     #   next_ecommerce/_docs/releases/<version>.json (semver, highest wins) —
     #   NOT necessarily what's live in every environment. staging/pre-prod/
     #   training track the latest release; .env.production can lag behind it.
-    docs_last_updated: "2026-09-02"
-    portal_version: "1.3.1"
+    docs_last_updated: "2026-09-20"
+    portal_version: "1.3.2"
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/LaplaceSoftware

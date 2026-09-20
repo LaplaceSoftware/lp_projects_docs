@@ -1,4 +1,4 @@
-# 006 — Client Portal: Company Management
+# 006 — Customer Portal: Company Management
 
 > These screens are for **Company Administrators** only. A Standard User who opens them is
 > redirected to Orders.
@@ -59,8 +59,6 @@ receives their access details.
   in, SAMTIA has not approved them — contact your Account Manager.
 - **You cannot deactivate or delete your own account.** This prevents you locking your company
   out of its own administration.
-- **Deactivating someone takes effect immediately**, even if they are signed in and working at
-  that moment — see [002](002-User-Roles-and-Permissions.md).
 - An e-mail address already in use will be refused.
 - Deleting is permanent. **Deactivate instead** when someone might return, or when you want to
   keep their history clearly attributed.

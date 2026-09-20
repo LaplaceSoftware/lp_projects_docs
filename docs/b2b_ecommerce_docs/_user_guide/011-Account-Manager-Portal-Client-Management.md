@@ -1,18 +1,18 @@
-# 011 — Account Manager Portal: Client Management
+# 011 — Account Management Portal: Customer Management
 
 Two screens control who your customers are and how they are treated commercially.
 
 ---
 
-## Clients Categories
+## Customer Segments
 
-**Screen name:** Clients Categories
+**Screen name:** Customer Segments
 **Business purpose:** Group customers into commercial segments, each with its own default
 pricing.
 **Who uses it:** Account Managers, Business Administrators.
-**Navigation path:** Sidebar → Clients management → **Clients Categories**.
+**Navigation path:** Sidebar → Customers management → **Customer Segments**.
 
-![Clients Categories](images/amp-client-categories.png)
+![Customer Segments](images/amp-client-categories.png)
 
 ### Main information displayed
 
@@ -21,7 +21,7 @@ pricing.
 | **Name** | The segment name, for example *Gold*, *Distributor*, *Government* |
 | **Company** | Which of your business entities it belongs to |
 | **Price List** | The pricing applied by default to customers in this segment |
-| **Clients** | How many customer companies are currently in it |
+| **Customers** | How many customer companies are currently in it |
 | **Status** | Whether the category is in use |
 
 ### Available actions
@@ -41,7 +41,7 @@ segment rather than customer by customer.
 
 ### Business rules
 
-- Changing a category's price list affects customers assigned to it — review the **Clients** count
+- Changing a category's price list affects customers assigned to it — review the **Customers** count
   before making a change.
 - A customer can be given a price list that differs from their category's default. The system
   resolves the difference and records what it did in the customer's history, so the outcome is
@@ -49,14 +49,14 @@ segment rather than customer by customer.
 
 ---
 
-## Clients
+## Customers
 
-**Screen name:** Clients
+**Screen name:** Customers
 **Business purpose:** Maintain the customer companies you serve.
 **Who uses it:** Account Managers, Business Administrators.
-**Navigation path:** Sidebar → Clients management → **Clients**.
+**Navigation path:** Sidebar → Customers management → **Customers**.
 
-![Clients](images/amp-clients.png)
+![Customers](images/amp-clients.png)
 
 ### Main information displayed
 
@@ -66,7 +66,7 @@ segment rather than customer by customer.
 | **Tax ID** | Their tax registration number | Yes |
 | **Email** | Main contact address | Yes |
 | **Phone** | Main contact number | Yes |
-| **Client category** | Their commercial segment | Yes |
+| **Customer Segment** | Their commercial segment | Yes |
 | **Price list** | The pricing they receive | Yes |
 | **City** | Location | No — turn on when needed |
 
@@ -74,24 +74,22 @@ segment rather than customer by customer.
 
 | Action | Result |
 |--------|--------|
-| **New Client** | Opens the client form |
-| **Edit** | Opens an existing client |
-| **Delete** | Archives the client |
-| **Restore** | Brings an archived client back |
+| **New Customer** | Opens the customer form |
+| **Edit** | Opens an existing customer |
+| **Delete** | Archives the customer |
+| **Restore** | Brings an archived customer back |
 | **Search** | Finds by company name |
 
 ### Business rules
 
-- **You see only your own clients.**
-- Deleting archives rather than erases — history is preserved and the client can be restored.
-- If a client cannot be archived because other records still reference it, the screen tells you
-  clearly instead of showing a technical error.
+- **You see only your own customers.**
+- Deleting archives rather than erases — history is preserved and the customer can be restored.
 
 ---
 
-## The Client Form
+## The Customer Form
 
-Opening a client gives you four tabs.
+Opening a customer gives you four tabs.
 
 | Tab | What you maintain |
 |-----|-------------------|
@@ -100,7 +98,7 @@ Opening a client gives you four tabs.
 | **Banners** | Promotional banners aimed at this customer specifically |
 | **Attachments** | Documents relating to the customer |
 
-![Client form](images/amp-client-form.png)
+![Customer form](images/amp-client-form.png)
 
 ### Company Info
 
@@ -116,7 +114,7 @@ Opening a client gives you four tabs.
 | **Postal code** | Postcode | *11564* |
 | **Country / State** | Location, chosen from a list | |
 | **Account manager** | **Who at SAMTIA owns this customer** | |
-| **Client category** | Their commercial segment | |
+| **Customer Segment** | Their commercial segment | |
 | **Logo** | Their logo, with a preview | |
 
 ### The Account Manager field is the most important one
@@ -132,7 +130,7 @@ customer reports being ignored.
 
 ### Users tab
 
-Create and manage the customer's portal accounts without leaving the client record.
+Create and manage the customer's portal accounts without leaving the customer record.
 
 | Action | Result |
 |--------|--------|
@@ -142,7 +140,8 @@ Create and manage the customer's portal accounts without leaving the client reco
 | **Send invitation** | E-mails the user their access details, including a QR code |
 
 Remember the two switches described in [002](002-User-Roles-and-Permissions.md): you control
-*Active User*; the customer's own administrator controls *Portal Active*. **Both must be on.**
+*Account Enabled*; the customer's own administrator controls *Portal Access Enabled*. **Both must
+be on.**
 
 ### Banners tab
 
@@ -168,9 +167,9 @@ separate from files attached to individual orders.
 
 ```mermaid
 flowchart TB
-    A["1 · Confirm the client category<br/>exists with the right price list"] --> B["2 · Create the client —<br/>Company Info tab"]
+    A["1 · Confirm the customer segment<br/>exists with the right price list"] --> B["2 · Create the customer —<br/>Company Info tab"]
     B --> C["3 · Assign yourself as<br/>Account Manager"]
-    C --> D["4 · Set the client category<br/>and price list"]
+    C --> D["4 · Set the customer segment<br/>and price list"]
     D --> E["5 · Create their first user —<br/>Users tab"]
     E --> F["6 · Send the invitation"]
     F --> G["7 · Customer's admin creates<br/>their own colleagues"]
@@ -185,20 +184,20 @@ create the rest of their team themselves rather than coming back to you for each
 
 ### "Our people cannot sign in"
 
-1. Open the client → Users tab
-2. Check *Active User* is on for that person — that is your switch
-3. If it is on, the customer's own administrator has switched off *Portal Active*
+1. Open the customer → Users tab
+2. Check *Account Enabled* is on for that person — that is your switch
+3. If it is on, the customer's own administrator has switched off *Portal Access Enabled*
 
 ### "We are seeing the wrong prices"
 
-1. Open the client → Company Info
-2. Check the **Client category** and **Price list**
+1. Open the customer → Company Info
+2. Check the **Customer Segment** and **Price list**
 3. If the price list has been set individually and differs from the category default, that
    individual setting is what applies
 
 ### "We never got the invitation"
 
-1. Open the client → Users tab
+1. Open the customer → Users tab
 2. Confirm the e-mail address is correct
 3. Use **Send invitation** again
 
@@ -207,6 +206,6 @@ create the rest of their team themselves rather than coming back to you for each
 ## Tips
 
 - **Fill in the Tax ID at setup.** It is needed for invoicing and is awkward to chase later.
-- **Use client-specific banners sparingly** — one clear message lands better than several.
+- **Use customer-specific banners sparingly** — one clear message lands better than several.
 - **Archive rather than delete** a customer who has gone quiet. Restoring is instant if they
   return.

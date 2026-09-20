@@ -14,10 +14,10 @@ sent here automatically.
 
 | Field | What to type |
 |-------|--------------|
-| Email or Iqama | Your work e-mail address, **or** the identification number your Account Manager registered for you |
+| Email or National ID / Iqama | Your work e-mail address, **or** the National ID / Iqama number your Account Manager registered for you |
 | Password | Your password |
 
-You can sign in with either your e-mail or your identification number — whichever you remember.
+You can sign in with either your e-mail or your National ID / Iqama number — whichever you remember.
 Both work.
 
 ### Available actions

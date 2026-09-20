@@ -1,4 +1,4 @@
-# 008 — Order Lifecycle
+# 008 — Sales Order Lifecycle
 
 The order lifecycle is the heart of the platform. A single `sale.order` record carries **two
 status fields**: Odoo's native `state` (the ERP truth) and `portal_state` (the B2B business
@@ -10,7 +10,7 @@ truth shown in both portals).
 
 ```mermaid
 stateDiagram-v2
-    [*] --> draft: customer creates a basket/wishlist
+    [*] --> draft: customer creates a basket/draft request
 
     draft --> rfq_submitted: customer submits for quotation
 
@@ -41,7 +41,7 @@ stateDiagram-v2
 
 | `portal_state`        | Business meaning                             | Mapped Odoo`state` | Owner of the next move  |
 | ----------------------- | -------------------------------------------- | -------------------- | ----------------------- |
-| `draft`               | Basket / wishlist being built                | `draft`            | Customer                |
+| `draft`               | Basket / draft request being built                | `draft`            | Customer                |
 | `rfq_submitted`       | Request for quotation lodged                 | `draft`            | Account Manager         |
 | `rfq_updated`         | Customer revised the request                 | `draft`            | Account Manager         |
 | `rejected`            | Request refused                              | `cancel`           | —                      |
@@ -67,10 +67,6 @@ writes — they delegate to real Odoo actions:
 - Only the creator may delete a basket.
 - Editing an already-quoted order sets `portal_pending_submit`, marking it as changed but not
   yet re-submitted.
-- A B2B portal order stays out of the standard Odoo Sales module views
-  (Quotations / Orders) until it reaches `state='sale'` — i.e. until it hits `in_progress`. This
-  keeps in-flight RFQs and quotations from cluttering the internal sales pipeline; the order is
-  always visible in the AMP/back-office portal-state queues regardless.
 
 ---
 
@@ -79,8 +75,8 @@ writes — they delegate to real Odoo actions:
 ```mermaid
 sequenceDiagram
     autonumber
-    actor C as Client Portal User
-    participant P as Client Portal
+    actor C as Customer Portal User
+    participant P as Customer Portal
     participant API as Odoo REST API
     participant O as sale.order
     participant N as Notifications + e-mail
@@ -88,7 +84,7 @@ sequenceDiagram
 
     C->>P: browse catalog, add products
     P->>API: order create / order_lines create
-    API->>O: draft order, per-client sequence number
+    API->>O: draft order, per-customer sequence number
     Note over O: portal_state = draft
 
     C->>P: submit request
@@ -123,33 +119,33 @@ sequenceDiagram
 ```
 
 **Notification trigger points.** The account manager is notified on exactly three customer-side
-transitions: `rfq_submitted`, `rfq_updated`, `po_submitted` — plus when a wishlist is shared, and
-whenever the client opens or downloads the quotation PDF. Notifications are only sent when the
-actor is a portal user, so account-manager-side edits do not notify the account manager. E-mail
-delivery is globally switchable via a system setting; the in-app notification is always created.
+transitions: `rfq_submitted`, `rfq_updated`, `po_submitted` — plus when a draft request is shared.
+Notifications are only sent when the actor is a portal user, so account-manager-side edits do
+not notify the account manager. E-mail delivery is globally switchable via a system setting;
+the in-app notification is always created.
 
 ---
 
-## The Shared-Wishlist Flow
+## The Shared-Request Flow
 
 A parallel, lighter-weight flow that does not enter the RFQ pipeline.
 
 ```mermaid
 sequenceDiagram
-    actor C as Client user
+    actor C as Customer user
     participant O as sale.order (draft)
     participant N as Notification
     actor AM as Account Manager
 
-    C->>O: mark basket as "needs attention" (portal_visible = true)
+    C->>O: mark basket as "action required" (portal_visible = true)
     O->>N: create notification + notify account manager
-    N-->>AM: "<user> shared wishlist <name>"
-    AM->>O: review in AMP "Shared wishlist" queue
+    N-->>AM: "<user> shared draft request <name>"
+    AM->>O: review in AMP "Shared Request" queue
     AM->>O: mark handled (portal_visible = false)
 ```
 
-`portal_visible` is the "needs attention" flag; it also drives the **Needs Attention** filter
-and dashboard counter in the Odoo back-office.
+`portal_visible` is the "action required" flag; it also drives the **Action Required** filter
+and dashboard counter in the Odoo ERP Back Office.
 
 ---
 
@@ -157,7 +153,7 @@ and dashboard counter in the Odoo back-office.
 
 ```mermaid
 sequenceDiagram
-    actor C as Client user
+    actor C as Customer user
     participant R as ecommerce.product.request.line
     participant O as sale.order
     actor AM as Account Manager
@@ -175,19 +171,19 @@ sequenceDiagram
 
 The request line and the order line stay linked: unlinking or re-pointing the request removes
 or replaces the generated order line. The order carries a live count of unresolved requests,
-surfaced as a button on the back-office order form.
+surfaced as a button on the ERP Back Office order form.
 
 ---
 
-## Order Numbering and Labelling
+## Sales Order Numbering and Labelling
 
 | Field               | Origin                                                                                         | Shown to     |
 | ------------------- | ---------------------------------------------------------------------------------------------- | ------------ |
-| `name`            | Odoo's standard sale-order sequence                                                            | Back-office  |
-| `portal_order_no` | The**client company's own sequence** (`portal_order_sequence_id`), generated on create | Both portals |
+| `name`            | Odoo's standard sale-order sequence                                                            | ERP Back Office  |
+| `portal_order_no` | The**customer company's own sequence** (`portal_order_sequence_id`), generated on create | Both portals |
 | `portal_label`    | Free text chosen by the customer ("Q3 lab restock")                                            | Both portals |
 
-Per-client sequences mean each customer sees a continuous, private numbering series.
+Per-customer sequences mean each customer sees a continuous, private numbering series.
 
 ---
 
@@ -196,17 +192,12 @@ Per-client sequences mean each customer sees a continuous, private numbering ser
 | Signal                                                  | Meaning                                                     |
 | ------------------------------------------------------- | ----------------------------------------------------------- |
 | `portal_planned_order_date` + computed planning state | Late / On Time / Upcoming — drives urgency indicators      |
-| `portal_visible`                                      | Needs attention (unread portal activity or shared wishlist) |
-| `portal_reviewed` + `portal_reviewed_date`          | The customer has reviewed the quotation — stamped only when the actor is a portal user |
-| `portal_print_quotation_date`                         | The customer printed/downloaded the quotation — same portal-user-only stamping |
-| `account_manager_print_po_date`                       | The account manager downloaded the purchase order — the internal-side mirror of the two rows above |
+| `portal_visible`                                      | Action required (unread portal activity or shared request) |
+| `portal_reviewed` + `portal_reviewed_date`          | The customer has reviewed the quotation                     |
+| `portal_print_quotation_date`                         | The customer printed/downloaded the quotation               |
 | `portal_pending_submit`                               | The customer edited a quoted order without re-submitting    |
 | `portal_messages_count`                               | Volume of portal-originated chatter                         |
-| `account_manager_notes` / `account_manager_comment` | Internal note vs. client-visible comment                    |
-
-The planning state is not purely computed-on-read: a daily scheduled job
-(*Ecommerce: Update Order Planning States*) recomputes it from `portal_planned_order_date` for
-every order, so a Late/Upcoming indicator does not go stale between reads.
+| `account_manager_notes` / `account_manager_comment` | Internal note vs. customer-visible comment                    |
 
 ---
 
@@ -214,6 +205,6 @@ every order, so a Late/Upcoming indicator does not go stale between reads.
 
 | Surface                                        | Queues                                                                                                                                                        |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **AMP** (`/admin`)                     | Shared Wishlist · RFQ Quotations · Quotations · Orders · Archived Orders                                                                                  |
-| **Client Portal** (`/company-profile`) | Wishlists · RFQs · Orders · Archived                                                                                                                       |
-| **Odoo back-office**                     | Orders Management → RFQ Quotations · Quotations · Orders; dashboard drill-downs for Needs Attention, New RFQs, Total RFQs; search filters per portal state |
+| **AMP** (`/admin`)                     | Shared Request · RFQ Quotations · Quotations · Orders · Archived Orders                                                                                  |
+| **Customer Portal** (`/company-profile`) | Draft Requests · RFQs · Orders · Archived                                                                                                                       |
+| **Odoo ERP Back Office**                     | Orders Management → RFQ Quotations · Quotations · Orders; dashboard drill-downs for Action Required, New RFQs, Total RFQs; search filters per portal state |

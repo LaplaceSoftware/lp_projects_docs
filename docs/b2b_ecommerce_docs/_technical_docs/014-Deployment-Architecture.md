@@ -71,10 +71,10 @@ to an Odoo.sh branch.
 
 ### Environments
 
-| Branch          | Purpose                               | Storefront portal                | Odoo back-office                           |
+| Branch          | Purpose                               | Storefront portal                | Odoo ERP Back Office                           |
 | --------------- | ------------------------------------- | -------------------------------- | ------------------------------------------ |
 | `staging-b2b` | Validate B2B submodule changes        | `staging-b2b.adv-photonx.com`  | `staging-b2b-odoo.adv-photonx.com`       |
-| `staging-erp` | Validate ERP / back-office changes    | — (back-office only)            | `adv-photonix-erp-34374833.dev.odoo.com` |
+| `staging-erp` | Validate ERP / ERP Back Office changes    | — (ERP Back Office only)            | `adv-photonix-erp-34374833.dev.odoo.com` |
 | `pre-prod`    | Integrate both streams; joint testing | `pre-prod.adv-photonx.com`     | `pre-prod-odoo.adv-photonx.com`          |
 | `training`    | UAT and end-user training             | `training-b2b.adv-photonx.com` | `training-b2b-odoo.adv-photonx.com`      |
 | `production`  | Live                                  | `b2b.samtia.com`               | `www.samtia.com`                         |
@@ -157,7 +157,7 @@ flowchart LR
 | Remote     | Address                                                       | Role                                                            |
 | ---------- | ------------------------------------------------------------- | --------------------------------------------------------------- |
 | `github` | `LaplaceSoftware/next_ecommerce`                            | **Deployment trigger.** Cloudflare watches `main` here  |
-| `origin` | Azure DevOps`laplace-software/B2B_Ecommerce/next_ecommerce` | **Code review.** Pull requests are raised and merged here |
+| `origin` | Azure DevOps`TechnicalUnitedSA/ERP-Odoo/next_ecommerce` | **Code review.** Pull requests are raised and merged here |
 
 **The consequence is the single most important operational fact about the portal:** merging a
 PR on Azure DevOps does not deploy anything. Production goes live only when `main` is pushed to
@@ -264,7 +264,7 @@ this for you.
 | `pre-prod`    | `docker/pre-prod/`                                        | aligned                                                                                                                                |
 | `training`    | `docker/training-b2b/` **and** `docker/training/` | two portal environments point at different Odoo hosts; check`NEXT_PUBLIC_APP_API_BASE_URL` before deploying                          |
 | `production`  | none — no`docker/production/` folder exists              | The live portal at`b2b.samtia.com` is a Cloudflare Worker, deployed by CI/CD from GitHub `main`, configured by `.env.production` |
-| `staging-erp` | —                                                          | back-office only, no portal                                                                                                            |
+| `staging-erp` | —                                                          | ERP Back Office only, no portal                                                                                                            |
 
 ---
 

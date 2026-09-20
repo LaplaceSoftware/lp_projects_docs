@@ -4,7 +4,7 @@
 
 ```mermaid
 flowchart TB
-    CU(["Client Portal User<br/>/ Company Admin"])
+    CU(["Customer Portal User<br/>/ Company Admin"])
     AM(["Account Manager<br/>Pricing / Read-only"])
     ADM(["ERP / System Admin"])
 
@@ -16,8 +16,8 @@ flowchart TB
     REG[["Private Docker registry<br/>+ internal server"]]
 
     CU -->|"HTTPS storefront"| SYS
-    AM -->|"HTTPS admin portal<br/>+ Odoo back-office"| SYS
-    ADM -->|"Odoo back-office"| SYS
+    AM -->|"HTTPS admin portal<br/>+ Odoo ERP Back Office"| SYS
+    ADM -->|"Odoo ERP Back Office"| SYS
 
     SYS -->|"quotation PDF, password-reset code,<br/>invitation QR, state alerts"| MAIL
     SYS -.->|"backend deployed to"| ODOOSH
@@ -35,11 +35,11 @@ runtime path is SMTP.
 ```mermaid
 flowchart TB
     subgraph Browser["User browser"]
-        NEXT["<b>Next.js 15 portal app</b><br/>React 19 · TypeScript · Tailwind 4<br/>Client Portal + AMP in one build"]
+        NEXT["<b>Next.js 15 portal app</b><br/>React 19 · TypeScript · Tailwind 4<br/>Customer Portal + AMP in one build"]
     end
 
     subgraph OdooSh["Odoo.sh runtime"]
-        WEB["<b>Odoo 19 HTTP workers</b><br/>REST controllers + ORM + back-office UI"]
+        WEB["<b>Odoo 19 HTTP workers</b><br/>REST controllers + ORM + ERP Back Office UI"]
         BUS["<b>Odoo bus / WebSocket</b><br/>/websocket"]
         CRON["<b>ir.cron scheduler</b>"]
         DB[("PostgreSQL")]
@@ -58,7 +58,7 @@ flowchart TB
 | Container         | Technology                               | Responsibility                                                             |
 | ----------------- | ---------------------------------------- | -------------------------------------------------------------------------- |
 | Portal app        | Next.js 15 App Router — Cloudflare Worker (OpenNext) in production, standalone container elsewhere | All customer and account-manager screens; no business rules                |
-| Odoo HTTP workers | Python / Odoo 19                         | REST API, business logic, ORM, back-office UI, PDF rendering               |
+| Odoo HTTP workers | Python / Odoo 19                         | REST API, business logic, ORM, ERP Back Office UI, PDF rendering               |
 | Odoo bus          | Odoo`bus.bus` + `/websocket`         | Push channel for chat messages, presence, notifications, grid auto-refresh |
 | Scheduler         | `ir.cron`                              | Presence hygiene (stale sessions → offline)                               |
 | PostgreSQL        | —                                       | Single database; all tenants share it, isolated by data scoping            |
@@ -71,7 +71,7 @@ flowchart TB
 ```mermaid
 flowchart TB
     subgraph HTTP["HTTP layer"]
-        CC["controllers/<br/>Client Portal routes"]
+        CC["controllers/<br/>Customer Portal routes"]
         AC["controllers_admin/<br/>AMP routes"]
         MC["access_management/controllers<br/>permission lookup"]
         BC["<b>lp_base.BaseController</b><br/>envelope · CORS · auth decorators"]
@@ -177,7 +177,7 @@ one-minute cron sweeps presences whose heartbeat went stale. See
 | Concern     | Contract                                                                                                                                      |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Transport   | HTTPS,`Content-Type: application/json` (multipart for uploads)                                                                              |
-| Base paths  | `/ecommerce/api/*` (client), `/ecommerce/api/admin/*` + `/api/admin/*` + `/ecommerce/admin/api/*` (AMP), `/amm/api/*` (permissions) |
+| Base paths  | `/ecommerce/api/*` (customer), `/ecommerce/api/admin/*` + `/api/admin/*` + `/ecommerce/admin/api/*` (AMP), `/amm/api/*` (permissions) |
 | Auth        | Odoo session cookie, sent with`withCredentials: true`                                                                                       |
 | Envelope    | `{ "response_code": "0", "response_message": "...", ...payload }`                                                                           |
 | Success     | `response_code === "0"`                                                                                                                     |

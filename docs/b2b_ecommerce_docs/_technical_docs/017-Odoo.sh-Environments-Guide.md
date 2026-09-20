@@ -10,7 +10,7 @@
 
 This guide is the single reference for how code moves from the two development repositories to the live production platform on Odoo.sh. It explains the repository architecture, the five Odoo.sh branches, the direction of syncing between them, and the exact step sequence each team follows when releasing changes.
 
-Every environment URL (storefront portal and Odoo back-office) is listed in Section 3 so any team member can immediately access the environment relevant to their stage of testing.
+Every environment URL (storefront portal and Odoo ERP Back Office) is listed in Section 3 so any team member can immediately access the environment relevant to their stage of testing.
 
 ### Golden Rule
 
@@ -24,7 +24,7 @@ Every environment URL (storefront portal and Odoo back-office) is listed in Sect
 
 The platform is built from two Git repositories with a submodule relationship:
 
-- **B2B E-commerce submodule repo** — Developed and owned by the B2B E-commerce Team. Contains the storefront and the Client / Account Manager portal features. The team works on its own cycle and delivers changes by pushing to the `main` branch.
+- **B2B E-commerce submodule repo** — Developed and owned by the B2B E-commerce Team. Contains the storefront and the Customer / Account Management portal features. The team works on its own cycle and delivers changes by pushing to the `main` branch.
 - **ERP main repo** — Owned by the ERP Team and connected to Odoo.sh. It embeds the B2B repo as a Git submodule and holds the five deployment branches. This repo is the single source of truth for everything deployed on Odoo.sh.
 
 ### Key Principle
@@ -35,15 +35,15 @@ The platform is built from two Git repositories with a submodule relationship:
 
 ## 3. Odoo.sh Environments & URLs
 
-Five branches exist on Odoo.sh. Every environment exposes an Odoo back-office; all except `staging-erp` also expose a storefront portal.
+Five branches exist on Odoo.sh. Every environment exposes an Odoo ERP Back Office; all except `staging-erp` also expose a storefront portal.
 
-| Branch                | Purpose                                            | Storefront Portal URL                                 | Odoo Back-office URL                                   |
+| Branch                | Purpose                                            | Storefront Portal URL                                 | Odoo ERP Back Office URL                                   |
 | --------------------- | -------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
 | **staging-b2b** | Validate B2B E-commerce submodule changes          | https://staging-b2b.adv-photonx.com  | https://staging-b2b-odoo.adv-photonx.com       |
-| **staging-erp** | Validate ERP / back-office changes                 | — (back-office only)                | https://adv-photonix-erp-34374833.dev.odoo.com |
+| **staging-erp** | Validate ERP / ERP Back Office changes                 | — (ERP Back Office only)                | https://adv-photonix-erp-34374833.dev.odoo.com |
 | **pre-prod**    | Integrate staging-b2b + staging-erp; joint testing | https://pre-prod.adv-photonx.com     | https://pre-prod-odoo.adv-photonx.com          |
 | **training**    | UAT and end-user training on validated build       | https://training-b2b.adv-photonx.com | https://training-b2b-odoo.adv-photonx.com      |
-| **production**  | Live environment serving real clients              | https://b2b.samtia.com               | https://www.samtia.com                         |
+| **production**  | Live environment serving real customers              | https://b2b.samtia.com               | https://www.samtia.com                         |
 
 Every environment except `staging-erp` is reached through a custom `adv-photonx.com`
 sub-domain (`samtia.com` in production); `staging-erp` is still addressed by its raw Odoo.sh

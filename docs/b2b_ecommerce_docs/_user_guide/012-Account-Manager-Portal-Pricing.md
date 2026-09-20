@@ -1,12 +1,12 @@
-# 012 — Account Manager Portal: Pricing
+# 012 — Account Management Portal: Pricing
 
 Pricing determines two things at once: **what a customer pays**, and **what a customer can see**.
 A product with no price rule on a customer's price list is invisible to them.
 
 ```mermaid
 flowchart LR
-    CC["Client Category<br/>e.g. Gold"] -->|"default"| PL["Price List"]
-    CL["Client company"] -->|"assigned to"| CC
+    CC["Customer Segment<br/>e.g. Gold"] -->|"default"| PL["Price List"]
+    CL["Customer company"] -->|"assigned to"| CC
     CL -->|"or set directly"| PL
     PL --> PI["Price Rules<br/>one per product or group"]
     PI --> WHAT["What the customer<br/>sees and pays"]
@@ -42,8 +42,8 @@ flowchart LR
 
 ### Business rules
 
-- **A price list assigned to a client or used as a client category's default cannot be deleted.**
-  The screen tells you it is in use — reassign the client(s) or category first.
+- A price list in use by customers should not be deleted — check which customer segments and
+  customers reference it first.
 - Changing the currency affects how every price on the list is interpreted. Treat it as a
   structural change, not an edit.
 
@@ -56,49 +56,34 @@ flowchart LR
 **Who uses it:** Pricing Managers, Business Administrators.
 **Navigation path:** Pricelists → **View details** on a price list.
 
-⚠️ <span title="Screen changed — Add Multiple Items button added, needs a fresh capture">**Needs update**</span>
-
 ![Pricelist Details](images/amp-pricelist-items.png)
 
 ### Main information displayed
 
 | Column | Meaning |
 |--------|---------|
-| **Apply On** | What the rule covers — a single product, a specific variant, or a broader group |
-| **Min Qty** | The minimum quantity before the rule applies, allowing volume pricing |
+| **Applies To** | What the rule covers — a single product, a specific product variant, or a broader group |
+| **Minimum Quantity** | The minimum quantity before the rule applies, allowing volume pricing |
 | **Price** | The price the customer pays |
-| **Valid Period** | The dates between which the rule applies, for time-limited pricing |
+| **Validity Period** | The dates between which the rule applies, for time-limited pricing |
 
 ### Available actions
 
 | Action | Result |
 |--------|--------|
-| **Add rule** | Creates a single price rule |
-| **Add Multiple Items** | Opens a dialog to pick several products at once and create a price rule for each in one go, starting from their catalogue prices |
+| **Add rule** | Creates a price rule |
 | **Edit** | Changes an existing rule |
 | **Delete** | Removes a rule |
-| **Search** | Finds a rule by product name or code |
+| **Search** | Finds a rule by what it applies to |
 | **Paging** | Moves through long lists |
-
-### Adding several rules at once
-
-Use **Add Multiple Items** when you are setting up a new price list for a segment and need to
-price many products at the same time rather than one by one:
-
-1. Click **Add Multiple Items**
-2. Select the products to add
-3. Confirm — a rule is created for each, seeded from that product's own catalogue price
-
-Review and adjust the resulting rules individually afterwards if any product needs a different
-price than its catalogue default.
 
 ### How rules combine
 
 | Feature | Business use |
 |---------|--------------|
-| **Min Qty** | Volume pricing — one rule at qty 1, a better price at qty 100 |
-| **Valid Period** | Seasonal or promotional pricing that starts and stops on its own |
-| **Apply On** | Price a whole group in one rule, then override individual products |
+| **Minimum Quantity** | Volume pricing — one rule at qty 1, a better price at qty 100 |
+| **Validity Period** | Seasonal or promotional pricing that starts and stops on its own |
+| **Applies To** | Price a whole group in one rule, then override individual products |
 
 ### Business rules
 
@@ -115,9 +100,9 @@ price than its catalogue default.
 ```mermaid
 flowchart TB
     A["Customer opens<br/>the catalogue"] --> B["System finds their<br/>price list"]
-    B --> C{"Set directly on<br/>the client?"}
+    B --> C{"Set directly on<br/>the customer?"}
     C -->|Yes| D["Use that price list"]
-    C -->|No| E["Use the client<br/>category's default"]
+    C -->|No| E["Use the customer<br/>segment's default"]
     D --> F["Find matching price rules"]
     E --> F
     F --> G{"Rule found?"}
@@ -132,7 +117,7 @@ flowchart TB
 ### Give a whole segment new prices
 
 1. Sidebar → Products management → **Pricelists**
-2. Open the price list used by that client category
+2. Open the price list used by that customer segment
 3. Add or edit the rules
 
 Every customer in the segment is updated at once.
@@ -143,14 +128,14 @@ Two options, with different consequences:
 
 | Option | Effect | When to use |
 |--------|--------|-------------|
-| Create a dedicated price list and assign it to that client | Isolated — affects nobody else | Genuinely bespoke agreements |
+| Create a dedicated price list and assign it to that customer | Isolated — affects nobody else | Genuinely bespoke agreements |
 | Add a rule to their existing shared price list | **Affects every customer on that list** | Never, for a single-customer discount |
 
 The second is the classic mistake. Check who else uses a price list before editing it.
 
 ### Run a time-limited promotion
 
-Add rules with a **Valid Period** covering the campaign dates. The prices apply and expire on
+Add rules with a **Validity Period** covering the campaign dates. The prices apply and expire on
 their own — no need to remember to remove them.
 
 ### Make a new product visible
@@ -164,7 +149,7 @@ product exists but no customer can find it.
 
 - **Name price lists so their purpose is obvious**, including the year or contract where it
   helps: *Gold Tier 2026* is better than *List 3*.
-- **Check the Clients count on the client category** before editing a price list — it tells you
+- **Check the Customers count on the customer segment** before editing a price list — it tells you
   how many customers a change will reach.
 - **When a customer says a product is missing, check pricing first.** It is more often a missing
   price rule than a missing product.

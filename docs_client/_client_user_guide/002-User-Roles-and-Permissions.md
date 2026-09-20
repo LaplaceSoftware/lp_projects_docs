@@ -16,9 +16,9 @@ The everyday buyer.
 | Can do | Cannot do |
 |--------|-----------|
 | Browse the catalogue and search products | See or manage colleagues' accounts |
-| Build and name wishlists | Create or deactivate users |
+| Build and name draft requests | Create or deactivate users |
 | Request products that are not in the catalogue | Manage user tags |
-| Submit a wishlist as a Request for Quotation | See other companies' orders or prices |
+| Submit a draft request as a Request for Quotation | See other companies' orders or prices |
 | Review quotations and upload a Purchase Order | |
 | Track orders through to delivery | |
 | Chat with the Account Manager | |
@@ -46,19 +46,19 @@ A user can only sign in when **both** switches are on.
 
 ```mermaid
 flowchart LR
-    A["Active User<br/>set by your<br/>Account Manager"] --> AND{"Both on?"}
-    B["Portal Active<br/>set by your own<br/>Company Administrator"] --> AND
+    A["Account Enabled<br/>set by your<br/>Account Manager"] --> AND{"Both on?"}
+    B["Portal Access Enabled<br/>set by your own<br/>Company Administrator"] --> AND
     AND -->|Yes| OK["User can sign in and work"]
     AND -->|No| NO["Sign-in refused —<br/>'account is not active'"]
 ```
 
 | Switch | Controlled by | Business purpose |
 |--------|---------------|------------------|
-| **Active User** (shown as *Account Manager Approved*) | SAMTIA Account Manager | Lets SAMTIA suspend your access — for example during a commercial dispute. You cannot undo this. |
-| **Portal Active** (shown as *Active / Inactive*) | Your own Company Administrator | Lets you manage your own team — a leaver is switched off without involving SAMTIA. |
+| **Account Enabled** (shown as *Account Manager Approved*) | SAMTIA Account Manager | Lets SAMTIA suspend your access — for example during a commercial dispute. You cannot undo this. |
+| **Portal Access Enabled** (shown as *Active / Inactive*) | Your own Company Administrator | Lets you manage your own team — a leaver is switched off without involving SAMTIA. |
 
 **In practice:** if you switched a colleague back on but they still cannot sign in, SAMTIA may
-have switched off the *Active User* flag — contact your Account Manager.
+have switched off the *Account Enabled* flag — contact your Account Manager.
 
 **Switching either flag off takes effect immediately** — even for someone already signed in and
 working. It is not just a block on the next sign-in attempt; their current session is ended
@@ -84,8 +84,8 @@ These limits apply to every user and are enforced by the system, not by conventi
 
 - **See another company's data.** Your information is separated from every other customer. There
   is no view that mixes two customers' orders, prices or users.
-- **Delete an order that has left Draft.** Once a wishlist becomes a Request for Quotation it can
-  be cancelled or archived, but not deleted.
-- **Delete someone else's wishlist.** Only the person who created a wishlist can delete it.
+- **Delete an order that has left Draft Request.** Once a draft request becomes a Request for
+  Quotation it can be cancelled or archived, but not deleted.
+- **Delete someone else's draft request.** Only the person who created a draft request can delete it.
 - **Delete a file someone else uploaded.** Only the person who attached a file can remove it.
 - **Deactivate or delete your own account.** You cannot lock yourself out.

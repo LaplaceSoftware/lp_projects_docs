@@ -7,7 +7,7 @@ keeps records clean.
 |---------|----------|----------------|
 | **Chat** | Quick back-and-forth while both people are available | The Messages screen, or *Open Chat* on an order |
 | **Comments** | Discussion that must stay attached to an order permanently | The order's Comments panel |
-| **Account Manager Comment** | A standing statement about an order you must see | The order summary, written by your Account Manager |
+| **Account Manager Note** | A standing statement about an order you must see | The order summary, written by your Account Manager |
 
 ---
 
@@ -15,7 +15,7 @@ keeps records clean.
 
 **Screen name:** Chat
 **Business purpose:** Talk to your Account Manager directly.
-**Who uses it:** All Client Portal users.
+**Who uses it:** All Customer Portal users.
 **Navigation path:** Any order → **Open Chat**.
 
 ![Chat](images/client-chat.png)
@@ -86,14 +86,14 @@ You receive an e-mail when:
 
 ---
 
-## Attention Flags on Orders
+## Attention Flags on Sales Orders
 
-When you share a wishlist or post a message, the order is flagged for your Account Manager as
+When you share a draft request or post a message, the order is flagged for your Account Manager as
 **needing attention**.
 
 ```mermaid
 flowchart LR
-    A["You share a wishlist<br/>or post a message"] --> B["Order flagged for<br/>your Account Manager"]
+    A["You share a draft request<br/>or post a message"] --> B["Order flagged for<br/>your Account Manager"]
     B --> C["Your Account Manager<br/>responds"]
 ```
 
@@ -126,5 +126,5 @@ flowchart TB
   they will not reply immediately, however urgent the message.
 - **Anything you will need to refer back to belongs in a Comment**, not chat. Chat is for the
   conversation; comments are the record.
-- **Watch the Account Manager Comment on your orders.** It is the most common place a question or
+- **Watch the Account Manager Note on your orders.** It is the most common place a question or
   condition is recorded, and it is easy to scroll past.

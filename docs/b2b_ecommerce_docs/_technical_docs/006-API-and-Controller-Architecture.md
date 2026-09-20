@@ -95,11 +95,11 @@ never on the HTTP status.
 |-------|--------|
 | 5101–5134 | User / authentication |
 | 5201–5212 | Orders and order lines |
-| 5401–5407 | Products, attributes, variants |
+| 5401–5407 | Products, product attributes, product variants |
 | 5501–5509 | Attachments and chatter |
 | 5601–5612 | Product requests |
 | 5701–5703 | Portal user tags |
-| 6xxx | Additional admin-side families (banners, brands, clients, pricelists, chat) |
+| 6xxx | Additional admin-side families (banners, brands, customers, pricelists, chat) |
 
 All codes and their messages are centralised in one module-level file, so a code never has two
 meanings.
@@ -112,25 +112,25 @@ Route prefixes in use:
 
 | Prefix | Consumer |
 |--------|----------|
-| `/ecommerce/api/*` | Client Portal |
+| `/ecommerce/api/*` | Customer Portal |
 | `/ecommerce/api/admin/*` | AMP — most admin resources |
-| `/api/admin/*` | AMP — clients, pricelists, pricelist items, currencies |
+| `/api/admin/*` | AMP — customers, pricelists, pricelist items, currencies |
 | `/ecommerce/admin/api/chat/*` | AMP — chat |
 | `/amm/api/*` | Both portals — permission lookup |
 
 > Three admin prefixes coexist for historical reasons. New admin endpoints should use
 > `/ecommerce/api/admin/*`.
 
-### Client Portal API
+### Customer Portal API
 
 | Area | Endpoints | Purpose |
 |------|-----------|---------|
-| Authentication | `authenticate`, `logout` | Session login by login **or** identification number; blocks users who are not activated on both flags. Password is the only sign-in method |
+| Authentication | `authenticate`, `logout` | Session login by login **or** National ID / Iqama; blocks users who are not activated on both flags. Password is the only sign-in method |
 | Password reset | `otp/send`, `otp/verify`, `change-password` | Three-step forgotten-password flow: e-mail a one-time code, verify it for a secret token, set the new password. Verification does **not** create a session |
 | Password change | `reset-password` | Lets an already authenticated user change their own password |
-| Catalog | `brands`, `products`, `product`, `public_categories` | Paginated, filterable catalog with pricelist-resolved prices, variants and attribute exclusions |
+| Catalog | `brands`, `products`, `product`, `public_categories` | Paginated, filterable catalog with pricelist-resolved prices, product variants and product attribute exclusions |
 | Marketing | `banners` | Active, schedule-aware banners for the user's company |
-| Orders | `orders`, `orders/create`, `orders/drafts`, `orders/details`, `orders/update`, `orders/delete` | Basket/RFQ/quotation/order lifecycle; create supports copying an existing order; list accepts `sort_field`/`sort_order` |
+| Orders | `orders`, `orders/create`, `orders/drafts`, `orders/details`, `orders/update`, `orders/delete` | Basket/RFQ/quotation/order lifecycle; create supports copying an existing order |
 | Order lines | `order_lines/create`, `update`, `delete` | Line editing including customer target price |
 | Product requests | `product_requests` (+ `create`, `update`, `delete`, `details`) | Requests for items not in the catalog |
 | Chatter | `chatter/messages`, `message/post`, `message/update`, `attachment/upload`, `attachment/delete` | Per-order comment thread with attachments |
@@ -142,28 +142,27 @@ Route prefixes in use:
 | Media | `/web/content`, image proxy route | Serves product and attachment media with CORS |
 | Diagnostics | `build-info` | Deployed build identification |
 
-### Account Manager Portal API
+### Account Management Portal API
 
 | Area | Endpoints | Purpose |
 |------|-----------|---------|
-| Products | `products` (GET/POST/PUT/DELETE), `product`, `products/import` | Full product CRUD with media, plus JSON bulk import; list accepts `sort`/`sort_order` and returns `default_code` (internal reference) |
-| Attributes & variants | `attributes`, `attribute/values`, `product/variants` (GET/POST/DELETE), `product/variant` (PUT), `link-attribute`, `unlink-attribute`, `remove-attribute-value`, `generate-product-variants` | Variant matrix management |
+| Products | `products` (GET/POST/PUT/DELETE), `product`, `products/import` | Full product CRUD with media, plus JSON bulk import |
+| Product attributes & product variants | `attributes`, `attribute/values`, `product/variants` (GET/POST/DELETE), `product/variant` (PUT), `link-attribute`, `unlink-attribute`, `remove-attribute-value`, `generate-product-variants` | Product variant matrix management |
 | Product metadata | `ribbons`, `alert-messages` | Lookup lists for the product form |
 | Product categories | `product-categories` (list / create / update / delete) | Public category tree |
 | Brands | `brands`, `details`, `create`, `update`, `delete` | Brand CRUD with duplicate-name protection |
 | Banners | `banners`, `details`, `create`, `update`, `delete` | Banner CRUD with scheduling and targeting |
 | Orders | `orders`, `orders/details`, `orders/update` | Server-side filtered order queues; state transitions |
 | Order lines | `order_lines/create`, `update`, `delete` | Account manager pricing of lines |
-| Clients | `/api/admin/clients` (+ `get`, `create`, `update`, `delete`, `restore`) | Client company CRUD with archive/restore |
-| Client categories | `client-categories` (+ `details`, `create`, `update`, `delete`) | Category (grade) CRUD |
+| Customers | `/api/admin/clients` (+ `get`, `create`, `update`, `delete`, `restore`) | Customer company CRUD with archive/restore |
+| Customer segments | `client-categories` (+ `details`, `create`, `update`, `delete`) | Category (grade) CRUD |
 | Pricelists | `/api/admin/pricelists` (+ `details`, `create`, `update`, `delete`), `currencies` | Pricelist CRUD |
-| Pricelist items | `/api/admin/pricelists/items` (+ `details`, `create`, `update`, `delete`, `bulk_create`) | Price rule CRUD; `bulk_create` seeds rules for several products at once from their default prices |
+| Pricelist items | `/api/admin/pricelists/items` (+ `details`, `create`, `update`, `delete`) | Price rule CRUD |
 | Product requests | `product_requests`, `product_requests/update` | Triage of catalog requests |
-| Chat | `chat/threads`, `chat/init`, `chat/send`, `chat/mark_read` | Multi-client inbox |
+| Chat | `chat/threads`, `chat/init`, `chat/send`, `chat/mark_read` | Multi-customer inbox |
 | Users | `users/send-invitation` | Sends the QR invitation e-mail |
 | Address lookups | `countries`, `states` | Form dropdowns |
 | Attachments | `attachments/list` | Documents on a record |
-| Reports | `reports/persistence`, `reports/persistence/export` | Client activity (`ecommerce.notification` of type `user_login`) over a chosen date range; export streams an `.xlsx` via `xlsxwriter` |
 
 ### Access Management API
 

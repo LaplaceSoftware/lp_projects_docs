@@ -1,8 +1,8 @@
-# 003 — Client Portal: Navigation
+# 003 — Customer Portal: Navigation
 
 ## The Layout
 
-Every page in the Client Portal has the same header. Learning it once means you can reach
+Every page in the Customer Portal has the same header. Learning it once means you can reach
 anything from anywhere.
 
 ```mermaid
@@ -12,7 +12,7 @@ flowchart LR
     H --> B["Brands menu"]
     H --> S["Search box"]
     H --> N["🔔 Notifications"]
-    H --> W["Wishlist selector"]
+    H --> W["Request Selector"]
     H --> U["Your name ▾"]
 
     U --> U1["Help"]
@@ -21,7 +21,7 @@ flowchart LR
     U --> U4["Sign Out"]
 ```
 
-![Client Header screen](images/client-header.png)
+![Customer Header screen](images/client-header.png)
 ---
 
 ## Header Items
@@ -33,27 +33,27 @@ flowchart LR
 | **Brands** | Browse by manufacturer | Opens the brand list; choosing one shows that brand's products |
 | **Search** | Find a specific product fast | Suggests matching products as you type |
 | **🔔 Notifications** | See what changed | Shows recent activity on your company's orders. When there is nothing new it reads *All caught up* |
-| **Wishlist selector** | Switch between your baskets | Lists your wishlists so you can pick which one you are adding to. Also offers **New** and **View All** |
+| **Request Selector** | Switch between your baskets | Lists your draft requests so you can pick which one you are adding to. Also offers **New** and **View All** |
 | **Your name ▾** | Account and company options | Opens the menu shown above |
 
 ---
 
-## The Wishlist Selector — the key habit to learn
+## The Request Selector — the key habit to learn
 
-You can keep **several wishlists open at the same time** — for example one for a routine restock
-and one for a special project. The selector in the header decides which one receives the products
-you add.
+You can keep **several draft requests open at the same time** — for example one for a routine
+restock and one for a special project. The selector in the header decides which one receives the
+products you add.
 
-> **Always check the selector before adding products.** Items go into the wishlist currently
+> **Always check the selector before adding products.** Items go into the draft request currently
 > shown there, not into a single universal basket.
 
 | Option in the selector | What it does |
 |------------------------|--------------|
-| A wishlist name | Makes that wishlist the active one |
-| **New** | Creates a fresh wishlist and makes it active |
-| **View All** | Opens Company Profile → Wishlists, showing every wishlist |
+| A draft request name | Makes that draft request the active one |
+| **New** | Creates a fresh draft request and makes it active |
+| **View All** | Opens Company Profile → Draft Requests, showing every draft request |
 
-If you have not created any yet, the selector reads *No wishlists found*.
+If you have not created any yet, the selector reads *No draft requests found*.
 
 ---
 
@@ -66,7 +66,7 @@ a page with its own side navigation.
 flowchart LR
     CP["Company Profile"] --> T1["Users 🔒"]
     CP --> T2["User Tags 🔒"]
-    CP --> T3["Wishlists"]
+    CP --> T3["Draft Requests"]
     CP --> T4["RFQs"]
     CP --> T5["Orders"]
     CP --> T6["Archived"]
@@ -78,13 +78,13 @@ flowchart LR
 |---------|---------------|
 | **Users** | Your colleagues' portal accounts |
 | **User Tags** | Labels you use to organise those colleagues |
-| **Wishlists** | Baskets you are still building — not yet sent to SAMTIA |
+| **Draft Requests** | Baskets you are still building — not yet sent to SAMTIA |
 | **RFQs** | Requests you have sent, and quotations you have received back |
-| **Orders** | Business that is confirmed and in progress |
+| **Orders** | Business that is confirmed and in Processing |
 | **Archived** | Cancelled requests, kept for reference |
 
-The four order sections follow the natural life of a purchase: build it (Wishlists), negotiate it
-(RFQs), receive it (Orders), file it away (Archived).
+The four order sections follow the natural life of a purchase: build it (Draft Requests), negotiate
+it (RFQs), receive it (Orders), file it away (Archived).
 
 ---
 
@@ -95,11 +95,11 @@ The four order sections follow the natural life of a purchase: build it (Wishlis
 | Home | Logo, or after sign-in | [004](004-Client-Portal-Browsing-and-Wishlists.md) |
 | Products list | Products menu, Brands menu, or search | [004](004-Client-Portal-Browsing-and-Wishlists.md) |
 | Product details | Click any product | [004](004-Client-Portal-Browsing-and-Wishlists.md) |
-| Wishlists | Company Profile → Wishlists | [005](005-Client-Portal-Orders.md) |
+| Draft Requests | Company Profile → Draft Requests | [005](005-Client-Portal-Orders.md) |
 | RFQs | Company Profile → RFQs | [005](005-Client-Portal-Orders.md) |
 | Orders | Company Profile → Orders | [005](005-Client-Portal-Orders.md) |
 | Archived | Company Profile → Archived | [005](005-Client-Portal-Orders.md) |
-| Order details | Click any wishlist, RFQ or order | [005](005-Client-Portal-Orders.md) |
+| Order details | Click any draft request, RFQ or order | [005](005-Client-Portal-Orders.md) |
 | Users | Company Profile → Users | [006](006-Client-Portal-Company-Management.md) |
 | User Tags | Company Profile → User Tags | [006](006-Client-Portal-Company-Management.md) |
 | Chat | *Open Chat* on an order | [013](013-Messages-and-Notifications.md) |

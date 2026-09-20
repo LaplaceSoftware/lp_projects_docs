@@ -4,7 +4,7 @@ Welcome. This guide explains how to use the SAMTIA B2B platform day to day. It i
 business users — no technical knowledge is needed.
 
 **Who this guide is for:** Account Managers · Sales Representatives · Customer Service ·
-Client Users · Business Administrators · New Employees.
+Customer Users · Business Administrators · New Employees.
 
 ---
 
@@ -15,8 +15,8 @@ you see when you sign in — you cannot switch between them.
 
 | You are… | You use | You land on |
 |----------|---------|-------------|
-| A customer buying from SAMTIA | **Client Portal** | The Home page |
-| A SAMTIA employee serving customers | **Account Manager Portal (AMP)** | The Dashboard |
+| A customer buying from SAMTIA | **Customer Portal** | The Home page |
+| A SAMTIA employee serving customers | **Account Management Portal** | The Dashboard |
 
 ---
 
@@ -26,31 +26,30 @@ you see when you sign in — you cannot switch between them.
 |---|----------|------------------------|
 | 001 | [Getting Started](001-Getting-Started.md) | Sign in, reset your password, find your way around |
 | 002 | [User Roles and Permissions](002-User-Roles-and-Permissions.md) | Understand who can do what |
-| 003 | [Client Portal — Navigation](003-Client-Portal-Navigation.md) | Learn the customer website layout |
-| 004 | [Client Portal — Browsing and Wishlists](004-Client-Portal-Browsing-and-Wishlists.md) | Find products and build a wishlist |
-| 005 | [Client Portal — Orders](005-Client-Portal-Orders.md) | Submit RFQs, accept quotations, track orders |
-| 006 | [Client Portal — Company Management](006-Client-Portal-Company-Management.md) | Manage your colleagues' access and tags |
-| 007 | [Account Manager Portal — Navigation](007-Account-Manager-Portal-Navigation.md) | Learn the internal portal layout |
-| 008 | [Account Manager Portal — Order Queues](008-Account-Manager-Portal-Order-Queues.md) | Work the wishlist, RFQ, quotation and order lists |
-| 009 | [Account Manager Portal — Working an Order](009-Account-Manager-Portal-Working-an-Order.md) | Price a request and issue a quotation |
-| 010 | [Account Manager Portal — Product Management](010-Account-Manager-Portal-Product-Management.md) | Maintain the catalogue |
-| 011 | [Account Manager Portal — Client Management](011-Account-Manager-Portal-Client-Management.md) | Set up and maintain customer companies |
-| 012 | [Account Manager Portal — Pricing](012-Account-Manager-Portal-Pricing.md) | Manage price lists and price rules |
+| 003 | [Customer Portal — Navigation](003-Client-Portal-Navigation.md) | Learn the customer website layout |
+| 004 | [Customer Portal — Browsing and Draft Requests](004-Client-Portal-Browsing-and-Wishlists.md) | Find products and build a draft request |
+| 005 | [Customer Portal — Sales Orders](005-Client-Portal-Orders.md) | Submit RFQs, accept quotations, track orders |
+| 006 | [Customer Portal — Company Management](006-Client-Portal-Company-Management.md) | Manage your colleagues' access and tags |
+| 007 | [Account Management Portal — Navigation](007-Account-Manager-Portal-Navigation.md) | Learn the internal portal layout |
+| 008 | [Account Management Portal — Sales Order Queues](008-Account-Manager-Portal-Order-Queues.md) | Work the draft request, RFQ, quotation and order lists |
+| 009 | [Account Management Portal — Working a Sales Order](009-Account-Manager-Portal-Working-an-Order.md) | Price a request and issue a quotation |
+| 010 | [Account Management Portal — Product Management](010-Account-Manager-Portal-Product-Management.md) | Maintain the catalogue |
+| 011 | [Account Management Portal — Customer Management](011-Account-Manager-Portal-Client-Management.md) | Set up and maintain customer companies |
+| 012 | [Account Management Portal — Pricing](012-Account-Manager-Portal-Pricing.md) | Manage price lists and price rules |
 | 013 | [Messages and Notifications](013-Messages-and-Notifications.md) | Chat with the other side and follow alerts |
-| 014 | [The Order Lifecycle](014-The-Order-Lifecycle.md) | Understand every status and who acts next |
+| 014 | [The Sales Order Lifecycle](014-The-Order-Lifecycle.md) | Understand every status and who acts next |
 | 015 | [Common Business Scenarios](015-Common-Business-Scenarios.md) | Follow step-by-step recipes for daily tasks |
-| 016 | [Account Manager Portal — Reports](016-Account-Manager-Portal-Reports.md) | Review login activity with the Persistence Report |
-| 017 | [Glossary](017-Glossary.md) | Look up a term |
+| 016 | [Glossary](017-Glossary.md) | Look up a term |
 
 ---
 
 ## Suggested reading order
 
-**New Client Portal user** → 001 → 003 → 004 → 005 → 013
+**New Customer Portal user** → 001 → 003 → 004 → 005 → 013
 
 **New Account Manager** → 001 → 002 → 007 → 014 → 008 → 009 → 013 → 015
 
-**New Business Administrator** → 001 → 002 → 011 → 012 → 010 → 016 → 015
+**New Business Administrator** → 001 → 002 → 011 → 012 → 010 → 015
 
 ---
 
@@ -58,7 +57,7 @@ you see when you sign in — you cannot switch between them.
 
 ```mermaid
 flowchart LR
-    A["Customer browses<br/>the catalogue"] --> B["Adds products<br/>to a wishlist"]
+    A["Customer browses<br/>the catalogue"] --> B["Adds products<br/>to a draft request"]
     B --> C["Submits it as<br/>a Request for Quotation"]
     C --> D["Account Manager<br/>prices it"]
     D --> E["Quotation sent<br/>to the customer"]

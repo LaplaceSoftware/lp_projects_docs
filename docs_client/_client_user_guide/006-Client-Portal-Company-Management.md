@@ -1,4 +1,4 @@
-# 006 — Client Portal: Company Management
+# 006 — Customer Portal: Company Management
 
 > These screens are for **Company Administrators** only. A Standard User who opens them is
 > redirected to Orders.

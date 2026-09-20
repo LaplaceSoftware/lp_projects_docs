@@ -1,4 +1,4 @@
-# 009 — Account Manager Portal: Working an Order
+# 009 — Account Management Portal: Working a Sales Order
 
 This is the screen where you earn the business. Everything you do to a customer request happens
 here.
@@ -8,8 +8,6 @@ here.
 **Who uses it:** Account Managers, Sales Representatives, Customer Service.
 **Navigation path:** Any order queue → 👁 **View Details**.
 
-⚠️ <span title="Screen changed — Send Quotation for Review button added to the header, needs a fresh capture">**Needs update**</span>
-
 ![Order Details](images/amp-order-detail.png)
 
 ---
@@ -18,9 +16,9 @@ here.
 
 ```mermaid
 flowchart TB
-    H["Header — label, state, action buttons"] --> S["Summary — client, dates, notes, your comment"]
+    H["Header — label, state, action buttons"] --> S["Summary — customer, dates, notes, your comment"]
     S --> L["Product lines — where you price"]
-    L --> P["Panels — Add Products · Product Requests · Comments & Attachments"]
+    L --> P["Panels — Add Products · New Product Requests · Comments & Attachments"]
 ```
 
 ---
@@ -29,16 +27,16 @@ flowchart TB
 
 | Field | Meaning | Can you edit it? |
 |-------|---------|------------------|
-| **Client** | The customer company | No |
+| **Customer** | The customer company | No |
 | **Created By** | Which person raised it | No |
 | **Create Date** | When it was raised | No |
-| **Planned Date** | When the customer needs the goods | No |
-| **Order Planning State** | Late / On Time / Upcoming | No — calculated |
+| **Requested Delivery Date** | When the customer needs the goods | No |
+| **Order Schedule Status** | Late / On Time / Upcoming | No — calculated |
 | **Notes** | The customer's stated purpose | No |
-| **Account Manager Comment** | Your message to the customer about this order | **Yes** |
+| **Account Manager Note** | Your message to the customer about this order | **Yes** |
 | **Return Reason** | Why the order was returned, when it has been | No |
 
-### The Account Manager Comment
+### The Account Manager Note
 
 This is your channel for anything that must stay attached to the order — a condition, a lead
 time, an explanation of the pricing. **The customer sees it on their own order screen.**
@@ -49,7 +47,7 @@ Prefer this over chat for anything the customer will need to refer back to later
 
 ---
 
-## Pricing the Order
+## Pricing the Sales Order
 
 The product lines table is where the commercial work happens.
 
@@ -69,7 +67,7 @@ The product lines table is where the commercial work happens.
 1. Read the **Target Price** column — it tells you where the customer needs to land.
 2. Adjust **Discount %** on each line until the totals work commercially.
 3. Adjust **Qty** if you are proposing a different pack size or minimum order.
-4. Remove any line that cannot be supplied, and explain why in the Account Manager Comment.
+4. Remove any line that cannot be supplied, and explain why in the Account Manager Note.
 5. Add anything missing using **Add Products**.
 
 Changes save as you make them, and the order total updates immediately.
@@ -77,7 +75,7 @@ Changes save as you make them, and the order total updates immediately.
 ### Adding products
 
 Use the **Add Products** panel to search the catalogue and add lines the customer did not find —
-alternatives, accessories, or items resolving a product request.
+alternatives, accessories, or items resolving a new product request.
 
 ---
 
@@ -89,20 +87,9 @@ Which buttons appear depends on where the order has reached.
 |--------|--------------|--------------|
 | **Open Chat** | Always | Opens a live conversation with the customer |
 | **Reply Done** | The customer has flagged the order for attention | Clears the attention flag once you have responded |
-| **Send Quotation for Review** | Always | Sends the quotation to chosen internal colleagues for a second look, before it ever reaches the customer |
-| **Send Quotation** | The order is a submitted or revised request | Produces the quotation, e-mails it to the customer, and moves the order to *Quotation Submitted* |
-| **Confirm** | The customer has uploaded a Purchase Order | Confirms the order — it becomes real business and moves to *In Progress* |
+| **Send Quotation** | The order is a submitted or revised request | Produces the quotation, e-mails it to the customer, and moves the order to *Quotation Issued* |
+| **Confirm** | The customer has uploaded a Purchase Order | Confirms the order — it becomes real business and moves to *Processing* |
 | **Return** | The customer has uploaded a Purchase Order | Sends the order back to the customer with a reason |
-
-### Send Quotation for Review
-
-Before a price goes out to the customer, you can have a colleague check it internally.
-
-1. Click **Send Quotation for Review**
-2. Select the internal reviewers
-3. Confirm — they all receive one e-mail with the quotation and any attached product requests
-
-This is entirely internal: the customer is not notified and the order does not change stage.
 
 ### Send Quotation
 
@@ -112,7 +99,7 @@ This single button does several things at once:
 flowchart LR
     A["Send Quotation"] --> B["Quotation document<br/>produced"]
     B --> C["E-mailed to<br/>the customer"]
-    C --> D["Order moves to<br/>Quotation Submitted"]
+    C --> D["Order moves to<br/>Quotation Issued"]
     D --> E["Customer notified<br/>in their portal"]
 ```
 
@@ -133,20 +120,18 @@ resubmit. **Always be specific** — a vague reason produces another round trip.
 
 ### Reply Done
 
-When a customer shares a wishlist or posts a message, the order is flagged as needing attention.
-After you have responded, click **Reply Done** to clear the flag. This keeps the Shared wishlist
-queue meaningful for you and your colleagues.
+When a customer shares a draft request or posts a message, the order is flagged as needing
+attention. After you have responded, click **Reply Done** to clear the flag. This keeps the
+Shared Request queue meaningful for you and your colleagues.
 
 ---
 
-## Product Requests
+## New Product Requests
 
-When a customer asks for something not in the catalogue, it appears in the **Product Requests**
-panel.
+When a customer asks for something not in the catalogue, it appears in the **New Product
+Requests** panel.
 
-⚠️ <span title="Screen changed — Price Unit field added when marking a request Product Added, needs a fresh capture">**Needs update**</span>
-
-![Product Requests](images/amp-product-requests.png)
+![New Product Requests](images/amp-product-requests.png)
 
 ```mermaid
 flowchart LR
@@ -165,10 +150,6 @@ flowchart LR
 **When you link a product to a request, the order line is created automatically.** You do not add
 it manually. Removing the link removes the line again.
 
-When you mark a request **Product Added**, set the **Price Unit** for the line — it defaults to
-the linked product's catalogue price but you can override it before confirming, so the sourced
-item lands on the order at the right price the first time.
-
 The customer can see the status, so moving a request to **In Progress** is itself a useful signal
 that you are working on it.
 
@@ -185,11 +166,11 @@ Each order carries a discussion thread shared with the customer.
 | Upload a file | Datasheets, revised quotations, certificates |
 | Delete a file | **Only files you uploaded yourself** |
 
-### Comment, chat, or Account Manager Comment?
+### Comment, chat, or Account Manager Note?
 
 | Use | When |
 |-----|------|
-| **Account Manager Comment** | A standing statement about the order — conditions, lead time. The customer sees it prominently on their summary |
+| **Account Manager Note** | A standing statement about the order — conditions, lead time. The customer sees it prominently on their summary |
 | **Comments** | Discussion that should stay permanently attached to the record |
 | **Chat** | Quick back-and-forth that does not need to be part of the record |
 
@@ -207,7 +188,7 @@ from the order screen yourself. **The file must be a PDF** — other formats are
 - **Send Quotation and Confirm cannot be undone.** The quotation is e-mailed and the order is
   confirmed in the business system immediately.
 - **An order with no lines cannot move forward.** Add at least one product first.
-- **You can only work on your own clients' orders.**
+- **You can only work on your own customers' orders.**
 - The customer can revise a request after you have quoted it. When they do, the order is flagged
   as changed and returns to your queue.
 
@@ -217,7 +198,7 @@ from the order screen yourself. **The file must be a PDF** — other formats are
 
 - **Read the Target Price column first.** It is the customer telling you what they need, and it is
   the fastest route to a quotation they will accept.
-- **Turn on Reviewed Date in the queue** to see whether a customer has actually opened your
+- **Turn on Quotation Viewed Date in the queue** to see whether a customer has actually opened your
   quotation before you chase them.
 - **Resolve product requests before quoting.** A quotation missing a requested item usually comes
   straight back.

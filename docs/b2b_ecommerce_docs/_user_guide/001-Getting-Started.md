@@ -14,10 +14,10 @@ sent here automatically.
 
 | Field | What to type |
 |-------|--------------|
-| Email or Iqama | Your work e-mail address, **or** the identification number your Account Manager registered for you |
+| Email or Iqama | Your work e-mail address, **or** the National ID / Iqama number your Account Manager registered for you |
 | Password | Your password |
 
-You can sign in with either your e-mail or your identification number — whichever you remember.
+You can sign in with either your e-mail or your National ID / Iqama number — whichever you remember.
 Both work.
 
 ### Available actions
@@ -84,8 +84,8 @@ required when you are already signed in.
 ```mermaid
 flowchart TB
     L["You sign in"] --> Q{"What kind of account?"}
-    Q -->|"Customer account"| CP["Client Portal → Home"]
-    Q -->|"SAMTIA staff account"| AMP["Account Manager Portal → Dashboard"]
+    Q -->|"Customer account"| CP["Customer Portal → Home"]
+    Q -->|"SAMTIA staff account"| AMP["Account Management Portal → Dashboard"]
 ```
 
 You cannot move between the two portals. If you try to open an address belonging to the other
@@ -98,8 +98,8 @@ portal, you are returned to your own home page. If a customer reaches an interna
 
 | Portal | Where to find it |
 |--------|------------------|
-| Client Portal | Top-right user menu (your name) → **Sign Out** |
-| Account Manager Portal | Bottom-left of the sidebar, next to your name → **⋮** → **Sign Out** |
+| Customer Portal | Top-right user menu (your name) → **Sign Out** |
+| Account Management Portal | Bottom-left of the sidebar, next to your name → **⋮** → **Sign Out** |
 
 Signing out also marks you offline in chat, so colleagues and customers know you have left.
 
@@ -111,8 +111,8 @@ Both portals can be shown light or dark. Your choice is remembered on your devic
 
 | Portal | Where to switch |
 |--------|-----------------|
-| Client Portal | User menu → **Light mode / Dark mode** |
-| Account Manager Portal | Sidebar → **⋮** next to your name → **Light mode / Dark mode** |
+| Customer Portal | User menu → **Light mode / Dark mode** |
+| Account Management Portal | Sidebar → **⋮** next to your name → **Light mode / Dark mode** |
 
 ---
 
@@ -123,8 +123,8 @@ Both portals can be shown light or dark. Your choice is remembered on your devic
 | **Help** | Guidance and support information | Anyone, including before signing in |
 | **Release Notes** | A dated list of recent improvements, written in plain language | Anyone, including before signing in |
 
-The Client Portal links to Help from the user menu. Release Notes are grouped into **General**,
-**Client Portal** and **Account Manager Portal** so you only need to read the entries that
+The Customer Portal links to Help from the user menu. Release Notes are grouped into **General**,
+**Customer Portal** and **Account Management Portal** so you only need to read the entries that
 affect you.
 
 ---

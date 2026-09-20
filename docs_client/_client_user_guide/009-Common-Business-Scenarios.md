@@ -9,18 +9,18 @@ Step-by-step recipes for the tasks you will do most often.
 **Goal:** get a price for a set of products.
 
 1. Sign in. You land on **Home**.
-2. In the header, open the wishlist selector and choose **New**.
+2. In the header, open the Request Selector and choose **New**.
 3. Give it a clear name — *"Q3 lab restock"*, not *"list 1"*.
 4. Browse using **Products** or **Brands**, or type in the search box.
-5. Open a product, choose a variant if it has options, set the quantity, and **Add**.
+5. Open a product, choose a product variant if it has options, set the quantity, and **Add**.
 6. Repeat for everything you need.
-7. Open **Company Profile → Wishlists** and open your wishlist.
-8. Set the **Planned Date** — when you need the goods.
+7. Open **Company Profile → Draft Requests** and open your draft request.
+8. Set the **Requested Delivery Date** — when you need the goods.
 9. Enter a **Target Price** on each line if you have a budget in mind.
 10. Click **Submit RFQ**.
 
-**What happens next:** your Account Manager is notified. The request moves out of Wishlists and
-into **RFQs**. You will be notified when the quotation arrives.
+**What happens next:** your Account Manager is notified. The request moves out of Draft Requests
+and into **RFQs**. You will be notified when the quotation arrives.
 
 ---
 
@@ -29,7 +29,7 @@ into **RFQs**. You will be notified when the quotation arrives.
 1. You receive a notification and an e-mail that a quotation is ready.
 2. Open **Company Profile → RFQs** and open the record.
 3. Review the lines — check quantities, prices, discounts and the total.
-4. Read the **Account Manager Comment**; conditions and lead times are recorded there.
+4. Read the **Account Manager Note**; conditions and lead times are recorded there.
 5. If you are happy, click **Submit PO**.
 6. Upload your Purchase Order. **It must be a PDF.**
 7. Confirm.
@@ -48,8 +48,8 @@ The fastest route is to copy.
 1. Open **Company Profile → Orders**.
 2. Find the previous order.
 3. Click 📋 **Copy**.
-4. A new wishlist is created with the same products.
-5. Adjust quantities and the planned date.
+4. A new draft request is created with the same products.
+5. Adjust quantities and the requested delivery date.
 6. **Submit RFQ**.
 
 This works on any record at any stage — including archived ones.
@@ -58,12 +58,12 @@ This works on any record at any stage — including archived ones.
 
 ### Scenario 4 — Ask for something not in the catalogue
 
-1. Open the wishlist or RFQ it belongs to.
-2. Go to the **Product Requests** panel.
+1. Open the draft request or RFQ it belongs to.
+2. Go to the **New Product Requests** panel.
 3. Enter the product name, a description, the quantity, and a reference link if you have one.
 4. Submit.
 
-**What happens next:** your Account Manager marks it *In Progress* while sourcing. If they find
+**What happens next:** your Account Manager marks it *Processing* while sourcing. If they find
 it, the product appears as a normal line on your order automatically. If not, it is marked
 *Product Not Found*.
 
@@ -73,10 +73,10 @@ it, the product appears as a normal line on your order automatically. If not, it
 
 ### Scenario 5 — Get advice before committing
 
-Use **Share wishlist** instead of Submit RFQ.
+Use **Share Draft Request** instead of Submit RFQ.
 
-1. Build your wishlist as normal.
-2. Open it and click **Share wishlist**.
+1. Build your draft request as normal.
+2. Open it and click **Share Draft Request**.
 3. Use **Open Chat** to explain what you need help with.
 
 Your Account Manager is notified and can see the list, but it stays a draft in your hands. Nothing
@@ -108,5 +108,5 @@ SAMTIA's.
 | I never received a quotation e-mail | Confirm your e-mail address is correct and check your spam folder |
 | Prices look wrong | Contact your Account Manager to review your pricing setup |
 | Purchase Order will not upload | It must be a PDF |
-| Wishlist cannot be submitted | It has no products, or it has already been submitted |
-| Wishlist cannot be deleted | Only its creator can delete it; after submission, archive instead |
+| Draft Request cannot be submitted | It has no products, or it has already been submitted |
+| Draft Request cannot be deleted | Only its creator can delete it; after submission, archive instead |

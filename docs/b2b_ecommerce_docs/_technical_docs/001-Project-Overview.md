@@ -18,8 +18,8 @@ prices it, and the customer converts the resulting quotation into a purchase ord
 ```mermaid
 flowchart LR
     subgraph External["Customer side"]
-        CA["Client Company Admin<br/>manages own sub-users"]
-        CU["Client Portal User<br/>browses, requests, orders"]
+        CA["Customer Company Admin<br/>manages own sub-users"]
+        CU["Customer Portal User<br/>browses, requests, orders"]
     end
     subgraph Internal["Vendor side"]
         AM["Account Manager<br/>prices & fulfils"]
@@ -28,23 +28,23 @@ flowchart LR
         SA["System Admin / ERP Team"]
     end
 
-    CA --> CP["Client Portal /"]
+    CA --> CP["Customer Portal /"]
     CU --> CP
-    AM --> AMP["Account Manager Portal /admin"]
+    AM --> AMP["Account Management Portal /admin"]
     PT --> AMP
     RO --> AMP
-    SA --> BO["Odoo Back-office"]
+    SA --> BO["Odoo ERP Back Office"]
     AM --> BO
 ```
 
 | Actor | Primary surface | Responsibility |
 |-------|-----------------|----------------|
-| Client Portal User | Client Portal | Browse catalog, build wishlists, submit RFQs, track orders, chat |
-| Client Company Admin | Client Portal | Everything above **plus** create/activate/deactivate their company's portal users and manage user tags |
-| Account Manager | AMP + Back-office | Own assigned Clients; price RFQs, issue quotations, confirm orders, chat, manage products and banners |
-| Pricing Team | AMP + Back-office | Maintain pricelists and price rules |
+| Customer Portal User | Customer Portal | Browse catalog, build draft requests, submit RFQs, track orders, chat |
+| Customer Company Admin | Customer Portal | Everything above **plus** create/activate/deactivate their company's portal users and manage user tags |
+| Account Manager | AMP + ERP Back Office | Own assigned Customers; price RFQs, issue quotations, confirm orders, chat, manage products and banners |
+| Pricing Team | AMP + ERP Back Office | Maintain pricelists and price rules |
 | Read-Only Manager | AMP | Observe without mutating |
-| System Admin / ERP Team | Back-office | Configuration, master data, deployments |
+| System Admin / ERP Team | ERP Back Office | Configuration, master data, deployments |
 
 ---
 
@@ -53,10 +53,10 @@ flowchart LR
 ```mermaid
 flowchart TB
     subgraph N["Next.js application (one codebase, two portals)"]
-        CP["Client Portal — route '/'<br/>AuthGuard"]
-        AMP["Account Manager Portal — route '/admin/*'<br/>AdminGuard"]
+        CP["Customer Portal — route '/'<br/>AuthGuard"]
+        AMP["Account Management Portal — route '/admin/*'<br/>AdminGuard"]
     end
-    ODOO["Odoo 19 back-office<br/>ERP UI, master data, configuration"]
+    ODOO["Odoo 19 ERP back office<br/>ERP UI, master data, configuration"]
 
     CP -- "REST + WebSocket" --> API["Odoo custom REST API"]
     AMP -- "REST + WebSocket" --> API
@@ -73,7 +73,7 @@ second build, no second host.
 
 ```mermaid
 flowchart LR
-    A["Catalog<br/>products, brands,<br/>categories, banners"] --> B["Wishlist / basket"]
+    A["Catalog<br/>products, brands,<br/>categories, banners"] --> B["Draft Request / basket"]
     B --> C["RFQ submitted"]
     C --> D["Account Manager<br/>prices lines"]
     D --> E["Quotation issued<br/>PDF + e-mail"]
@@ -82,7 +82,7 @@ flowchart LR
     G --> H["Delivered"]
 ```
 
-Everything else in the platform exists to support this chain: pricing per client tier,
+Everything else in the platform exists to support this chain: pricing per customer tier,
 multi-tenant isolation, real-time chat with the Account Manager, requests for products that
 are not yet in the catalog, and notifications on every state change.
 
@@ -93,7 +93,7 @@ are not yet in the catalog, and notifications on every state change.
 | Characteristic | Consequence for the architecture |
 |----------------|----------------------------------|
 | **Quote-driven** | A parallel `portal_state` machine sits alongside Odoo's native `sale.order.state`; see [008](008-Order-Lifecycle.md) |
-| **Multi-tenant by client company** | Every read and write is scoped server-side to the user's company partner; see [007](007-Authentication-and-Authorization.md#multi-tenant-isolation) |
+| **Multi-tenant by customer company** | Every read and write is scoped server-side to the user's company partner; see [007](007-Authentication-and-Authorization.md#multi-tenant-isolation) |
 | **Headless Odoo** | ~110 custom REST routes; no Odoo website/QWeb pages in the customer path; see [006](006-API-and-Controller-Architecture.md) |
 | **Session-cookie auth, no tokens** | Browser holds the Odoo session cookie; CORS with credentials everywhere |
 | **English only** | The portals ship a single language (`en_US`). No localisation layer, no per-locale content variants |

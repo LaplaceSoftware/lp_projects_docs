@@ -9,11 +9,11 @@ flowchart TB
     C["<b>3 · Activation</b><br/>Is the account usable? — activate + portal_activate"] --> D
     D["<b>4 · Tenancy</b><br/>Whose data? — portal_company_partner_id"] --> E
     E["<b>5 · Feature permission</b><br/>Which screens & actions? — AMM roles"] --> F
-    F["<b>6 · Odoo ACL</b><br/>Back-office model rights — groups + ir.model.access"]
+    F["<b>6 · Odoo ACL</b><br/>ERP Back Office model rights — groups + ir.model.access"]
 ```
 
 Each layer is independent. Layers 1–4 are always enforced; layer 5 degrades gracefully to
-"allow everything" when AMM data is absent; layer 6 applies only inside the Odoo back-office.
+"allow everything" when AMM data is absent; layer 6 applies only inside the Odoo ERP Back Office.
 
 ---
 
@@ -106,10 +106,10 @@ A single boolean decides which application the user gets.
 ```mermaid
 flowchart TB
     L["Login succeeds"] --> Q{"is_b2b_portal"}
-    Q -->|true| CG["AuthGuard<br/>client routes"]
+    Q -->|true| CG["AuthGuard<br/>customer routes"]
     Q -->|false| AG["AdminGuard<br/>/admin routes"]
     CG -->|"user hits /admin/*"| R1["redirect /home"]
-    AG -->|"user hits a client route"| R2["redirect /admin"]
+    AG -->|"user hits a customer route"| R2["redirect /admin"]
     CG -->|"no session"| L2["redirect /login?redirect=…"]
     AG -->|"no session"| L2
 ```
@@ -128,20 +128,14 @@ assertion.
 ```mermaid
 flowchart LR
     A["activate<br/>set by the vendor's<br/>Account Manager"] --> AND{"AND"}
-    B["portal_activate<br/>set by the client's<br/>own Company Admin"] --> AND
+    B["portal_activate<br/>set by the customer's<br/>own Company Admin"] --> AND
     AND -->|both true| OK["User may log in and act"]
     AND -->|either false| NO["5133 / 5102 — blocked"]
 ```
 
-This lets the vendor suspend an entire client's user without the client being able to
-re-enable it, while still letting the client's own admin manage their team day to day. The
+This lets the vendor suspend an entire customer's user without the customer being able to
+re-enable it, while still letting the customer's own admin manage their team day to day. The
 check is re-applied on write operations, not only at login.
-
-**Immediate revocation.** Flipping `activate` or `portal_activate` to `False` — or changing
-`is_admin_portal_user` in either direction — revokes every one of that user's active device
-sessions on the spot (`res.users.write()` → `_action_revoke_all_devices()`). Deactivation is not
-just a login-time check: a user already signed in loses access immediately, without waiting for
-their session to expire or for a next login attempt.
 
 ---
 
@@ -161,23 +155,12 @@ flowchart LR
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Reads                  | Every list and detail endpoint appends the company scope to the search domain                                                                                        |
 | Writes                 | Ownership is re-verified against the resolved user before mutating                                                                                                   |
-| Account managers       | Scoped by`res.partner.account_manager_user_id` — an AM sees only the clients assigned to them (chat threads, for example, are built from the managed-company set) |
+| Account managers       | Scoped by`res.partner.account_manager_user_id` — an AM sees only the customers assigned to them (chat threads, for example, are built from the managed-company set) |
 | Attachments & messages | Access is validated against the*related record's* company, not the attachment itself                                                                               |
 | Enforcement location   | API layer, because all portal traffic runs through`sudo()` model methods; the module defines **no `ir.rule` record rules**                                 |
 
 **Consequence for developers:** a new endpoint that forgets the company scope has no second
 line of defence. Scoping is not optional and cannot be added later by configuration.
-
-The product, pricelist and order APIs now route through a shared helper module,
-`ecommerce/api_access.py` (`as_user()`, `resolve_for_user()`, `resolve_id_for_user()`,
-`search_as_user()`): a record is resolved/authorized under the calling user first — so Odoo's
-own record rules still apply at that step — then the actual read or write executes under
-`sudo()`. This formalizes the pattern above into one place instead of each controller
-re-implementing its own scoping.
-
-Deleting a client company that is still referenced by other records (orders, users, …) no
-longer surfaces a raw database FK error — the delete is wrapped in a savepoint and reported back
-as a plain `CLIENT_IN_USE` business error instead.
 
 Identifiers exposed to clients can additionally be obfuscated (reversible XOR + Base64) to
 mitigate enumeration — a defence-in-depth measure, not a substitute for the scoping above.
@@ -230,8 +213,8 @@ device sessions of every affected user. Permission changes never wait for a sess
 
 ### Roles shipped
 
-Super Admin · Account Manager · Read Only Manager · Pricing Manager · Client Company Admin ·
-Client Standard User.
+Super Admin · Account Manager · Read Only Manager · Pricing Manager · Customer Company Admin ·
+Customer Standard User.
 
 > AMM is **advisory in the current build**: it drives menu visibility and route guards in the
 > portals. Backend endpoints are not yet gated by permission codes — the enforcement hook
@@ -240,15 +223,15 @@ Client Standard User.
 
 ---
 
-## 6 · Back-Office Access Control
+## 6 · ERP Back Office Access Control
 
 Standard Odoo mechanics, used only for internal users in the Odoo web client.
 
 | Group                               | Effect                                                                    |
 | ----------------------------------- | ------------------------------------------------------------------------- |
-| `ecommerce_group_account_manager` | Grants the B2B Ecommerce root menu and the attachment-scoped Clients view |
+| `ecommerce_group_account_manager` | Grants the B2B Ecommerce root menu and the attachment-scoped Customers view |
 | `ecommerce_group_pricing_team`    | Grants the Pricelists menu (alongside system administrators)              |
 | `ecommerce_group_read_only`       | Observation-only access                                                   |
-| `base.group_system`               | Configuration submenu, full Clients view with chatter, settings           |
+| `base.group_system`               | Configuration submenu, full Customers view with chatter, settings           |
 
 Model-level create/read/write/unlink rights are declared in `ir.model.access.csv`.

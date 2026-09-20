@@ -15,7 +15,7 @@ erDiagram
     RES_PARTNER_COMPANY ||--o{ PORTAL_USER_TAG : "own tags"
     RES_PARTNER_COMPANY ||--o{ NOTIFICATION : "activity feed"
     RES_PARTNER_COMPANY }o--|| PRODUCT_PRICELIST : "property pricelist"
-    RES_PARTNER_COMPANY }o--o| RES_PARTNER_GRADE : "client category"
+    RES_PARTNER_COMPANY }o--o| RES_PARTNER_GRADE : "customer segment"
     RES_PARTNER_COMPANY }o--o| RES_USERS_AM : "account manager"
     RES_PARTNER_COMPANY ||--o| DISCUSS_CHANNEL : "company chat channel"
     RES_PARTNER_COMPANY ||--o| IR_SEQUENCE : "portal order sequence"
@@ -28,8 +28,8 @@ erDiagram
     SALE_ORDER ||--o{ IR_ATTACHMENT : "documents"
     SALE_ORDER ||--o{ MAIL_MESSAGE : "chatter"
 
-    SALE_ORDER_LINE }o--|| PRODUCT_PRODUCT : "variant"
-    PRODUCT_PRODUCT }o--|| PRODUCT_TEMPLATE : "variant of"
+    SALE_ORDER_LINE }o--|| PRODUCT_PRODUCT : "product variant"
+    PRODUCT_PRODUCT }o--|| PRODUCT_TEMPLATE : "product variant of"
 
     PRODUCT_TEMPLATE }o--o| ECOMMERCE_BRAND : "brand"
     PRODUCT_TEMPLATE }o--o{ PRODUCT_PUBLIC_CATEGORY : "public categories"
@@ -53,7 +53,7 @@ flowchart LR
     U["res.users<br/>portal user"] -->|portal_company_partner_id| C["res.partner<br/>is_company = True<br/>is_b2b_portal = True"]
     C -->|account_manager_user_id| AM["res.users<br/>Account Manager"]
     C -->|property_product_pricelist| PL["product.pricelist"]
-    C -->|partner_grade_id| G["res.partner.grade<br/>Client Category"]
+    C -->|partner_grade_id| G["res.partner.grade<br/>Customer Segment"]
 ```
 
 A portal user's company partner determines: which orders they see, which prices they get,
@@ -67,13 +67,13 @@ which Account Manager is alerted on state changes.
 | Model                              | Purpose                                           | Notable traits                                                                                                                                 |
 | ---------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ecommerce.brand`                | Product brands                                    | Name & description, manual sequence, active flag, chatter                                                                         |
-| `ecommerce.banner`               | Marketing banners                                 | Scheduled`active_datetime` / `deactivate_datetime`, optional client targeting, promotion URL, linked products & categories, obfuscated IDs |
+| `ecommerce.banner`               | Marketing banners                                 | Scheduled`active_datetime` / `deactivate_datetime`, optional customer targeting, promotion URL, linked products & categories, obfuscated IDs |
 | `ecommerce.alert_message`        | Short catalog alert text attached to products     | Simple label model                                                                                                                             |
-| `ecommerce.portal.user.tag`      | Tags for portal users                             | Scoped per client company                                                                                                                      |
+| `ecommerce.portal.user.tag`      | Tags for portal users                             | Scoped per customer company                                                                                                                      |
 | `ecommerce.product.request.line` | Customer request for a product not in the catalog | Own state machine; can auto-create a sale order line                                                                                           |
 | `ecommerce.notification`         | In-app activity notification                      | Typed, company-scoped,`owner_user_id` excludes the actor from their own notifications, obfuscated IDs                                        |
 
-### Product request line state machine
+### New product request line state machine
 
 ```mermaid
 stateDiagram-v2
@@ -98,7 +98,7 @@ removes it again.
 | Added capability      | Fields / behaviour                                                                                                                                                        |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Tenancy               | `portal_company_partner_id`, computed `is_b2b_portal`, `is_admin_portal_user`                                                                                 |
-| Dual activation       | `activate` (controlled by the vendor's account manager) **and** `portal_activate` (controlled by the client's own company admin) — both must be true to log in |
+| Dual activation       | `activate` (controlled by the vendor's account manager) **and** `portal_activate` (controlled by the customer's own company admin) — both must be true to log in |
 | Identity              | `identification_no` as an alternative login, `portal_user_code`                                                                                                       |
 | Password reset        | `otp`, `otp_expiry_datetime` — a one-time code e-mailed and verified during a forgotten-password reset. It never establishes a session |
 | Invitation            | Computed`invitation_url` and `qr_code_image`, printable QR report, invitation e-mail                                                                                  |
@@ -110,16 +110,16 @@ removes it again.
 
 | Added capability     | Detail                                                                                     |
 | -------------------- | ------------------------------------------------------------------------------------------ |
-| Portal client flag   | `is_b2b_portal` marks a company as a B2B client                                    |
+| Portal customer flag   | `is_b2b_portal` marks a company as a B2B customer                                    |
 | Account managers     | `account_manager_user_id` (primary) and `account_manager_ids` (many-to-many)           |
-| Per-client numbering | `portal_order_sequence_id` — each client gets its own order sequence                    |
+| Per-customer numbering | `portal_order_sequence_id` — each customer gets its own order sequence                    |
 | Portal URL           | `shop_portal_url`, falling back to a global system parameter                             |
 | Chat                 | `company_channel_id` — the discuss channel for company-wide conversation                |
-| Pricing              | `property_product_pricelist` with conflict resolution against the client's grade default |
+| Pricing              | `property_product_pricelist` with conflict resolution against the customer's grade default |
 | Owned collections    | Banners, portal users, portal user tags                                                    |
 
-The **client category** (`res.partner.grade`, reused from the `partnership` module) carries a
-default pricelist. Assigning a category and a conflicting pricelist to the same client triggers
+The **customer segment** (`res.partner.grade`, reused from the `partnership` module) carries a
+default pricelist. Assigning a category and a conflicting pricelist to the same customer triggers
 an explicit resolution that logs the outcome in the chatter.
 
 ### `sale.order` / `sale.order.line`
@@ -127,13 +127,13 @@ an explicit resolution that logs the outcome in the chatter.
 | Added capability | Detail                                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Parallel status  | `portal_state` — 9 states in use, tracked; mapped onto Odoo's native `state` on every transition                                |
-| Portal identity  | `portal_order_no`, `portal_label` (customer's own name for the basket), per-client sequence                                |
+| Portal identity  | `portal_order_no`, `portal_label` (customer's own name for the basket), per-customer sequence                                |
 | Planning         | `portal_planned_order_date` and a computed `portal_order_planning_state` (late / on time / upcoming)                       |
-| Attention flags  | `portal_visible` ("needs attention"), `portal_reviewed` + date, `portal_pending_submit`, `portal_print_quotation_date` |
-| Collaboration    | `portal_messages_count`, attachment count, account-manager notes (internal) and comment (client-visible)                     |
+| Attention flags  | `portal_visible` ("action required"), `portal_reviewed` + date, `portal_pending_submit`, `portal_print_quotation_date` |
+| Collaboration    | `portal_messages_count`, attachment count, account-manager notes (internal) and comment (customer-visible)                     |
 | Catalog requests | `request_product_ids` with a count of new requests                                                                           |
 | Line additions   | `portal_target_price` (the price the customer is asking for), `manual` flag, `need_call` related from the product        |
-| Live refresh     | Inherits the auto-refresh mixin — back-office lists update without a reload                                                   |
+| Live refresh     | Inherits the auto-refresh mixin — ERP Back Office lists update without a reload                                                   |
 
 ### `product.template` / `product.product`
 
@@ -143,7 +143,7 @@ an explicit resolution that logs the outcome in the chatter.
 |                    |                                                                                                                                         |
 | Sales behaviour    | `need_call` — a product that must be quoted by phone                                                                                 |
 | Pricing projection | Computed`product_pricelist_ids`; the catalog API resolves the effective price, list price and discount per pricelist                  |
-| Admin management   | Full product CRUD, media sync, attribute linking, variant generation and the JSON import pipeline are implemented as model methods here |
+| Admin management   | Full product CRUD, media sync, product attribute linking, product variant generation and the JSON import pipeline are implemented as model methods here |
 
 ### Collaboration models
 
@@ -161,7 +161,7 @@ an explicit resolution that logs the outcome in the chatter.
 | Mixin                                 | Applied to                                       | Effect                                                                                                                                                                                     |
 | ------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `ecommerce.base.secure_model`       | `ecommerce.banner`, `ecommerce.notification` | Reversible XOR + Base64 ID obfuscation for externally exposed identifiers; controllers resolve incoming external IDs back to database IDs. Toggled by a system parameter, defaults to off. |
-| `ecommerce.base_auto_refresh_model` | `sale.order`                                   | Broadcasts a bus event on create/write/unlink so open back-office views refresh live.                                                                                                      |
+| `ecommerce.base_auto_refresh_model` | `sale.order`                                   | Broadcasts a bus event on create/write/unlink so open ERP Back Office views refresh live.                                                                                                      |
 
 ---
 
@@ -170,7 +170,7 @@ an explicit resolution that logs the outcome in the chatter.
 `ecommerce.tier` and `ecommerce.product_merchant` (product ↔ merchant price link) were fully
 removed from the codebase — model, views, security rules and manifest entries all deleted — in
 commit `c26ef8b` (2026-08-06). They are not present in any form; do not build on either name.
-Client segmentation is done with `res.partner.grade` (Client Categories) instead.
+Customer segmentation is done with `res.partner.grade` (Customer Segments) instead.
 `ecommerce.merchant` (supplier master data, singular) is still present in code today but is
 slated for removal too — see `_docs/todos/ecommerce-models-dead-code.md` — so it is no longer
 documented here.

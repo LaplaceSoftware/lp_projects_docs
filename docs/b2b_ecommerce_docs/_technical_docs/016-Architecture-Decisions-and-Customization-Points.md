@@ -27,8 +27,8 @@ two deployment pipelines.
 **Decision.** Orders carry a 9-state business status independent of Odoo's 4-value native
 state, mapped onto it at every transition.
 
-**Why.** The business needs to distinguish RFQ submitted, RFQ updated, quotation submitted, PO
-submitted, in progress and delivered. Odoo's `draft/sent/sale/cancel` cannot express that, and
+**Why.** The business needs to distinguish RFQ submitted, RFQ revised, quotation issued, PO
+submitted, processing and delivered. Odoo's `draft/sent/sale/cancel` cannot express that, and
 widening it would break every standard sale flow.
 
 **Cost.** Two fields to keep consistent. Two transitions delegate to real Odoo actions
@@ -108,7 +108,7 @@ exposed record IDs, toggled by a system parameter, applied to banners and notifi
 and tenancy scoping, never a substitute.
 
 **Operational care.** Flipping the toggle or changing the salt invalidates every identifier a
-client already holds. Coordinate with a portal deploy.
+customer already holds. Coordinate with a portal deploy.
 
 ---
 
@@ -151,7 +151,7 @@ be validated locally.
 **Decision.** Controllers parse, call one model method, wrap the result. All logic, validation,
 scoping and serialisation live in models as `api_*` / `*_payload` methods returning plain dicts.
 
-**Why.** The same logic is reachable from the API, the back-office and tests. Serialisation
+**Why.** The same logic is reachable from the API, the ERP Back Office and tests. Serialisation
 helpers (`_prepare_*_dict`) guarantee one shape across list, detail and update responses.
 
 **Cost.** Large model files — the three biggest carry most of the domain.
@@ -160,17 +160,17 @@ helpers (`_prepare_*_dict`) guarantee one shape across list, detail and update r
 
 ### AD-11 · Dual activation flags
 
-**Decision.** A portal user is usable only when the vendor's `activate` **and** the client's
+**Decision.** A portal user is usable only when the vendor's `activate` **and** the customer's
 `portal_activate` are both true.
 
-**Why.** The vendor must be able to suspend a client's access irrespective of what the client's
-own admin does, while still delegating day-to-day user management to the client.
+**Why.** The vendor must be able to suspend a customer's access irrespective of what the customer's
+own admin does, while still delegating day-to-day user management to the customer.
 
 ---
 
-### AD-12 · Per-client order sequences
+### AD-12 · Per-customer order sequences
 
-**Decision.** Each client company owns an `ir.sequence`; portal order numbers are drawn from it
+**Decision.** Each customer company owns an `ir.sequence`; portal order numbers are drawn from it
 at creation, in addition to Odoo's global sale-order name.
 
 **Why.** B2B customers expect a continuous, private numbering series and must not be able to
@@ -221,9 +221,9 @@ Where to extend, in decreasing order of safety.
 
 | Need | Where |
 |------|-------|
-| New client segment with its own pricing | Client category + pricelist |
-| Product visibility for a client | Price rules on that client's pricelist |
-| Campaign banners, scheduled or client-targeted | Banner records |
+| New customer segment with its own pricing | Customer segment + pricelist |
+| Product visibility for a customer | Price rules on that customer's pricelist |
+| Campaign banners, scheduled or customer-targeted | Banner records |
 | New portal role / menu restriction | AMM roles and assignments |
 | Turn account-manager e-mails on or off | Settings → B2B Ecommerce |
 | Enable ID obfuscation | System parameters |
@@ -235,7 +235,7 @@ Where to extend, in decreasing order of safety.
 | New portal screen in the permission catalogue | `ecommerce_access_data` screen + permission records, matched by a frontend nav entry with the same `reference` |
 | New notification type | Extend the `ecommerce.notification` type selection |
 | New mail wording | The shipped mail templates |
-| New back-office queue | An action with a `portal_state` domain plus a menu item |
+| New ERP Back Office queue | An action with a `portal_state` domain plus a menu item |
 
 ### Code extension — follow the conventions
 
@@ -243,9 +243,9 @@ Where to extend, in decreasing order of safety.
 |------|-------|
 | New API endpoint | 1 · model method returning a dict with `response_code` · 2 · thin controller subclassing the ecommerce base controller, with a **globally unique method name** · 3 · error codes in the central file · 4 · company scoping applied · 5 · frontend `endpoints`/`service`/`types` triple · 6 · store action |
 | New portal screen | Page under `app/` with the right guard · nav entry with an AMM `reference` · AMM screen + permission records |
-| New order state | Add to the `portal_state` selection **and** to the portal→Odoo state mapping · decide whether it notifies · add the queue in both portals and the back-office |
+| New order state | Add to the `portal_state` selection **and** to the portal→Odoo state mapping · decide whether it notifies · add the queue in both portals and the ERP Back Office |
 | New model exposed to the portal | Inherit `ecommerce.base.secure_model` if IDs go outside · add `ir.model.access` rules · implement `_prepare_*_dict` · scope by company |
-| Live back-office lists | Inherit `ecommerce.base_auto_refresh_model` |
+| Live ERP Back Office lists | Inherit `ecommerce.base_auto_refresh_model` |
 
 ### Do not
 
@@ -283,11 +283,11 @@ as features because they are unreachable from any menu or screen, or not loaded:
 | Item | Status |
 |------|--------|
 | `pending_approval` order state | Present in the `portal_state` selection but never reached — no screen or endpoint transitions into it. The lifecycle runs `draft → rfq_submitted` directly |
-| Arabic / any second language | **Not supported.** The portals are English only. The language flag toggle in the client header is commented out, no translation catalogue is loaded, and the localised message key some endpoints still return is ignored by both portals |
+| Arabic / any second language | **Not supported.** The portals are English only. The language flag toggle in the customer header is commented out, no translation catalogue is loaded, and the localised message key some endpoints still return is ignored by both portals |
 | Passwordless / OTP sign-in | **Not supported.** Login is password-only. The one-time code exists solely for the forgotten-password reset and never creates a session |
 | `access.service` abstract model | Declared, no behaviour |
 | `require_permission` guard in `lp_base` | Placeholder, no-op |
 | `/admin/client-users`, `/admin/users-tags` | Pages exist; their sidebar entries are commented out |
 | `/demo-page` | Development scratch page |
-| Commented-out back-office menus (To Invoice, Orders to Upsell) | Not registered |
+| Commented-out ERP Back Office menus (To Invoice, Orders to Upsell) | Not registered |
 | Repo-root Docker files | Local development only, outside the deploy pipeline |

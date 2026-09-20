@@ -39,15 +39,15 @@ addons_lp_ecommerce/
 
 | Folder | Responsibility |
 |--------|----------------|
-| `controllers/` | Client Portal REST routes (`/ecommerce/api/*`) — 14 files, thin |
-| `controllers_admin/` | Account Manager Portal REST routes — 15 files, thin |
+| `controllers/` | Customer Portal REST routes (`/ecommerce/api/*`) — 14 files, thin |
+| `controllers_admin/` | Account Management Portal REST routes — 15 files, thin |
 | `models/` | All business logic, validation, tenancy scoping, API serialisation |
-| `views/` | Odoo back-office forms, lists, searches, actions, menus |
+| `views/` | Odoo ERP Back Office forms, lists, searches, actions, menus |
 | `security/` | Groups (`groups.xml`) and model access rules (`ir.model.access.csv`) |
 | `data/` | Sequences, mail templates, scheduled job |
 | `report/` | User invitation QR-code PDF report |
 | `wizard/` | JSON product import wizard |
-| `static/` | Back-office assets: B2B dashboard OWL component, chat widget, SCSS |
+| `static/` | ERP Back Office assets: B2B dashboard OWL component, chat widget, SCSS |
 | `tests/` | Module tests |
 | `_docs/` | Module-level developer notes |
 

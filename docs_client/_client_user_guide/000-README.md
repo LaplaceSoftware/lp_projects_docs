@@ -1,10 +1,10 @@
-# SAMTIA B2B Platform — Client User Guide
+# SAMTIA B2B Platform — Customer User Guide
 
-Welcome. This guide explains how to use the SAMTIA B2B Client Portal day to day. It is written
+Welcome. This guide explains how to use the SAMTIA B2B Customer Portal day to day. It is written
 for business users — no technical knowledge is needed.
 
-**Who this guide is for:** Client Users · Company Administrators at customer companies using the
-SAMTIA Client Portal.
+**Who this guide is for:** Customer Users · Company Administrators at customer companies using the
+SAMTIA Customer Portal.
 
 ---
 
@@ -15,7 +15,7 @@ SAMTIA Client Portal.
 | 001 | [Getting Started](001-Getting-Started.md) | Sign in, reset your password, find your way around |
 | 002 | [User Roles and Permissions](002-User-Roles-and-Permissions.md) | Understand who at your company can do what |
 | 003 | [Navigation](003-Client-Portal-Navigation.md) | Learn the website layout |
-| 004 | [Browsing and Wishlists](004-Client-Portal-Browsing-and-Wishlists.md) | Find products and build a wishlist |
+| 004 | [Browsing and Draft Requests](004-Client-Portal-Browsing-and-Wishlists.md) | Find products and build a draft request |
 | 005 | [Orders](005-Client-Portal-Orders.md) | Submit RFQs, accept quotations, track orders |
 | 006 | [Company Management](006-Client-Portal-Company-Management.md) | Manage your colleagues' access and tags |
 | 007 | [Messages and Notifications](007-Messages-and-Notifications.md) | Chat with your Account Manager and follow alerts |
@@ -37,7 +37,7 @@ SAMTIA Client Portal.
 
 ```mermaid
 flowchart LR
-    A["You browse<br/>the catalogue"] --> B["Add products<br/>to a wishlist"]
+    A["You browse<br/>the catalogue"] --> B["Add products<br/>to a draft request"]
     B --> C["Submit it as<br/>a Request for Quotation"]
     C --> D["Your Account Manager<br/>prices it"]
     D --> E["Quotation sent<br/>to you"]
@@ -67,6 +67,6 @@ given in the placeholders.
 
 ## A note on what is documented
 
-This guide covers only the **Client Portal** — the website you use to browse, order and manage
+This guide covers only the **Customer Portal** — the website you use to browse, order and manage
 your company's access. It covers only what you can actually see and use as a customer. It does
 not describe SAMTIA's own internal systems.

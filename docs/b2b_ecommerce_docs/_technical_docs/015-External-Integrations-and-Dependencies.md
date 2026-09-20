@@ -48,7 +48,7 @@ The single outbound runtime dependency is **SMTP**.
 | Dependency | Criticality | Used for | Failure impact |
 |------------|-------------|----------|----------------|
 | PostgreSQL | Fatal | All persistence | Platform down |
-| Cloudflare Workers | Fatal (production only) | Serves the live portal at `b2b.samtia.com` | The production storefront and AMP are unreachable; the Odoo back-office and the non-production portals are unaffected |
+| Cloudflare Workers | Fatal (production only) | Serves the live portal at `b2b.samtia.com` | The production storefront and AMP are unreachable; the Odoo ERP Back Office and the non-production portals are unaffected |
 | Odoo filestore | Fatal | Product media, attachments, generated PDFs | Images and documents fail; orders still work |
 | SMTP relay | High | Password-reset codes, invitations, quotation delivery, account-manager alerts | Self-service password reset and invitations stop working; quotations are still created but not delivered by e-mail |
 | Odoo bus / WebSocket endpoint | Medium | Chat, presence, live notifications | Real-time features degrade; REST paths are unaffected |
@@ -70,12 +70,12 @@ The single outbound runtime dependency is **SMTP**.
 `base` · `mail` · `portal` · `product` · `website_sale` · `sale` · `crm` · `contacts` ·
 `calendar` · `im_livechat` · `spreadsheet_dashboard` · `partnership`
 
-`partnership` is the least obvious: its `res.partner.grade` model is reused as **Client
-Categories**, the platform's client segmentation and default-pricing dimension.
+`partnership` is the least obvious: its `res.partner.grade` model is reused as **Customer
+Segments**, the platform's customer segmentation and default-pricing dimension.
 
 ### Optional companion module
 
-`lp_auto_refresh` — not a declared dependency. Without it the back-office auto-refresh bus
+`lp_auto_refresh` — not a declared dependency. Without it the ERP Back Office auto-refresh bus
 messages are emitted and ignored; lists simply do not refresh on their own.
 
 ---
@@ -123,9 +123,9 @@ Storybook, Wrangler, OpenNext.
 | Risk | Exposure | Mitigation in place |
 |------|----------|---------------------|
 | Odoo.sh WebSocket gateway behaviour | Chat, presence and notifications break in ways that do not reproduce on-premises | Subscribe-first protocol, string-channel message mirroring, HTTP presence heartbeat, stale-presence cron |
-| SMTP outage | Self-service password reset and invitations blocked | Login itself is unaffected; an administrator can reset a password from the back-office |
+| SMTP outage | Self-service password reset and invitations blocked | Login itself is unaffected; an administrator can reset a password from the ERP Back Office |
 | Odoo major-version upgrade | Deep inheritance of `sale.order`, `mail.message`, `discuss.channel`, `mail.presence` | Customisations are concentrated in a small number of models; the API envelope insulates the portal from ORM changes |
-| `partnership` module changes | Client categories and default pricing depend on it | Isolated to `res.partner.grade` usage |
+| `partnership` module changes | Customer segments and default pricing depend on it | Isolated to `res.partner.grade` usage |
 | Two independently versioned halves | A portal build can outrun its backend | Release files record both head commits; deploy backend first |
 | Ungated production CI/CD | A push to GitHub `main` reaches live customers within minutes, with no approval step, while the matching backend change still has three Odoo.sh promotions to clear | Process only — validate on `staging-b2b` / `pre-prod` and confirm the backend has reached Odoo.sh `production` **before** pushing. Nothing in the pipeline enforces this |
 | Two git remotes with different roles | Merging on Azure DevOps does not deploy; pushing to GitHub does | Documented in [014](014-Deployment-Architecture.md#two-remotes-two-roles); no technical safeguard |

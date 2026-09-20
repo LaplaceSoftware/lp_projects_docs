@@ -77,7 +77,7 @@ flowchart TB
     ROOT --> HELP["/help — unguarded"]
     ROOT --> REL["/release-notes — unguarded"]
 
-    subgraph CLIENT["Client Portal — AuthGuard"]
+    subgraph CLIENT["Customer Portal — AuthGuard"]
         HOME["/home"]
         PROD["/products"]
         PDET["/products/[id]"]
@@ -109,8 +109,8 @@ segments. The admin layout exports `dynamic = 'force-dynamic'` to prevent static
 during Docker builds — the admin tree depends on runtime session state.
 
 Two admin routes exist as pages but are **not linked from the sidebar** (their nav entries are
-commented out): `/admin/client-users` and `/admin/users-tags`. Client-user and tag management
-currently happens from the Client Portal's company profile.
+commented out): `/admin/client-users` and `/admin/users-tags`. Customer-user and tag management
+currently happens from the Customer Portal's company profile.
 
 ---
 
@@ -118,7 +118,7 @@ currently happens from the Client Portal's company profile.
 
 | Guard | Applied to | Behaviour |
 |-------|-----------|-----------|
-| `AuthGuard` | Client Portal pages | No session → `/login?redirect=…`. Portal user on an `/admin` path → `/home`. Internal user on a client path → `/admin`. Renders a blocking state while redirecting. |
+| `AuthGuard` | Customer Portal pages | No session → `/login?redirect=…`. Portal user on an `/admin` path → `/home`. Internal user on a customer path → `/admin`. Renders a blocking state while redirecting. |
 | `AdminGuard` | `/admin/*` | Same redirects, plus an explicit *Access Denied* panel when a portal user reaches an admin route. |
 
 Both wait for `isInitialized` from the shared auth hook before deciding, so a page refresh does
@@ -134,13 +134,13 @@ One Zustand store per domain, all using `devtools` and `subscribeWithSelector`.
 |-------|------|
 | `user.store` | Current user, login/logout, portal user CRUD |
 | `permission.store` | AMM codes, screens, OPEN/ENFORCED mode, `can()` primitives |
-| `product.store` · `admin/product.store` · `admin/product-variants.store` | Catalog browsing; admin product and variant CRUD |
-| `admin/category.store` · `client-category.store` | Public categories; client categories |
+| `product.store` · `admin/product.store` · `admin/product-variants.store` | Catalog browsing; admin product and product variant CRUD |
+| `admin/category.store` · `client-category.store` | Public categories; customer segments |
 | `brand.store` | Brand catalog |
 | `order.store` | Order lists, creation, line management |
 | `product-request.store` | Catalog requests |
 | `pricelist.store` · `pricelist-item.store` | Pricing |
-| `client.store` | Client companies (admin) |
+| `client.store` | Customer companies (admin) |
 | `banner.store` · `admin_banner.store` | Storefront banners; admin banner CRUD |
 | `chat.store` · `chatter.store` | Live chat; order comment threads |
 | `notifications.store` | In-app feed and unread badge |

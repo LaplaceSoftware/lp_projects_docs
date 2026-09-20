@@ -7,7 +7,7 @@
 | `lp_base`               | 19.0.1.0.0 | Technical   | Shared HTTP plumbing: response envelope, CORS, auth decorators, base error codes. No models with tables, no business logic. |
 | `access_management`     | 19.0.1.0.0 | Application | Role-based access engine (AMM): portals, screens, permissions, roles, assignments, permission lookup API.                   |
 | `ecommerce_access_data` | 1.0        | Data        | Pre-loads the AMM catalogue for this platform: 2 applications, the screen tree, 106 permissions, 6 roles.                   |
-| `ecommerce`             | 19.0.1.0.4 | Application | The B2B business module — catalog, orders, clients, pricing, chat, notifications, and the whole REST API.                  |
+| `ecommerce`             | 19.0.1.0.4 | Application | The B2B business module — catalog, orders, customers, pricing, chat, notifications, and the whole REST API.                  |
 
 ## Dependency Graph
 
@@ -41,12 +41,12 @@ flowchart BT
 
 | Dependency                                       | Used for                                                                              |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| `sale`, `product`, `website_sale`          | Sale orders and lines, product templates/variants, public categories, product ribbons |
+| `sale`, `product`, `website_sale`          | Sale orders and lines, product templates / product variants, public categories, product badges |
 | `mail`                                         | Chatter, mail templates, activity mixin,`mail.presence`, the bus                    |
 | `im_livechat`, `contacts`                    | Discuss channels backing portal ↔ account-manager chat                               |
-| `partnership`                                  | `res.partner.grade`, reused as **Client Categories**                          |
+| `partnership`                                  | `res.partner.grade`, reused as **Customer Segments**                          |
 | `portal`                                       | Portal user plumbing                                                                  |
-| `crm`, `calendar`, `spreadsheet_dashboard` | Back-office context around the B2B menus                                              |
+| `crm`, `calendar`, `spreadsheet_dashboard` | ERP Back Office context around the B2B menus                                              |
 
 ---
 
@@ -81,7 +81,7 @@ A generic, application-agnostic authorization catalogue. It answers one question
 | `access.role`            | A named bundle of permissions, scoped to one application                                                 |
 | `access.role.assignment` | User ↔ role link                                                                                        |
 
-Back-office menu: **Access Management → Configuration** (Applications, Screen Categories,
+ERP Back Office menu: **Access Management → Configuration** (Applications, Screen Categories,
 Screens, Roles) plus a **User Access Right** effective-permission report wizard.
 
 Key rules enforced by the model layer:
@@ -104,10 +104,10 @@ Ships the concrete access catalogue so AMM is usable on install:
 
 | Data             | Contents                                                                                                                                                                                                                                                                                        |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Applications     | `amp` (Account Manager Portal), `client` (Client Portal)                                                                                                                                                                                                                                    |
-| Screen catalogue | AMP: dashboard, shared wishlist, RFQ quotations, quotations, orders, archived orders, product categories, products, brands, pricelists, pricelist items, client categories, clients, client users, user tags, messages. Client: home, products, orders, company profile, users, user tags, help |
+| Applications     | `amp` (Account Management Portal), `client` (Customer Portal)                                                                                                                                                                                                                                    |
+| Screen catalogue | AMP: dashboard, shared request, RFQ quotations, quotations, orders, archived orders, product categories, products, brands, pricelists, pricelist items, customer segments, customers, customer users, user tags, messages. Customer: home, products, orders, company profile, users, user tags, help |
 | Permissions      | 106 records across those screens                                                                                                                                                                                                                                                                |
-| Roles            | Super Admin · Account Manager · Read Only Manager · Pricing Manager · Client Company Admin · Client Standard User                                                                                                                                                                          |
+| Roles            | Super Admin · Account Manager · Read Only Manager · Pricing Manager · Customer Company Admin · Customer Standard User                                                                                                                                                                          |
 
 The screen `reference` values (`amp.dashboard`, `client.home`, …) are the join key between this
 data and the frontend navigation definition.
@@ -132,7 +132,7 @@ data and the frontend navigation definition.
 
 | Group                               | Grants                                                           |
 | ----------------------------------- | ---------------------------------------------------------------- |
-| `ecommerce_group_account_manager` | The B2B Ecommerce root menu and Clients (attachment-scoped view) |
+| `ecommerce_group_account_manager` | The B2B Ecommerce root menu and Customers (attachment-scoped view) |
 | `ecommerce_group_read_only`       | Observation only                                                 |
 | `ecommerce_group_pricing_team`    | Pricelists menu (together with system admins)                    |
 
@@ -141,10 +141,10 @@ Model-level rights are declared in `ir.model.access.csv` (≈49 rules). The modu
 all portal traffic runs through `sudo()` model methods. See
 [007](007-Authentication-and-Authorization.md#multi-tenant-isolation).
 
-### Assets registered into the back-office
+### Assets registered into the ERP Back Office
 
 - B2B Dashboard — an OWL client action rendering counters that drill into filtered order lists.
-- User chat widget — lets an internal user chat with portal users from the back-office.
+- User chat widget — lets an internal user chat with portal users from the ERP Back Office.
 - SCSS for the chat, client chatter and call-icon indicators.
 
 ### Scheduled job
@@ -160,4 +160,4 @@ all portal traffic runs through `sudo()` model methods. See
 | Abstract model                        | Effect on inheritors                                                                                                      |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 |                                       |                                                                                                                           |
-| `ecommerce.base_auto_refresh_model` | Pushes a bus message on every create / write / unlink so open back-office lists refresh live. Inherited by`sale.order`. |
+| `ecommerce.base_auto_refresh_model` | Pushes a bus message on every create / write / unlink so open ERP Back Office lists refresh live. Inherited by`sale.order`. |
