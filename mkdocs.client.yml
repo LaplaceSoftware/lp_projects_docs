@@ -1,5 +1,5 @@
-site_name: SAMTIA B2B Client Portal — Help Center
-site_description: How to use the SAMTIA B2B Client Portal — browsing, ordering, and company management
+site_name: SAMTIA B2B Customer Portal — Help Center
+site_description: How to use the SAMTIA B2B Customer Portal — browsing, ordering, and company management
 # NOTE: this is a Laplace-owned domain and must move to a SAMTIA domain at vendor handover.
 site_url: https://b2b-client.laplacesoftware.com/
 
@@ -70,12 +70,12 @@ nav:
   - Getting Started: _client_user_guide/001-Getting-Started.md
   - User Roles and Permissions: _client_user_guide/002-User-Roles-and-Permissions.md
   - Navigation: _client_user_guide/003-Client-Portal-Navigation.md
-  - Browsing and Wishlists: _client_user_guide/004-Client-Portal-Browsing-and-Wishlists.md
+  - Browsing and Draft Requests: _client_user_guide/004-Client-Portal-Browsing-and-Wishlists.md
   - Orders: _client_user_guide/005-Client-Portal-Orders.md
   - Company Management: _client_user_guide/006-Client-Portal-Company-Management.md
   - Messages and Notifications: _client_user_guide/007-Messages-and-Notifications.md
-  - The Order Lifecycle: _client_user_guide/008-The-Order-Lifecycle.md
+  - The Sales Order Lifecycle: _client_user_guide/008-The-Order-Lifecycle.md
   - Common Business Scenarios: _client_user_guide/009-Common-Business-Scenarios.md
   - Glossary: _client_user_guide/010-Glossary.md
 
-copyright: SAMTIA — B2B Client Portal Help Center
+copyright: SAMTIA — B2B Customer Portal Help Center
