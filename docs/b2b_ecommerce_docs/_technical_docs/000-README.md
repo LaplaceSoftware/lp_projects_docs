@@ -25,7 +25,7 @@ are documented. Dead code, commented-out models and unregistered views are exclu
 | 005.1 | [Model & Field Reference](005.1-Model-Field-Reference.md)                                               | Every model and every field, in full, with descriptions   |
 | 006 | [API and Controller Architecture](006-API-and-Controller-Architecture.md)                                 | Envelope, controller inheritance, endpoint catalog       |
 | 007 | [Authentication and Authorization](007-Authentication-and-Authorization.md)                               | Session login, password reset, guards, Access Management |
-| 008 | [Order Lifecycle](008-Order-Lifecycle.md)                                                                 | Portal state machine, sequence diagrams                  |
+| 008 | [Sales Order Lifecycle](008-Order-Lifecycle.md)                                                           | Portal state machine, sequence diagrams                  |
 | 009 | [Feature Catalog](009-Feature-Catalog.md)                                                                 | Every shipped feature with a technical description       |
 | 010 | [Next.js Application Architecture](010-NextJS-Application-Architecture.md)                                | Layers, routing, state, HTTP client                      |
 | 011 | [Navigation and User Journeys](011-Navigation-and-User-Journeys.md)                                       | ERP Back Office menus, portal menus, journeys                |
@@ -35,6 +35,8 @@ are documented. Dead code, commented-out models and unregistered views are exclu
 | 015 | [External Integrations and Dependencies](015-External-Integrations-and-Dependencies.md)                   | Third-party and platform dependencies                    |
 | 016 | [Architecture Decisions and Customization Points](016-Architecture-Decisions-and-Customization-Points.md) | Why it is built this way; where to extend                |
 | 017 | [Odoo.sh Environments Guide](017-Odoo.sh-Environments-Guide.md)                                           | Branch topology, environment URLs, release step sequence |
+| 018 | [Release and Build Process](018-Release-and-Build-Process.md)                                             | Step-by-step commands to cut and ship a release, both repos |
+| 019 | [Developer Quick Start](019-Developer-Quick-Start.md)                                                     | Where code lives and step-by-step recipes to add a model, API, portal screen or real-time feature |
 
 ---
 
@@ -45,6 +47,10 @@ are documented. Dead code, commented-out models and unregistered views are exclu
 **New Backend Developer** → 002 → 004 → 005 → 006 → 007 → 013 → 016
 
 **New Frontend Developer** → 002 → 010 → 011 → 006 → 007 → 012 → 014
+
+**Cutting your first release** → 014 → 017 → 018
+
+**Building your first feature** → 019 → then 006 / 010 / 012 as the recipe points
 
 ---
 

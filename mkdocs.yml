@@ -115,6 +115,8 @@ nav:
           - External Integrations and Dependencies: b2b_ecommerce_docs/_technical_docs/015-External-Integrations-and-Dependencies.md
           - Architecture Decisions: b2b_ecommerce_docs/_technical_docs/016-Architecture-Decisions-and-Customization-Points.md
           - Odoo.sh Environments Guide: b2b_ecommerce_docs/_technical_docs/017-Odoo.sh-Environments-Guide.md
+          - Release and Build Process: b2b_ecommerce_docs/_technical_docs/018-Release-and-Build-Process.md
+          - Developer Quick Start: b2b_ecommerce_docs/_technical_docs/019-Developer-Quick-Start.md
 
 extra:
   b2b_ecommerce:
