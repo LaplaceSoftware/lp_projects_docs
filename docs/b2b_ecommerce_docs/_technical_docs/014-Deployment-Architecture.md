@@ -62,7 +62,7 @@ environment-specific arrives through `NEXT_PUBLIC_*` build-time variables.
 
 ```mermaid
 flowchart LR
-    B2B["B2B submodule repo<br/>addons_lp_ecommerce<br/>branch: main"] -->|"submodule pointer<br/>updated by ERP Team"| ERP["ERP main repo<br/>connected to Odoo.sh"]
+    B2B["B2B submodule repo<br/>addons_lp_ecommerce<br/>branch: main"] -->|"submodule pointer on staging-b2b<br/>updated by B2B Team (direct, since 2026-09)<br/>or ERP Team"| ERP["ERP main repo<br/>connected to Odoo.sh"]
     ERP --> SB["staging-b2b"]
     ERP --> SE["staging-erp"]
     SB --> PP["pre-prod"]
@@ -73,8 +73,13 @@ flowchart LR
 
 **Golden rule:** code flows one way only —
 `staging-b2b / staging-erp → pre-prod → training → production`.
-**All merges on Odoo.sh are performed exclusively by the ERP Team.** The B2B team never pushes
-to an Odoo.sh branch.
+**Every promotion from `staging-b2b` onward (`→ pre-prod → training → production`) is performed
+exclusively by the ERP Team.** The one exception: since 2026-09 the B2B Team has direct push
+access to the ERP main repo (`samtia`) and may update the submodule pointer onto `staging-b2b`
+itself, without waiting on the ERP Team — see
+[018.2 §3.6](018.2-Manual-Deployment-Runbook.md#36-update-the-odoosh-submodule-pointer-staging-b2b).
+That access is scoped to `staging-b2b` only; the B2B team still never pushes to any other Odoo.sh
+branch.
 
 ### Environments
 
@@ -99,8 +104,12 @@ sequenceDiagram
     participant TR as Training Team
 
     B2B->>B2B: push to submodule main
-    B2B->>ERP: request promotion
-    ERP->>ERP: update submodule pointer → staging-b2b
+    alt B2B Team has direct access (since 2026-09)
+        B2B->>B2B: update submodule pointer → staging-b2b (direct push)
+    else
+        B2B->>ERP: request promotion
+        ERP->>ERP: update submodule pointer → staging-b2b
+    end
     B2B->>B2B: test storefront & portals on staging-b2b
     B2B->>ERP: upgrade request
     ERP->>ERP: staging-b2b → pre-prod
@@ -118,7 +127,7 @@ sequenceDiagram
 | Rule                         | Meaning                                                                                      |
 | ---------------------------- | -------------------------------------------------------------------------------------------- |
 | One-way syncing              | Never merge backwards. A fix restarts from the source repo.                                  |
-| Single merge authority       | Only the ERP Team merges or moves submodule pointers.                                        |
+| Single merge authority (from `staging-b2b` onward) | Only the ERP Team merges between Odoo.sh branches or moves the submodule pointer onto `pre-prod`, `training`, or `production`. The one exception is the submodule pointer onto `staging-b2b` itself — the B2B Team has had direct push access to do that step itself since 2026-09 (see [018.2 §3.6](018.2-Manual-Deployment-Runbook.md#36-update-the-odoosh-submodule-pointer-staging-b2b)). |
 | Test-then-promote            | A branch is promoted only after the responsible team confirms and raises an upgrade request. |
 | Isolation before integration | The B2B and ERP streams meet for the first time in`pre-prod` — never earlier.             |
 | Protected production         | Production receives code only from`training`.                                              |
@@ -127,8 +136,8 @@ sequenceDiagram
 
 | Team           | Owns                                                                      | Environments                                                |
 | -------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| B2B E-commerce | Submodule development, storefront & portal testing, upgrade requests      | `staging-b2b`, `pre-prod`                               |
-| ERP            | ERP repo, Odoo.sh,**all** merges and submodule updates, deployments | `staging-erp`, `pre-prod`, `training`, `production` |
+| B2B E-commerce | Submodule development, storefront & portal testing, upgrade requests; since 2026-09, direct push access to update the submodule pointer onto `staging-b2b` itself | `staging-b2b`, `pre-prod`                               |
+| ERP            | ERP repo, Odoo.sh,**all** merges from `staging-b2b` onward and submodule updates beyond it, deployments | `staging-erp`, `pre-prod`, `training`, `production` |
 | Training       | UAT, business-scenario validation, final go/no-go                         | `training`                                                |
 
 ---
