@@ -117,6 +117,7 @@ nav:
           - Odoo.sh Environments Guide: b2b_ecommerce_docs/_technical_docs/017-Odoo.sh-Environments-Guide.md
           - Release and Build Process: b2b_ecommerce_docs/_technical_docs/018-Release-and-Build-Process.md
           - AI-Agent-Assisted Deployment: b2b_ecommerce_docs/_technical_docs/018.1-AI-Agent-Assisted-Deployment.md
+          - Manual Deployment Runbook: b2b_ecommerce_docs/_technical_docs/018.2-Manual-Deployment-Runbook.md
           - Developer Quick Start: b2b_ecommerce_docs/_technical_docs/019-Developer-Quick-Start.md
 
 extra:

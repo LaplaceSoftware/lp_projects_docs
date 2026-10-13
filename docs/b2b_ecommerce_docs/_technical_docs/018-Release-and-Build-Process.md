@@ -11,7 +11,9 @@ order, and what mistakes have already cost time.
 asking a teammate to walk them through it. Driving this same process through the Claude Code
 agent instead of typing each command is covered in
 [018.1 — AI-Agent-Assisted Deployment](018.1-AI-Agent-Assisted-Deployment.md) — read that first if
-the agent is available; come back here when a skill is missing or you need the exact command.
+the agent is available; come back here when a skill is missing or you need the exact command. For
+a pure copy-paste command sequence with no explanation, see
+[018.2 — Manual Deployment Runbook](018.2-Manual-Deployment-Runbook.md).
 
 ---
 
