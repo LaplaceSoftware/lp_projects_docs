@@ -10,6 +10,13 @@ The platform deploys through **three pipelines**:
 
 Only pipeline 2 is continuous. Pipelines 1 and 3 are deliberately gated by a human.
 
+This page covers the **architecture** — what deploys where, and why. For the commands to actually
+*execute* a release against this architecture, see
+[018 — Release and Build Process](018-Release-and-Build-Process.md) (full runbook),
+[018.1 — AI-Agent-Assisted Deployment](018.1-AI-Agent-Assisted-Deployment.md) (same jobs, via
+Claude Code), or [018.2 — Manual Deployment Runbook](018.2-Manual-Deployment-Runbook.md) (pure
+copy-paste commands, no agent).
+
 ---
 
 ## Runtime Topology
@@ -132,7 +139,7 @@ The live portal is continuously deployed. There is no manual build step and no i
 
 ```mermaid
 flowchart LR
-    DEV["Developer merges<br/>to main"] --> GH["GitHub<br/>LaplaceSoftware/next_ecommerce"]
+    DEV["Developer merges<br/>to main"] --> GH["GitHub<br/>adv-photonix/B2B_ClientPortal"]
     GH -->|"push webhook"| CFB["Cloudflare Workers Build"]
     CFB --> P1["prebuild → release-history.json"]
     P1 --> P2["opennextjs-cloudflare build<br/>Next.js → .open-next/"]
@@ -156,7 +163,7 @@ flowchart LR
 
 | Remote     | Address                                                       | Role                                                            |
 | ---------- | ------------------------------------------------------------- | --------------------------------------------------------------- |
-| `github` | `LaplaceSoftware/next_ecommerce`                            | **Deployment trigger.** Cloudflare watches `main` here  |
+| `github` | `adv-photonix/B2B_ClientPortal`                            | **Deployment trigger.** Cloudflare watches `main` here  |
 | `origin` | Azure DevOps`TechnicalUnitedSA/ERP-Odoo/next_ecommerce` | **Code review.** Pull requests are raised and merged here |
 
 **The consequence is the single most important operational fact about the portal:** merging a
@@ -293,3 +300,16 @@ this for you.
 - [ ] `npm run preview:cloudflare` run locally — the Worker build differs from the container build
 - [ ] Push `main` to the **GitHub** remote — this is the deploy action
 - [ ] Cloudflare build succeeded; `b2b.samtia.com` serves the new version and `/release-notes` shows it
+
+---
+
+## Related Documents
+
+- [017 — Odoo.sh Environments Guide](017-Odoo.sh-Environments-Guide.md) — the ERP Team's
+  branch-promotion policy and guardrails behind the Odoo.sh pipeline above.
+- [018 — Release and Build Process](018-Release-and-Build-Process.md) — step-by-step commands to
+  actually cut and ship a release against this architecture, both repos.
+- [018.1 — AI-Agent-Assisted Deployment](018.1-AI-Agent-Assisted-Deployment.md) — the same release
+  jobs driven through the Claude Code agent instead of typed commands.
+- [018.2 — Manual Deployment Runbook](018.2-Manual-Deployment-Runbook.md) — the same jobs as pure
+  copy-paste commands, for when no agent is available.
