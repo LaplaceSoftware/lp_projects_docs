@@ -36,6 +36,7 @@ are documented. Dead code, commented-out models and unregistered views are exclu
 | 016 | [Architecture Decisions and Customization Points](016-Architecture-Decisions-and-Customization-Points.md) | Why it is built this way; where to extend                |
 | 017 | [Odoo.sh Environments Guide](017-Odoo.sh-Environments-Guide.md)                                           | Branch topology, environment URLs, release step sequence |
 | 018 | [Release and Build Process](018-Release-and-Build-Process.md)                                             | Step-by-step commands to cut and ship a release, both repos |
+| 018.1 | [AI-Agent-Assisted Deployment](018.1-AI-Agent-Assisted-Deployment.md)                                   | The same release/deploy jobs, done via Claude Code skills — fast handover reference |
 | 019 | [Developer Quick Start](019-Developer-Quick-Start.md)                                                     | Where code lives and step-by-step recipes to add a model, API, portal screen or real-time feature |
 
 ---
@@ -48,7 +49,7 @@ are documented. Dead code, commented-out models and unregistered views are exclu
 
 **New Frontend Developer** → 002 → 010 → 011 → 006 → 007 → 012 → 014
 
-**Cutting your first release** → 014 → 017 → 018
+**Cutting your first release** → 014 → 017 → 018 → 018.1 (fastest if the AI agent is available)
 
 **Building your first feature** → 019 → then 006 / 010 / 012 as the recipe points
 

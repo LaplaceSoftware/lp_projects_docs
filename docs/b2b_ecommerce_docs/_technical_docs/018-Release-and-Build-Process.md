@@ -8,7 +8,10 @@ change sitting in a feature branch, what does a developer actually type to ship 
 order, and what mistakes have already cost time.
 
 **Audience:** any developer cutting a release — written so a new team member can do one without
-asking a teammate to walk them through it.
+asking a teammate to walk them through it. Driving this same process through the Claude Code
+agent instead of typing each command is covered in
+[018.1 — AI-Agent-Assisted Deployment](018.1-AI-Agent-Assisted-Deployment.md) — read that first if
+the agent is available; come back here when a skill is missing or you need the exact command.
 
 ---
 
